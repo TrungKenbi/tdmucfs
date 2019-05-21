@@ -1,6 +1,6 @@
 let PostModel = require('../models/post.model');
 
-class HomeController {
+class PostController {
     static index(req, res, next) {
         try {
             res.render('post', { title: 'Đăng Bài Confession' });
@@ -36,4 +36,4 @@ class HomeController {
         }
     }
 }
-module.exports = HomeController;
+module.exports = PostController;
