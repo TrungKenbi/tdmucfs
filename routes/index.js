@@ -8,8 +8,8 @@ var PostCtrl = require('../controllers/post.controller');
 /* GET home page. */
 router
     .get('/', HomeCtrl.index)
-    .get('/post', PostCtrl.index)
-    .post('/post', PostCtrl.postCFS);
+    .get('/post', isLoggedIn, PostCtrl.index)
+    .post('/post', isLoggedIn, PostCtrl.postCFS);
 
 router.get('/profile', isLoggedIn, function(req, res) {
     res.render('profile', {
@@ -25,17 +25,21 @@ router.get('/auth/facebook', passport.authenticate('facebook'));
 // xử lý sau khi user cho phép xác thực với facebook
 router.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect: '/profile',
+        successRedirect: '/post',
         failureRedirect: '/'
     })
 );
+
+router.get('/logout', function (req, res) {
+    req.logout();
+    res.redirect('/');
+});
 
 module.exports = router;
 
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
-
     // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
         return next();

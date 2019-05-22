@@ -3,7 +3,7 @@ let PostModel = require('../models/post.model');
 class PostController {
     static index(req, res, next) {
         try {
-            res.render('post', { title: 'Đăng Bài Confession' });
+            res.render('post', { title: 'Đăng Bài Confession', user : req.user });
         } catch(exception) {
             res.status(500).send(exception)
         }
@@ -30,7 +30,7 @@ class PostController {
                 });
 
             var message = 'Đăng bài thành công: ' + content;
-            res.render('post', { title: 'Đăng Bài Confession', message: message });
+            res.render('post', { title: 'Đăng Bài Confession', message: message, user : req.user });
         } catch(exception) {
             res.status(500).send(exception)
         }
