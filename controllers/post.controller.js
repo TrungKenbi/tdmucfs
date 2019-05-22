@@ -1,55 +1,59 @@
 var PostModel = require('../models/post.model');
 var ImageModel = require('../models/image.model');
-var upload    = require('../helpers/upload');
 
 class PostController {
-    static index(req, res, next) {
+    static index(req, res) {
         try {
-            res.render('post', { title: 'Đăng Bài Confession', user : req.user });
+            res.render('post', {
+                title: 'Đăng Bài Confession',
+                user : req.user
+            });
         } catch(exception) {
             res.status(500).send(exception)
         }
     }
 
-    static postCFS(req, res, next) {
+    static async postCFS(req, res) {
         try {
             let content = req.body.content;
+            var image = [];
 
-            upload(req, res => {
-                var fullPath = "../public/files/" + req.file.filename;
-                var fs = require('fs');
-                var imageData = fs.readFileSync(fullPath);
-
-                var image = new ImageModel({
+            if (req.file) {
+                let ImageCFS = new ImageModel({
                     user: req.user._id,
-                    data: imageData
+                    data: req.file.buffer
                 });
-                image.save(function (error) {
-                    if (error) {
-                        throw error;
-                    }
-                    //res.redirect('/?msg=1');
-                });
-            });
+                await ImageCFS.save()
+                    .then(doc => {
+                        image.push(doc._id);
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            }
 
             let PostCFS = new PostModel ({
                 user: req.user._id,
                 content: content,
-                image: [],
+                image: image,
                 status: 0,
                 note: ''
             });
 
-            PostCFS.save()
+            await PostCFS.save()
                 .then(doc => {
-                    console.log(doc);
+                    //console.log(doc);
                 })
                 .catch(err => {
                     console.error(err);
                 });
 
-            var message = 'Đăng bài thành công: ' + content;
-            res.render('post', { title: 'Đăng Bài Confession', message: message, user : req.user });
+            var message = 'Đăng bài thành công !!!';
+            res.render('post', {
+                title: 'Đăng Bài Confession',
+                message: message,
+                user : req.user
+            });
         } catch(exception) {
             res.status(500).send(exception)
         }

@@ -1,7 +1,7 @@
 class HomeController {
-    static index(req, res, next) {
+    static index(req, res) {
         try {
-            res.render('index', { title: 'TDMU CFS' , user: req.user});
+            res.render('index', { title: 'TDMU Confession' , user: req.user});
         } catch(exception) {
             res.status(500).send(exception)
         }

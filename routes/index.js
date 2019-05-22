@@ -5,11 +5,15 @@ var passport = require('passport');
 var HomeCtrl = require('../controllers/home.controller');
 var PostCtrl = require('../controllers/post.controller');
 
+var multer = require('multer');
+var storage = multer.memoryStorage();
+var upload = multer({ storage: storage });
+
 /* GET home page. */
 router
     .get('/', HomeCtrl.index)
     .get('/post', isLoggedIn, PostCtrl.index)
-    .post('/post', isLoggedIn, PostCtrl.postCFS);
+    .post('/post', isLoggedIn, upload.single('image'),  PostCtrl.postCFS);
 
 router.get('/profile', isLoggedIn, function(req, res) {
     res.render('profile', {
