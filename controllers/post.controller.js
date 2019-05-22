@@ -4,6 +4,7 @@ class PostController {
     static index(req, res, next) {
         try {
             res.render('post', { title: 'Đăng Bài Confession', user : req.user });
+            console.log(req);
         } catch(exception) {
             res.status(500).send(exception)
         }
@@ -14,11 +15,11 @@ class PostController {
             let content = req.body.content;
 
             let PostCFS = new PostModel ({
-                user: '5ce3863af909952c44bbb205',
+                user: req.user._id,
                 content: content,
                 image: [],
                 status: 0,
-                note: 'Note hihi'
+                note: ''
             });
 
             PostCFS.save()

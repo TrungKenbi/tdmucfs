@@ -14,6 +14,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
+var expressValidator = require("express-validator");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
