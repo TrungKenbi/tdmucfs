@@ -1,5 +1,6 @@
 # TDMU Confession
-This is project of Chicken Fly Team in Thu Dau Mot University
+This is project of Chicken Fly Team in Thu Dau Mot University.
+The project helps students to confession to fanpage easily and help manage effectively.
 
 # Member of Team
 1. Duong Le Phuoc Trung
