@@ -1,10 +1,11 @@
-let PostModel = require('../models/post.model');
+var PostModel = require('../models/post.model');
+var ImageModel = require('../models/image.model');
+var upload    = require('../helpers/upload');
 
 class PostController {
     static index(req, res, next) {
         try {
             res.render('post', { title: 'Đăng Bài Confession', user : req.user });
-            console.log(req);
         } catch(exception) {
             res.status(500).send(exception)
         }
@@ -13,6 +14,23 @@ class PostController {
     static postCFS(req, res, next) {
         try {
             let content = req.body.content;
+
+            upload(req, res => {
+                var fullPath = "../public/files/" + req.file.filename;
+                var fs = require('fs');
+                var imageData = fs.readFileSync(fullPath);
+
+                var image = new ImageModel({
+                    user: req.user._id,
+                    data: imageData
+                });
+                image.save(function (error) {
+                    if (error) {
+                        throw error;
+                    }
+                    //res.redirect('/?msg=1');
+                });
+            });
 
             let PostCFS = new PostModel ({
                 user: req.user._id,
