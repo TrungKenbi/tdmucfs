@@ -7,13 +7,15 @@
                         <h1 class="text-center" style="color: rgb(1,1,1);font-weight: bold;">Đăng Bài Confession</h1>
                     </div>
                     <% if (locals.message) { %>
+                        <% message.forEach(mess => { %>
                         <div class="alert alert-info">
-                            <%= message %>
+                            <%= mess.msg %>
                         </div>
+                        <%  }); %>
                     <% } %>
-                    <div class="form-group"><textarea class="form-control form-control-lg" placeholder="Nội dung muốn đăng ?" name="content" style="width: 50%;margin-left: 25%;min-height: 200px;"></textarea></div>
+                    <div class="form-group"><textarea class="form-control form-control-lg" placeholder="Nội dung muốn đăng ?" name="content" id="content" style="width: 50%;margin-left: 25%;min-height: 200px;"></textarea></div>
                     <div class="form-group"><input type="file" accept="image/*" name="image"></div>
-                    <div class="form-group"><input type="checkbox" name="check"> Tôi đã đọc và đồng ý với nội quy đăng bài cfs</div>
+                    <div class="form-group"><input type="checkbox" name="check" id="check"> Tôi đã đọc và đồng ý với nội quy đăng bài cfs</div>
                     <div class="form-group"><button class="btn btn-dark btn-lg" type="submit" style="width: 50%;">Send</button></div>
                 </form>
             </div>

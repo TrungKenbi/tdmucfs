@@ -2,31 +2,33 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 
-var HomeCtrl = require('../controllers/home.controller');
-var PostCtrl = require('../controllers/post.controller');
-
 var multer = require('multer');
 var storage = multer.memoryStorage();
 var upload = multer({ storage: storage });
+
+var HomeCtrl = require('../controllers/home.controller');
+var PostCtrl = require('../controllers/post.controller');
 
 /* GET home page. */
 router
     .get('/', HomeCtrl.index)
     .get('/post', isLoggedIn, PostCtrl.index)
-    .post('/post', isLoggedIn, upload.single('image'),  PostCtrl.postCFS);
+    .post(
+        '/post',
+        isLoggedIn,
+        PostCtrl.validate('postCFS'),
+        upload.single('image'),
+        PostCtrl.postCFS
+    );
 
 router.get('/profile', isLoggedIn, function(req, res) {
     res.render('profile', {
-        user : req.user // get the user out of session and pass to template
+        user : req.user
     });
 });
 
-// =====================================
-// FACEBOOK ROUTES =====================
-// =====================================
-// yêu cầu xác thực bằng facebook
+
 router.get('/auth/facebook', passport.authenticate('facebook'));
-// xử lý sau khi user cho phép xác thực với facebook
 router.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
         successRedirect: '/post',
@@ -41,13 +43,8 @@ router.get('/logout', function (req, res) {
 
 module.exports = router;
 
-
-// route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
-    // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
         return next();
-
-    // if they aren't redirect them to the home page
     res.redirect('/');
 }
