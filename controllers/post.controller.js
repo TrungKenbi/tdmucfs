@@ -54,7 +54,7 @@ class PostController {
                 .then(doc => {
                     var success = {
                         'type': 'success',
-                        'msg': 'Đăng bài thành công !'
+                        'msg': 'Đăng bài thành công, vui lòng đợi admin duyệt bài để được đưa lên fanpage nhé !'
                     };
                     message.push(success);
                 })
