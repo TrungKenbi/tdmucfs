@@ -3,8 +3,24 @@ var router = express.Router();
 var passport = require('passport');
 
 var multer = require('multer');
-var storage = multer.memoryStorage();
-var upload = multer({ storage: storage });
+
+const accepted_extensions = ['jpg', 'jpeg', 'png'];
+const imageUpload = multer({
+    storage: multer.memoryStorage(),
+    limits: {
+        fileSize: 5 * 1024 * 1024,  // 5 MB upload limit
+        files: 1                    // 1 file
+    },
+    fileFilter: (req, file, cb) => {
+        // if the file extension is in our accepted list
+        if (accepted_extensions.some(ext => file.originalname.endsWith("." + ext))) {
+            return cb(null, true);
+        }
+
+        // otherwise, return error
+        return cb(new Error('Only ' + accepted_extensions.join(", ") + ' files are allowed!'));
+    }
+});
 
 var HomeCtrl = require('../controllers/home.controller');
 var PostCtrl = require('../controllers/post.controller');
@@ -16,8 +32,8 @@ router
     .post(
         '/post',
         isLoggedIn,
+        imageUpload.single('image'),
         PostCtrl.validate('postCFS'),
-        upload.single('image'),
         PostCtrl.postCFS
     );
 
