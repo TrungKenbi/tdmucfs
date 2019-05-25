@@ -1,12 +1,12 @@
 <!-- Start: Navigation with Button -->
 <div>
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="height: 64px;background-color: rgb(39,52,55);">
-        <div class="container"><a class="navbar-brand" href="/" style="width: 176px;height: 121px;"><img src="assets/img/60504378_588183758357050_5843766394524532736_n.png" style="width: 94%;height: 103px;"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand" href="/" style="width: 176px;height: 121px;"><img src="assets/img/logo.png" style="width: 94%;height: 103px;"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav mr-auto"></ul>
                 <span class="navbar-text actions">
                 <% if (locals.user) { %>
-                    <span style="color: #ffffff">Xin chào, <b><%= user.name %></b></span>
+                    <span style="color: #ffffff">Xin chào, <b><%= user.name %></b>&nbsp&nbsp</span>
                     <a class="btn btn-dark action-button" role="button" href="/logout" style="width: 106px;font-size: 16px;font-family: Lato, sans-serif;">Đăng xuất</a>
             <% } else { %>
                     <a class="btn btn-light action-button" role="button" href="/auth/facebook" style="width: 106px;font-size: 16px;font-family: Lato, sans-serif;">Đăng Nhập</a>
