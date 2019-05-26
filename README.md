@@ -1,5 +1,5 @@
 # TDMU Confession
-This is project of Chicken Fly Team in Thu Dau Mot University.  
+This is project of Chicken Fly Studio in Thu Dau Mot University.  
 The project helps students send confession to fanpage easily and help manage effectively.
 
 # Member of Team
