@@ -73,6 +73,31 @@ class PostController {
         });
     }
 
+    static async listPost(req, res, next)
+    {
+        try {
+
+            var status = [
+                '<span class="badge badge-info">Đang đợi duyệt</span>',
+                '<span class="badge badge-success">Đã duyệt</span>',
+                '<span class="badge badge-danger">Từ chối</span>'
+            ];
+
+            var posts = await PostModel.find({
+                user: req.user
+            });
+
+            res.render('posts', {
+                title: 'Danh Sách Đã Đăng Confession',
+                user : req.user,
+                posts: posts,
+                statusList: status
+            });
+        } catch(exception) {
+            res.status(500).send(exception)
+        }
+    }
+
     static validate (method) {
         switch (method) {
             case 'postCFS': {

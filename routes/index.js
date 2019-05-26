@@ -35,7 +35,8 @@ router
         imageUpload.single('image'),
         PostCtrl.validate('postCFS'),
         PostCtrl.postCFS
-    );
+    )
+    .get('/posts', isLoggedIn, PostCtrl.listPost);
 
 router.get('/profile', isLoggedIn, function(req, res) {
     res.render('profile', {
@@ -47,7 +48,7 @@ router.get('/profile', isLoggedIn, function(req, res) {
 router.get('/auth/facebook', passport.authenticate('facebook'));
 router.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect: '/post',
+        successRedirect: '/posts',
         failureRedirect: '/'
     })
 );

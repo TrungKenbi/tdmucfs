@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="shadow-lg d-block shadow text-center" style="width: 100%;min-height: 630px;margin-top: 119px;background-color: rgba(255,255,255,0.79);">
+                <h1>Danh Sách Bài Đã Đăng
+                <a href="/post">
+                    <button class="btn btn-info">Đăng Bài Mới</button>
+                </a></h1>
+                <br/>
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nội dung</th>
+                        <th scope="col">Hình ảnh</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Ghi chú</th>
+                        <th scope="col">Thao tác</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <%
+                        if (locals.posts) {
+                            var i = 1;
+                            posts.forEach(post => {
+                    %>
+                        <tr>
+                            <th scope="row"><%= i %></th>
+                            <td><%= post.content.length > 30 ? post.content.substring(0, 30) + '...' : post.content %></td>
+                            <td><%= post.image.length %></td>
+                            <td><%- statusList[post.status] %></td>
+                            <td><%= post.note %></td>
+                            <td>
+                                <button class="btn btn-warning"><i class="fa fa-pencil-square-o"></i></button>
+                                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    <%   i++;});
+                        } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
