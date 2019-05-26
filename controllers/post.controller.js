@@ -75,27 +75,32 @@ class PostController {
 
     static async listPost(req, res, next)
     {
-        try {
+        var perPage = 10;
+        var page = req.params.page || 1;
 
-            var status = [
-                '<span class="badge badge-info">Đang đợi duyệt</span>',
-                '<span class="badge badge-success">Đã duyệt</span>',
-                '<span class="badge badge-danger">Từ chối</span>'
-            ];
+        var status = [
+            '<span class="badge badge-info">Đang đợi duyệt</span>',
+            '<span class="badge badge-success">Đã duyệt</span>',
+            '<span class="badge badge-danger">Từ chối</span>'
+        ];
 
-            var posts = await PostModel.find({
+        await PostModel
+            .find({
                 user: req.user
+            }).skip((perPage * page) - perPage).limit(perPage)
+            .exec(function(err, posts) {
+                PostModel.count().exec(function(err, count) {
+                    if (err) return next(err);
+                    res.render('posts', {
+                        title: 'Danh Sách Đã Đăng Confession',
+                        user : req.user,
+                        posts: posts,
+                        statusList: status,
+                        current: page,
+                        pages: Math.ceil(count / perPage)
+                    });
+                })
             });
-
-            res.render('posts', {
-                title: 'Danh Sách Đã Đăng Confession',
-                user : req.user,
-                posts: posts,
-                statusList: status
-            });
-        } catch(exception) {
-            res.status(500).send(exception)
-        }
     }
 
     static validate (method) {
