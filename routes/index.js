@@ -36,10 +36,11 @@ router
         PostCtrl.validate('postCFS'),
         PostCtrl.postCFS
     )
+    .get('/posts', isLoggedIn, PostCtrl.listPost)
     .get('/posts/:page', isLoggedIn, PostCtrl.listPost);
 
 router.get('/profile', isLoggedIn, function(req, res) {
-    res.render('profile', {
+    res.render('member/profile', {
         user : req.user
     });
 });
@@ -48,7 +49,7 @@ router.get('/profile', isLoggedIn, function(req, res) {
 router.get('/auth/facebook', passport.authenticate('facebook'));
 router.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect: '/posts/1',
+        successRedirect: '/posts',
         failureRedirect: '/'
     })
 );

@@ -7,7 +7,7 @@ const { sanitizeBody } = require('express-validator/filter');
 class PostController {
     static index(req, res) {
         try {
-            res.render('post', {
+            res.render('member/post', {
                 title: 'Đăng Bài Confession',
                 user : req.user
             });
@@ -66,7 +66,7 @@ class PostController {
 
         console.log(message);
 
-        res.render('post', {
+        res.render('member/post', {
             title: 'Đăng Bài Confession',
             message: message,
             user : req.user
@@ -91,7 +91,7 @@ class PostController {
             .exec(function(err, posts) {
                 PostModel.count().exec(function(err, count) {
                     if (err) return next(err);
-                    res.render('posts', {
+                    res.render('member/posts', {
                         title: 'Danh Sách Đã Đăng Confession',
                         user : req.user,
                         posts: posts,
