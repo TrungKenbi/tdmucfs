@@ -6,12 +6,37 @@
                     <img src="/assets/img/menu.png" alt="nope">
                 </span>
             </button>
-            <div class="collapse navbar-collapse" id="navcol-1" style="font-family: 'Pattaya', sans-serif;">
+            <div class="collapse navbar-collapse dropdown" id="navcol-1" style="font-family: 'Pattaya', sans-serif;">
                 <ul class="nav navbar-nav mr-auto"></ul>
                 <span class="navbar-text actions">
                 <% if (locals.user) { %>
-                    <span style="color: #ffffff">Xin chào, <b><%= user.name %></b>&nbsp&nbsp</span>
-                    <a class="btn btn-dark action-button" role="button" href="/logout" style="width: 106px;font-size: 16px;">Đăng xuất</a>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"">Xin chào, <b><%= user.name %></b></button>
+                            <ul class="dropdown-menu ">
+                                <li><a href="/logout">Đăng xuất!</a></li>
+                            </ul>
+                        </div>
+                        <!--Start: Button Menu-->
+                        <div class="menu" role="navigation">
+                            <a class="float" id="menu-share" onclick="display()">
+                                <i class="fa fa-plus my-float"></i>
+                            </a>
+                            <ul id="menu-show" class="menu">
+                                <li>
+                                    <a href="/post">
+                                        <i class="fas fa-edit my-float"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/posts">
+                                        <i class="fas fa-clipboard-list my-float"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--End-->
+<!--                    <span style="color: #ffffff">Xin chào, <b><%= user.name %></b>&nbsp&nbsp</span>-->
+<!--                    <a class="btn btn-dark action-button" role="button" href="/logout" style="width: 106px;font-size: 16px;">Đăng xuất</a>-->
             <% } else { %>
                     <a class="btn btn-light action-button" role="button" href="/auth/facebook" style="width: 106px;font-size: 16px;">Đăng Nhập</a>
                 <% } %>
