@@ -14,7 +14,7 @@ class AdminController {
             ];
 
             await PostModel
-                .find().skip((perPage * page) - perPage).limit(perPage)
+                .find().sort({_id: -1}).skip((perPage * page) - perPage).limit(perPage)
                 .exec(function (err, posts) {
                     PostModel.count().exec(function (err, count) {
                         if (err) return next(err);

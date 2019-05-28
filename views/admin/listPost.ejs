@@ -1,11 +1,13 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <div class="shadow-lg d-block shadow text-center" style="width: 100%;min-height: 630px;margin-top: 119px;background-color: rgba(255,255,255,0.79);">
+            <div class="shadow-lg d-block shadow text-center"
+                 style="width: 100%;min-height: 630px;margin-top: 119px;background-color: rgba(255,255,255,0.79);">
                 <h1>Danh Sách Bài Đã Đăng</h1>
                 <table class="table">
                     <thead class="thead-light">
                     <tr>
+                        <th scope="col"><input type="checkbox" name="vehicle1" value="checkall"></th>
                         <th scope="col">#</th>
                         <th scope="col">Nội dung</th>
                         <th scope="col">Hình ảnh</th>
@@ -21,6 +23,7 @@
                     posts.forEach(post => {
                     %>
                         <tr>
+                            <th scope="col"><input type="checkbox" name="vehicle1" value="1"></th>
                             <th scope="row"><%= i %></th>
                             <td><%= post.content.length > 30 ? post.content.substring(0, 30) + '...' : post.content %></td>
                             <td><%= post.image.length %></td>
@@ -31,43 +34,41 @@
                                 <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
-                    <%   i++;});
+                    <% i++;});
                     } %>
                     </tbody>
                 </table>
 
-
-                <% if (locals.pages && pages > 0) { %>
-                    <ul class="pagination">
-                        <% if (current == 1) { %>
-                            <li class="page-item disabled"><a class="page-link">Trang Đầu</a></li>
-                        <% } else { %>
-                            <li class="page-item"><a class="page-link" href="/admin/listPost/1">Trang Đầu</a></li>
-                        <% } %>
-                        <% var i = (Number(current) > 2 ? Number(current) - 1 : 1) %>
-                        <% if (i !== 1) { %>
-                            <li class="page-item disabled"><a class="page-link">...</a></li>
-                        <% } %>
-                        <% for (; i <= (Number(current) + 1) && i <= pages; i++) { %>
-                            <% if (i == current) { %>
-                                <li class="page-item active"><a class="page-link"><%= i %></a></li>
+                    <% if (locals.pages && pages > 0) { %>
+                        <ul class="pagination">
+                            <% if (current == 1) { %>
+                                <li class="page-item disabled"><a class="page-link">Trang Đầu</a></li>
                             <% } else { %>
-                                <li class="page-item "><a class="page-link"href="/admin/listPost/<%= i %>"><%= i %></a></li>
+                                <li class="page-item"><a class="page-link" href="/admin/listPost/1">Trang Đầu</a></li>
                             <% } %>
-                            <% if (i == Number(current) + 1 && i < pages) { %>
+                            <% var i = (Number(current) > 2 ? Number(current) - 1 : 1) %>
+                            <% if (i !== 1) { %>
                                 <li class="page-item disabled"><a class="page-link">...</a></li>
                             <% } %>
-                        <% } %>
-                        <% if (current == pages) { %>
-                            <li class="page-item disabled"><a class="page-link">Trang Cuối</a></li>
-                        <% } else { %>
-                            <li class="page-item"><a class="page-link" href="/admin/listPost/<%= pages %>">Trang Cuối</a></li>
-                        <% } %>
-                    </ul>
-                <% } %>
-
-
-
+                            <% for (; i <= (Number(current) + 1) && i <= pages; i++) { %>
+                                <% if (i == current) { %>
+                                    <li class="page-item active"><a class="page-link"><%= i %></a></li>
+                                <% } else { %>
+                                    <li class="page-item "><a class="page-link"
+                                                              href="/admin/listPost/<%= i %>"><%= i %></a></li>
+                                <% } %>
+                                <% if (i == Number(current) + 1 && i < pages) { %>
+                                    <li class="page-item disabled"><a class="page-link">...</a></li>
+                                <% } %>
+                            <% } %>
+                            <% if (current == pages) { %>
+                                <li class="page-item disabled"><a class="page-link">Trang Cuối</a></li>
+                            <% } else { %>
+                                <li class="page-item"><a class="page-link" href="/admin/listPost/<%= pages %>">Trang
+                                        Cuối</a></li>
+                            <% } %>
+                        </ul>
+                    <% } %>
             </div>
         </div>
     </div>
