@@ -1,4 +1,26 @@
- <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="height: 101px;background-color: rgb(39,52,55);padding: 0 1.5rem;">
+<% if (locals.user) { %>
+    <!--Start: Button Menu-->
+    <div class="menu" role="navigation">
+        <a class="float" id="menu-share" onclick="display()">
+            <i class="fa fa-plus my-float"></i>
+        </a>
+        <ul id="menu-show" class="menu">
+            <li>
+                <a href="/post">
+                    <i class="fas fa-edit my-float"></i>
+                </a>
+            </li>
+            <li>
+                <a href="/posts">
+                    <i class="fas fa-clipboard-list my-float"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!--End-->
+<% } %>
+
+<nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="height: 101px;background-color: rgb(39,52,55);padding: 0 1.5rem;">
         <div class="container"><a class="navbar-brand" href="/" style="width: 176px;height: 121px;"><img src="/assets/img/logo.png" style="padding-top: 27px;width: 70%;"></a>
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1">
                 <span class="sr-only" >Toggle navigation</span>
@@ -18,25 +40,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <!--Start: Button Menu-->
-                        <div class="menu" role="navigation">
-                            <a class="float" id="menu-share" onclick="display()">
-                                <i class="fa fa-plus my-float"></i>
-                            </a>
-                            <ul id="menu-show" class="menu">
-                                <li>
-                                    <a href="/post">
-                                        <i class="fas fa-edit my-float"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/posts">
-                                        <i class="fas fa-clipboard-list my-float"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!--End-->
+
             <% } else { %>
                     <a class="btn btn-light action-button" role="button" href="/auth/facebook" style="width: 106px;font-size: 16px;">Đăng Nhập</a>
                 <% } %>
