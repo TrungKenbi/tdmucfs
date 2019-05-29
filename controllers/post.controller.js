@@ -81,7 +81,7 @@ class PostController {
         var status = [
             '<span class="badge badge-info">Waiting</span>',
             '<span class="badge badge-success">Accept</span>',
-            '<span class="badge badge-danger">Declined</span>'
+            '<span class="badge badge-danger">Decline</span>'
         ];
 
         await PostModel
