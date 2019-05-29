@@ -79,9 +79,9 @@ class PostController {
         var page = req.params.page || 1;
 
         var status = [
-            '<span class="badge badge-info">Đang đợi duyệt</span>',
-            '<span class="badge badge-success">Đã duyệt</span>',
-            '<span class="badge badge-danger">Từ chối</span>'
+            '<span class="badge badge-info">Waiting</span>',
+            '<span class="badge badge-success">Accept</span>',
+            '<span class="badge badge-danger">Declined</span>'
         ];
 
         await PostModel
