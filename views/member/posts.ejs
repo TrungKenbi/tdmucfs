@@ -28,23 +28,34 @@
                             <td class="column4"><%- statusList[post.status] %></td>
                             <td class="column5">&emsp;<%= post.note %></td>
                             <td class="column6">
-                                <button class="btn-1 btn-1-success"><i class="fas fa-check"></i></button>
-                                <button class="btn-1 btn-1-warning"><i class="fa fa-edit"></i></button>
-                                <button class="btn-1 btn-1-danger"><i class="fa fa-trash"></i></button>
+                                <a href="/editpost/<%= post._id %>">
+                                    <button class="btn-1 btn-1-warning"><i class="fa fa-edit"></i></button>
+                                </a>
+                                <% if (post.status == 0) { %>
+                                <a href="/deletepost/<%= post._id %>">
+                                    <button
+                                        onclick="return confirm('Bạn có muốn xóa bài đăng này chứ ?')"
+                                        class="btn-1 btn-1-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </a>
+                                <% } else { %>
+                                    <button
+                                        onclick="return confirm('Bạn không thể xóa bài đăng này được !')"
+                                        class="btn-1 btn-1-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                <% } %>
                             </td>
                         </tr>
                     <%   i++;});
                     } %>
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ------------------- -->
 
+                <br/>
                 <% if (locals.pages && pages > 0) { %>
-                    <ul class="pagination">
+                    <ul class="pagination" style="justify-content: center;">
                         <% if (current == 1) { %>
                             <li class="page-item disabled"><a class="page-link">Trang Đầu</a></li>
                         <% } else { %>
@@ -71,4 +82,13 @@
                         <% } %>
                     </ul>
                 <% } %>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ------------------- -->
+
+
 

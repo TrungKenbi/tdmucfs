@@ -36,8 +36,26 @@ router
         PostCtrl.validate('postCFS'),
         PostCtrl.postCFS
     )
+
     .get('/posts', isLoggedIn, PostCtrl.listPost)
-    .get('/posts/:page', isLoggedIn, PostCtrl.listPost);
+    .get('/posts/:page', isLoggedIn, PostCtrl.listPost)
+
+    .get('/editpost/:id', isLoggedIn, PostCtrl.index)
+    .post(
+        '/editpost/:id',
+        isLoggedIn,
+        imageUpload.single('image'),
+        PostCtrl.validate('postCFS'),
+        PostCtrl.editPost
+    )
+
+    .get(
+        '/deletepost/:id',
+        isLoggedIn,
+        PostCtrl.deletePost
+    )
+
+;
 
 router.get('/profile', isLoggedIn, function(req, res) {
     res.render('member/profile', {
