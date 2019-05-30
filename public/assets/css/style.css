@@ -43,7 +43,6 @@
 }
 
 html {
-    font-family: sans-serif;
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent
@@ -62,17 +61,6 @@ section {
     display: block
 }
 
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    text-align: left;
-    background-color: #fff
-}
-
 [tabindex="-1"]:focus {
     outline: 0!important
 }
@@ -83,15 +71,6 @@ hr {
     overflow: visible
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    margin-top: 0;
-    margin-bottom: .5rem
-}
 
 p {
     margin-top: 0;
@@ -2524,7 +2503,7 @@ textarea.form-control.is-invalid {
     user-select: none;
     background-color: transparent;
     border: 1px solid transparent;
-    padding: .375rem .75rem;
+    padding: 13px;
     font-size: 1rem;
     line-height: 1.5;
     border-radius: .25rem;
@@ -10341,6 +10320,6 @@ a.text-dark:hover {
 }
 
 span {
-    font-family: 'Lobster', cursive;
+    font-family: 'Quicksand', sans-serif;
 }
 /*# sourceMappingURL=bootstrap.min.css.map */
