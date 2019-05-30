@@ -1,15 +1,27 @@
 var PostModel = require('../models/post.model');
 var ImageModel = require('../models/image.model');
+const {ObjectID} = require("mongodb");
 
 const { body, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 
 class PostController {
-    static index(req, res) {
+    static async index(req, res) {
         try {
+            var edit = req.params.id || 0;
+            var post = undefined;
+
+            if (edit != 0)
+            {
+                post = await PostModel.findOne({
+                    _id: ObjectID(edit)
+                });
+            }
+
             res.render('member/post', {
                 title: 'Đăng Bài Confession',
-                user : req.user
+                user : req.user,
+                post: post
             });
         } catch(exception) {
             res.status(500).send(exception)
@@ -79,9 +91,9 @@ class PostController {
         var page = req.params.page || 1;
 
         var status = [
-            '<span class="badge badge-info">Đang đợi duyệt</span>',
-            '<span class="badge badge-success">Đã duyệt</span>',
-            '<span class="badge badge-danger">Từ chối</span>'
+            '<span class="badge badge-info">Waiting</span>',
+            '<span class="badge badge-success">Accept</span>',
+            '<span class="badge badge-danger">Decline</span>'
         ];
 
         await PostModel
@@ -101,6 +113,77 @@ class PostController {
                     });
                 })
             });
+    }
+
+    static async editPost(req, res, next)
+    {
+        var errors = validationResult(req);
+
+        var message = [];
+
+        if (!errors.isEmpty()) {
+            message = errors.array({ onlyFirstError: true });
+            var PostCFS = await PostModel.findOne({
+                _id: ObjectID(req.params.id),
+                user: req.user._id
+            });
+        } else {
+            let content = req.body.content;
+            var image = [];
+
+            if (req.file) {
+                let ImageCFS = new ImageModel({
+                    user: req.user._id,
+                    data: req.file.buffer
+                });
+                await ImageCFS.save()
+                    .then(doc => {
+                        image.push(doc._id);
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            }
+
+            var PostCFS = await PostModel.findOne({
+                _id: ObjectID(req.params.id),
+                user: req.user._id
+            });
+
+            PostCFS.content = content;
+            if (image.length)
+                PostCFS.image = image;
+
+            await PostCFS.save()
+                .then(doc => {
+                    var success = {
+                        'type': 'success',
+                        'msg': 'Sửa bài thành công !'
+                    };
+                    message.push(success);
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+
+        }
+
+        res.render('member/post', {
+            title: 'Đăng Bài Confession',
+            message: message,
+            user : req.user,
+            post: PostCFS
+        });
+    }
+
+    static async deletePost (req, res, next)
+    {
+        await PostModel.deleteOne({
+            _id: ObjectID(req.params.id),
+            user: req.user._id,
+            status: 0
+        });
+        res.redirect('/posts');
     }
 
     static validate (method) {

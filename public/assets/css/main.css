@@ -1,0 +1,526 @@
+
+
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+
+@font-face {
+    font-family: OpenSans-Regular;
+    src: url('../fonts/OpenSans/OpenSans-Regular.ttf');
+}
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[ RESTYLE TAG ]*/
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+}
+
+/* ------------------------------------ */
+a {
+    margin: 0px;
+    transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+}
+
+a:focus {
+    outline: none !important;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/* ------------------------------------ */
+h1,h2,h3,h4,h5,h6 {margin: 0px;}
+
+p {margin: 0px;}
+
+ul, li {
+    margin: 0px;
+    list-style-type: none;
+}
+
+
+/* ------------------------------------ */
+input {
+    display: block;
+    outline: none;
+    border: none !important;
+}
+
+textarea {
+    display: block;
+    outline: none;
+}
+
+textarea:focus, input:focus {
+    border-color: transparent !important;
+}
+
+/* ------------------------------------ */
+button {
+    outline: none !important;
+    border: none;
+    background: transparent;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+iframe {
+    border: none !important;
+}
+
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[ Utiliti ]*/
+
+
+
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[ Table ]*/
+
+.limiter {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.container-table100 {
+    width: 100%;
+    min-height: 100vh;
+    background: #c850c0;
+    background: -webkit-linear-gradient(45deg, #4158d0, #c850c0);
+    background: -o-linear-gradient(45deg, #4158d0, #c850c0);
+    background: -moz-linear-gradient(45deg, #4158d0, #c850c0);
+    background: linear-gradient(45deg, #4158d0, #c850c0);
+
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 33px 30px;
+}
+
+.wrap-table100 {
+    width: 1170px;
+}
+
+table {
+    border-spacing: 1;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+table * {
+    position: relative;
+}
+table td, table th {
+    padding-left: 8px;
+}
+table thead tr {
+    height: 60px;
+    background: #36304a;
+}
+table tbody tr {
+    height: 50px;
+}
+table tbody tr:last-child {
+    border: 0;
+}
+table td, table th {
+    text-align: left;
+}
+table td.l, table th.l {
+    text-align: right;
+}
+table td.c, table th.c {
+    text-align: center;
+}
+table td.r, table th.r {
+    text-align: center;
+}
+
+
+.table100-head th{
+    font-family: OpenSans-Regular;
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.2;
+    font-weight: unset;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+tbody tr {
+    font-family: OpenSans-Regular;
+    font-size: 15px;
+    color: #808080;
+    line-height: 1.2;
+    font-weight: unset;
+}
+
+tbody tr:hover {
+    color: #555555;
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+.column1 {
+    width: 260px;
+    padding-left: 40px;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+}
+
+.column2 {
+    width: 160px;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+}
+
+.column3 {
+    width: 245px;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+}
+
+.column4 {
+    width: 110px;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+}
+
+.column5 {
+    width: 170px;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+}
+
+.column6 {
+    width: 222px;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+}
+
+
+@media screen and (max-width: 992px) {
+    table {
+        display: block;
+    }
+    table > *, table tr, table td, table th {
+        display: block;
+    }
+    table thead {
+        display: none;
+    }
+    table tbody tr {
+        height: auto;
+        padding: 37px 0;
+    }
+    table tbody tr td {
+        padding-left: 40% !important;
+        margin-bottom: 24px;
+    }
+    table tbody tr td:last-child {
+        margin-bottom: 0;
+    }
+    table tbody tr td:before {
+        font-family: OpenSans-Regular;
+        font-size: 14px;
+        color: #999999;
+        line-height: 1.2;
+        font-weight: unset;
+        position: absolute;
+        width: 40%;
+        left: 30px;
+        top: 0;
+    }
+    table tbody tr td:nth-child(1):before {
+        content: "STT";
+        font-family: 'Lobster', cursive;
+    }
+    table tbody tr td:nth-child(2):before {
+        content: "Nội dung";
+        font-family: 'Lobster', cursive;
+    }
+    table tbody tr td:nth-child(3):before {
+        content: "Hình ảnh";
+        font-family: 'Lobster', cursive;
+    }
+    table tbody tr td:nth-child(4):before {
+        content: "Trạng thái";
+        font-family: 'Lobster', cursive;
+    }
+    table tbody tr td:nth-child(5):before {
+        content: "Ghi chú";
+        font-family: 'Lobster', cursive;
+    }
+    table tbody tr td:nth-child(6):before {
+        content: "Thao tác";
+        font-family: 'Lobster', cursive;
+    }
+
+    .column1,
+    .column2,
+    .column3,
+    .column4,
+    .column5,
+    .column6 {
+        text-align: center;
+    }
+
+    .column4,
+    .column5,
+    .column6,
+    .column1,
+    .column2,
+    .column3 {
+        width: 100%;
+    }
+
+    tbody tr {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container-table100 {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+.btn-1 {
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .btn-1 {
+        transition: none
+    }
+}
+
+.btn-1-success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745
+}
+
+.btn-1-success:hover {
+    color: #fff;
+    background-color: #218838;
+    border-color: #1e7e34
+}
+
+.btn-1-success.focus,
+.btn-1-success:focus {
+    box-shadow: 0 0 0 .2rem rgba(72, 180, 97, .5)
+}
+
+.btn-1-success.disabled,
+.btn-1-success:disabled {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745
+}
+
+.btn-1-success:not(:disabled):not(.disabled).active,
+.btn-1-success:not(:disabled):not(.disabled):active,
+.show>.btn-1-success.dropdown-toggle {
+    color: #fff;
+    background-color: #1e7e34;
+    border-color: #1c7430
+}
+
+.btn-1-success:not(:disabled):not(.disabled).active:focus,
+.btn-1-success:not(:disabled):not(.disabled):active:focus,
+.show>.btn-1-success.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem rgba(72, 180, 97, .5)
+}
+
+.btn-1-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545
+}
+
+.btn-1-danger:hover {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130
+}
+
+.btn-1-danger.focus,
+.btn-1-danger:focus {
+    box-shadow: 0 0 0 .2rem rgba(225, 83, 97, .5)
+}
+
+.btn-1-danger.disabled,
+.btn-1-danger:disabled {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545
+}
+
+.btn-1-danger:not(:disabled):not(.disabled).active,
+.btn-1-danger:not(:disabled):not(.disabled):active,
+.show>.btn-1-danger.dropdown-toggle {
+    color: #fff;
+    background-color: #bd2130;
+    border-color: #b21f2d
+}
+
+.btn-1-danger:not(:disabled):not(.disabled).active:focus,
+.btn-1-danger:not(:disabled):not(.disabled):active:focus,
+.show>.btn-1-danger.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem rgba(225, 83, 97, .5)
+}
+
+.btn-1-warning {
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107
+}
+
+.btn-1-warning:hover {
+    color: #212529;
+    background-color: #e0a800;
+    border-color: #d39e00
+}
+
+.btn-1-warning.focus,
+.btn-1-warning:focus {
+    box-shadow: 0 0 0 .2rem rgba(222, 170, 12, .5)
+}
+
+.btn-1-warning.disabled,
+.btn-1-warning:disabled {
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107
+}
+
+.btn-1-warning:not(:disabled):not(.disabled).active,
+.btn-1-warning:not(:disabled):not(.disabled):active,
+.show>.btn-1-warning.dropdown-toggle {
+    color: #212529;
+    background-color: #d39e00;
+    border-color: #c69500
+}
+
+.btn-1-warning:not(:disabled):not(.disabled).active:focus,
+.btn-1-warning:not(:disabled):not(.disabled):active:focus,
+.show>.btn-1-warning.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem rgba(222, 170, 12, .5)
+}
+
+.badge-1 {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .badge-1 {
+        transition: none
+    }
+}
+
+.badge-1-danger {
+    color: #fff;
+    background-color: #dc3545
+}
+
+a.badge-1-danger:focus,
+a.badge-1-danger:hover {
+    color: #fff;
+    background-color: #bd2130
+}
+
+a.badge-1-danger.focus,
+a.badge-1-danger:focus {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .5)
+}
+
+.badge-1-success {
+    color: #fff;
+    background-color: #28a745
+}
+
+a.badge-1-success:focus,
+a.badge-1-success:hover {
+    color: #fff;
+    background-color: #1e7e34
+}
+
+a.badge-1-success.focus,
+a.badge-1-success:focus {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(40, 167, 69, .5)
+}
+
+.badge-1-primary {
+    color: #fff;
+    background-color: #007bff
+}
+
+a.badge-1-primary:focus,
+a.badge-1-primary:hover {
+    color: #fff;
+    background-color: #0062cc
+}
+
+a.badge-1-primary.focus,
+a.badge-1-primary:focus {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .5)
+}

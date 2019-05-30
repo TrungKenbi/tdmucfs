@@ -130,6 +130,12 @@ hr.star-light:after {
     border-radius: 50%
 }
 
+hr.star-light-1:after {
+    color: #fff;
+    background-color: rgb(44, 95, 161);
+    border-radius: 50%
+}
+
 .img-fluid.d-block.mx-auto.mb-5 {
     box-shadow: 0 3px 7px #000;
     border-radius: 50%
