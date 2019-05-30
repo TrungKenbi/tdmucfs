@@ -13,7 +13,9 @@
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"">Xin chào, <b><%= user.name %></b></button>
                             <ul class="dropdown-menu ">
-                                <li><a href="/logout">Đăng xuất!</a></li>
+                                <li>
+                                    <a href="/logout">Đăng xuất!</a>
+                                </li>
                             </ul>
                         </div>
                         <!--Start: Button Menu-->
@@ -35,8 +37,6 @@
                             </ul>
                         </div>
                         <!--End-->
-<!--                    <span style="color: #ffffff">Xin chào, <b><%= user.name %></b>&nbsp&nbsp</span>-->
-<!--                    <a class="btn btn-dark action-button" role="button" href="/logout" style="width: 106px;font-size: 16px;">Đăng xuất</a>-->
             <% } else { %>
                     <a class="btn btn-light action-button" role="button" href="/auth/facebook" style="width: 106px;font-size: 16px;">Đăng Nhập</a>
                 <% } %>

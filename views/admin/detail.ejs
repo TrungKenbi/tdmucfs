@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="shadow-lg d-block shadow text-center" style="width: 100%;min-height: 630px;margin-top: 119px;background-color: rgba(255,255,255,0.79);">
+                <form style="padding-top: 70px;" method="post" action="sendcomment" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <h1 class="text-center" style="color: rgb(1,1,1);font-weight: bold;">Chi tiết bài đăng người dùng</h1>
+                    </div>
+                    <% if (locals.message) { %>
+                        <% message.forEach(mess => { %>
+                            <div class="alert alert-info">
+                                <%= mess.msg %>
+                            </div>
+                        <%  }); %>
+                    <% } %>
+                    <div class="form-group"><textarea readonly="true" class="form-control form-control-lg" name="content" id="content" style="width: 50%;margin-left: 25%;min-height: 200px;"></textarea></div>
+                    <div class="form-group">Image đính kèm</div>
+                    <div class="form-group"><textarea placeholder="Admin commet ở đây" class="form-control form-control-lg" name="content" style="width: 50%;margin-left: 25%;min-height: 100px;"></textarea></div>
+                    <div class="form-group"><button class="btn btn-primary btn-lg" type="submit" style="width: 25%;">Gửi</button></div>
+                    <div class="form-gr oup"><a href="/admin/listPost" class="btn btn-dark btn-lg" style="width: 25%;">Trở về</a></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

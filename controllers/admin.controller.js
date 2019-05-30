@@ -14,9 +14,9 @@ class AdminController {
             ];
 
             await PostModel
-                .find().sort({_id: -1}).skip((perPage * page) - perPage).limit(perPage)
+                .find({ status: [0] }).sort({_id: -1}).skip((perPage * page) - perPage).limit(perPage)
                 .exec(function (err, posts) {
-                    PostModel.count().exec(function (err, count) {
+                    PostModel.count({ status: [0] }).exec(function (err, count) {
                         if (err) return next(err);
                         res.render('admin/listPost', {
                             title: 'Danh Sách Các Bài Đã Đăng Confession',
@@ -28,6 +28,37 @@ class AdminController {
                         });
                     })
                 });
+        }
+        catch (e) {
+            res.status(555).send("Fail Admin");
+        }
+    }
+
+    static async sendcomment(req, res, next){
+        try {
+            res.redirect('listPost');
+        }
+        catch (e) {
+            res.status(555).send("Fail Admin");
+        }
+    }
+
+    static async detailPost(req, res, next){
+        try {
+            res.render('admin/detail',{
+                title: "Detail Post"
+            });
+        }
+        catch (e) {
+            res.status(555).send("Fail Admin");
+        }
+    }
+
+    static async posting(req, res, next){
+        try {
+            res.render('admin/posting',{
+                title: "Posting"
+            });
         }
         catch (e) {
             res.status(555).send("Fail Admin");
