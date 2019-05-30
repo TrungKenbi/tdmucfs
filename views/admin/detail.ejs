@@ -4,7 +4,7 @@
             <div class="shadow-lg d-block shadow text-center" style="width: 100%;min-height: 630px;margin-top: 119px;background-color: rgba(255,255,255,0.79);">
                 <form style="padding-top: 70px;" method="post" action="/post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <h1 class="text-center" style="color: rgb(1,1,1);font-weight: bold;">Đăng Bài Confession</h1>
+                        <h1 class="text-center" style="color: rgb(1,1,1);font-weight: bold;">Chi tiết bài đăng</h1>
                     </div>
                     <% if (locals.message) { %>
                         <% message.forEach(mess => { %>
@@ -13,10 +13,19 @@
                             </div>
                         <%  }); %>
                     <% } %>
-                    <div class="form-group"><textarea class="form-control form-control-lg" placeholder="Nội dung muốn đăng ?" name="content" id="content" style="width: 50%;margin-left: 25%;min-height: 200px;"></textarea></div>
-                    <div class="form-group"><input type="file" accept="image/*" name="image"></div>
-                    <div class="form-group"><input type="checkbox" name="check" id="check"> Tôi đã đọc và đồng ý với nội quy đăng bài cfs</div>
-                    <div class="form-group"><button class="btn btn-dark btn-lg" type="submit" style="width: 50%;">Send</button></div>
+                    <div class="form-group"><textarea readonly="true" class="form-control form-control-lg" name="content" id="content" style="width: 50%;margin-left: 25%;min-height: 200px;"><%= poster.content %></textarea></div>
+                    <div class="form-group">
+                        <% if(Images){ %>
+                            <% Images.forEach(img => { %>
+                                <img src="<%= img.data %>" height="50%">
+                            <% }) %>
+                        <% } %>
+                    </div>
+                    <div class="form-group"><textarea class="form-control form-control-lg" placeholder="Admin note send user here!" name="content" id="content" style="width: 50%;margin-left: 25%;min-height: 100px; max-height: 500px;"></textarea></div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-lg" type="submit" style="width: 20%;">Send</button>
+                        <a href="/admin/listPost" class="btn btn-dark btn-lg" style="width: 20%;">Cancel</a>
+                    </div>
                 </form>
             </div>
         </div>

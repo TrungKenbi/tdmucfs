@@ -6,6 +6,7 @@
                 <table class="table">
                     <thead class="thead-light">
                     <tr>
+                        <th scope="col"><input type="checkbox"></th>
                         <th scope="col">#</th>
                         <th scope="col">Nội dung</th>
                         <th scope="col">Hình ảnh</th>
@@ -21,14 +22,15 @@
                     posts.forEach(post => {
                     %>
                         <tr>
+                            <th scope="col"><input type="checkbox"></th>
                             <th scope="row"><%= i %></th>
                             <td><%= post.content.length > 30 ? post.content.substring(0, 30) + '...' : post.content %></td>
                             <td><%= post.image.length %></td>
                             <td><%- statusList[post.status] %></td>
                             <td><%= post.note %></td>
                             <td>
-                                <button class="btn btn-warning"><i class="fa fa-pencil-square-o"></i></button>
-                                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                <a href="/admin/detail?key=<%= post._id%>" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i></a>
+                                <a class="btn btn-danger"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                     <%   i++;});
@@ -36,6 +38,7 @@
                     </tbody>
                 </table>
 
+                <a href="/admin/posting" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i></a>
 
                 <% if (locals.pages && pages > 0) { %>
                     <ul class="pagination">

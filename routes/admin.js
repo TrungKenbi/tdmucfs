@@ -10,8 +10,9 @@ router
         res.status(403).json({message: "hhi"});
     })
     .get('/listPost', AdminCtrl.listPost)
-    .get('/listPost/:page', AdminCtrl.listPost);;
-
+    .get('/listPost/:page', AdminCtrl.listPost)
+    .get('/detail', AdminCtrl.detailPost)
+    .get('/posting', AdminCtrl.postingPost);
 
 module.exports = router;
 
