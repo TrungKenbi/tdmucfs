@@ -27,7 +27,7 @@
                             <td><%= post.content.length > 30 ? post.content.substring(0, 30) + '...' : post.content %></td>
                             <td><%= post.image.length %></td>
                             <td><%- statusList[post.status] %></td>
-                            <td><%= post.note %></td>
+                            <td><%= post.note.length > 20 ? post.note.substring(0, 20) + '...' : post.note %></td>
                             <td>
                                 <a href="/admin/detail?key=<%= post._id%>" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i></a>
                                 <a class="btn btn-danger"><i class="fa fa-trash"></i></a>

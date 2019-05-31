@@ -48,7 +48,7 @@ class AdminController {
             await PostModel
                 .findOne({ _id:req.query.key })
                 .then(async poster => {
-                    let Images;
+                    var Images = [];
                     await ImageModel
                         .find({_id : poster.image })
                         .then(Img =>{
@@ -57,6 +57,7 @@ class AdminController {
                         .catch(err => {
                             console.log(err);
                         })
+                    console.log(Images);
                     res.render('admin/detail', {
                         title: "Hello",
                         user: req.user,
@@ -80,6 +81,32 @@ class AdminController {
             res.render('admin/posting', {
                 title: "Hello"
             })
+        }
+        catch (e) {
+            res.status(555).send("Fail Admin");
+        }
+    }
+
+    static async sendMess(req, res, next){
+        try {
+            let messages = req.body.messagesOfAdmin;
+            let Istatus = req.body.statusPost;
+            if(req.body.statusBox=="on")
+                Istatus=2;
+            await PostModel
+                .updateOne({
+                        _id: req.query.key// chạy thử anh
+                    },
+                    {
+                        note: messages,
+                        status: Istatus
+                }).then(data => {
+                    // console.log(data);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+            res.redirect('listPost');
         }
         catch (e) {
             res.status(555).send("Fail Admin");
