@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="shadow-lg d-block shadow text-center" style="width: 100%;min-height: 630px;margin-top: 119px;background-color: rgba(255,255,255,0.79);">
+                <form style="padding-top: 70px;" method="post" action="sendmess?key=<%= poster._id %>">
+                    <div class="form-group">
+                        <h1 class="text-center" style="color: rgb(1,1,1);font-weight: bold;">Chi tiết bài đăng</h1>
+                        <p><%- statusList[poster.status] %></p>
+                        <input name="statusPost" type="hidden" value="<%= poster.status %>">
+                    </div>
+                    <% if (locals.message) { %>
+                        <% message.forEach(mess => { %>
+                            <div class="alert alert-info">
+                                <%= mess.msg %>
+                            </div>
+                        <%  }); %>
+                    <% } %>
+                    <div class="form-group"><textarea readonly="true" class="form-control form-control-lg" name="content" id="content" style="width: 50%;margin-left: 25%;min-height: 200px;"><%= poster.content %></textarea></div>
+                    <div class="form-group">
+                        <% if(Images){ %>
+                            <% Images.forEach(img => { %>
+                                <img style="width: 20%" src="data:image/png;base64,<%= img.data.toString('base64') %>" />
+                            <% }) %>
+                        <% } %>
+                    </div>
+                    <div class="form-group"><textarea class="form-control form-control-lg" placeholder="Admin note send user here!" name="messagesOfAdmin" style="width: 50%;margin-left: 25%;min-height: 100px; max-height: 500px;"><%= poster.note %></textarea></div>
+                    <div class="form-group"><input type="checkbox" name="statusBox" <%= poster.status==2?"checked":0 %> >Từ chối bài đăng</div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-lg" type="submit" style="width: 20%;">Send</button>
+                        <a href="/admin/listPost" class="btn btn-dark btn-lg" style="width: 20%;">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
