@@ -57,7 +57,6 @@ class AdminController {
                         .catch(err => {
                             console.log(err);
                         })
-                    console.log(Images);
                     res.render('admin/detail', {
                         title: "Hello",
                         user: req.user,
@@ -78,8 +77,20 @@ class AdminController {
 
     static async postingPost(req, res, next){
         try {
+            var keys = req.query.check;
+            var posts = [];
+            await PostModel
+                .find({_id: keys })
+                .then(post => {
+                    posts = post;
+                })
+                .catch(err =>{
+                    console.log(err);
+                });
+            console.log(posts);
             res.render('admin/posting', {
-                title: "Hello"
+                title: "Hello",
+                posts: posts
             })
         }
         catch (e) {
@@ -93,6 +104,8 @@ class AdminController {
             let Istatus = req.body.statusPost;
             if(req.body.statusBox=="on")
                 Istatus=2;
+            else if(Istatus == 2)
+                Istatus=0;
             await PostModel
                 .updateOne({
                         _id: req.query.key// chạy thử anh

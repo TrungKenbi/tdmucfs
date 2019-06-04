@@ -19,8 +19,6 @@
                     <div class="form-group">
                         <% if(Images){ %>
                             <% Images.forEach(img => { %>
-<!--                            Chỗ này em để là jpeg nè, giờ mình cần xác định là loại ảnh gì, để e tìm thử
-                                còn cái đăng bài làm cái gì, làm sao đăng bài lên fb được-->
                                 <img style="width: 20%" src="data:image/png;base64,<%= img.data.toString('base64') %>" />
                             <% }) %>
                         <% } %>
