@@ -12,9 +12,8 @@ router
     .get('/listPost', AdminCtrl.listPost)
     .get('/listPost/:page', AdminCtrl.listPost)
     .get('/detail', AdminCtrl.detailPost)
-    .get('/posting', AdminCtrl.posting)
-    .post('/sendcomment', AdminCtrl.sendcomment);
-
+    .get('/posting', AdminCtrl.postingPost)
+    .post('/sendmess', AdminCtrl.sendMess);
 
 module.exports = router;
 

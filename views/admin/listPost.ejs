@@ -1,3 +1,12 @@
+<script>
+    function handle() {
+        var k = document.getElementById("checkall").checked;
+        var arr = document.getElementsByClassName('PostSelected');
+        for (var i = 0; i < arr.length; i++) {
+            arr[i].checked = k;
+        }
+    }
+</script>
 <div class="container">
     <div class="row">
         <div class="col">
@@ -7,7 +16,7 @@
                 <table class="table">
                     <thead class="thead-light">
                     <tr>
-                        <th scope="col"><input type="checkbox" name="vehicle1" value="checkall"></th>
+                        <th scope="col"><input onclick="handle()" type="checkbox" id="checkall"></th>
                         <th scope="col">#</th>
                         <th scope="col">Nội dung</th>
                         <th scope="col">Hình ảnh</th>
@@ -16,33 +25,36 @@
                         <th scope="col">Thao tác</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <%
-                    if (locals.posts) {
-                        var i = (current == 1) ? 1 : (current - 1) * 10 + 1;
-                    posts.forEach(post => {
-                    %>
-                        <tr>
-                            <th scope="col"><input type="checkbox" name="vehicle1" value="1"></th>
-                            <th scope="row"><%= i %></th>
-                            <td><%= post.content.length > 30 ? post.content.substring(0, 30) + '...' : post.content %></td>
-                            <td><%= post.image.length %></td>
-                            <td><%- statusList[post.status] %></td>
-                            <td><%= post.note %></td>
-                            <td>
-                                <a href="/admin/detail?key=<%= post._id%>"><button class="btn btn-warning"><i class="fa fa-pencil-square-o"></i></button></a>
-                                <a href="/admin/posting?key=<%= post._id%>"><button class="btn btn-warning"><i class="fa fa-pencil-square-o"></i></button></a>
-                                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                            </td>
-                        </tr>
-                    <% i++;});
-                    } %>
-                    </tbody>
+                    <form action="/admin/posting" method="get">
+                        <tbody>
+                        <%
+                        if (locals.posts) {
+                            var i = (current == 1) ? 1 : (current - 1) * 10 + 1;
+                            posts.forEach(post => {
+                        %>
+                            <tr>
+                                <th scope="col"><input type="checkbox" class="PostSelected" name="check"
+                                                       value="<%= post._id %>"></th>
+                                <th scope="row"><%= i %></th>
+                                <td><%= post.content.length > 30 ? post.content.substring(0, 30) + '...' : post.content %></td>
+                                <td><%= post.image.length %></td>
+                                <td><%- statusList[post.status] %></td>
+                                <td><%= post.note.length > 20 ? post.note.substring(0, 20) + '...' : post.note %></td>
+                                <td>
+                                    <a href="/admin/detail?key=<%= post._id %>" class="btn btn-warning"><i
+                                                class="fa fa-pencil-square-o"></i></a>
+                                    <a class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        <% i++;});
+                        } %>
+                        </tbody>
+                        <button class="btn btn-primary btn-lg" type="submit" style="width: 20%;">Đăng bài</button>
+                    </form>
                 </table>
-                <div>
-                    <button class="btn btn-warning"><i class="fa fa-pencil-square-o"></i></button>
-                    <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                </div>
+
+                <!--                <a href="/admin/posting" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i></a>-->
+
                 <% if (locals.pages && pages > 0) { %>
                     <ul class="pagination">
                         <% if (current == 1) { %>
@@ -58,8 +70,8 @@
                             <% if (i == current) { %>
                                 <li class="page-item active"><a class="page-link"><%= i %></a></li>
                             <% } else { %>
-                                <li class="page-item "><a class="page-link"
-                                                          href="/admin/listPost/<%= i %>"><%= i %></a></li>
+                                <li class="page-item "><a class="page-link" href="/admin/listPost/<%= i %>"><%= i %></a>
+                                </li>
                             <% } %>
                             <% if (i == Number(current) + 1 && i < pages) { %>
                                 <li class="page-item disabled"><a class="page-link">...</a></li>
