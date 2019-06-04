@@ -45,6 +45,8 @@ class AdminController {
                 '<span class="badge badge-danger">Từ chối</span>'
             ];
 
+            console.log(req.query.key);
+
             await PostModel
                 .findOne({ _id:req.query.key })
                 .then(async poster => {
@@ -126,35 +128,5 @@ class AdminController {
         }
     }
 
-    static async sendcomment(req, res, next){
-        try {
-            res.redirect('listPost');
-        }
-        catch (e) {
-            res.status(555).send("Fail Admin");
-        }
-    }
-
-    static async detailPost(req, res, next){
-        try {
-            res.render('admin/detail',{
-                title: "Detail Post"
-            });
-        }
-        catch (e) {
-            res.status(555).send("Fail Admin");
-        }
-    }
-
-    static async posting(req, res, next){
-        try {
-            res.render('admin/posting',{
-                title: "Posting"
-            });
-        }
-        catch (e) {
-            res.status(555).send("Fail Admin");
-        }
-    }
 }
 module.exports = AdminController;
