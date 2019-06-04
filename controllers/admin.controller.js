@@ -1,11 +1,13 @@
 var PostModel = require('../models/post.model');
 var ImageModel = require('../models/image.model');
+var numeral = require('numeral');
 
 class AdminController {
     static async listPost(req, res, next) {
         try {
             var perPage = 10;
             var page = req.params.page || 1;
+            var f = req.query.filter;
 
             var status = [
                 '<span class="badge badge-info">Đang đợi duyệt</span>',
@@ -13,8 +15,11 @@ class AdminController {
                 '<span class="badge badge-danger">Từ chối</span>'
             ];
 
+            if(f != 0 && f != 1 && f!= 2){
+                f = new Array(0,1,2) ;
+            }
             await PostModel
-                .find().sort({_id: -1}).skip((perPage * page) - perPage).limit(perPage)
+                .find({ status: f }).sort({_id: -1}).skip((perPage * page) - perPage).limit(perPage)
                 .exec(function (err, posts) {
                     PostModel.countDocuments(
                         // {}, // filters
@@ -44,8 +49,6 @@ class AdminController {
                 '<span class="badge badge-success">Đã duyệt</span>',
                 '<span class="badge badge-danger">Từ chối</span>'
             ];
-
-            console.log(req.query.key);
 
             await PostModel
                 .findOne({ _id:req.query.key })
@@ -81,6 +84,21 @@ class AdminController {
         try {
             var keys = req.query.check;
             var posts = [];
+            var Images = [];
+
+            var tit;
+            await PostModel
+                .countDocuments({ status: 2 })
+                .then(count => {
+                    tit = count;
+                })
+                .catch(err =>{
+                    console.log(err);
+                });
+
+
+            var numOfTitle = numeral(tit).format('000000');
+
             await PostModel
                 .find({_id: keys })
                 .then(post => {
@@ -89,10 +107,35 @@ class AdminController {
                 .catch(err =>{
                     console.log(err);
                 });
-            console.log(posts);
+
+            var d = 1;
+            for(var i = 0; i < posts.length; i++){
+                var post = posts[i];
+                await ImageModel
+                    .find({_id : post.image })
+                    .then(Img =>{
+                        if(Img.length > 0) {
+                            posts[i].content += " (Hình ";
+                            Img.forEach(img => {
+                                Images.push(img);
+                                if(Img.indexOf(img) != 0)
+                                    posts[i].content += ", ";
+                                posts[i].content += d.toString();
+                                d++;
+                            });
+                            posts[i].content += ")";
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+            }
+
             res.render('admin/posting', {
                 title: "Hello",
-                posts: posts
+                posts: posts,
+                Images: Images,
+                numOfTitle: numOfTitle
             })
         }
         catch (e) {
@@ -128,5 +171,14 @@ class AdminController {
         }
     }
 
+    static async postPost(req, res, next){
+        try {
+            console.log(req.files);
+            res.redirect('listPost');
+        }
+        catch (e) {
+            e.status(555).send("Fail Admin");
+        }
+    }
 }
 module.exports = AdminController;
