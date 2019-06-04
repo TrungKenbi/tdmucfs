@@ -38,23 +38,33 @@ class PostController {
             message = errors.array({ onlyFirstError: true })
         } else {
             let content = req.body.content;
-            var image = [];
+            var image = []; // mảng lưu ID hình ảnh
 
-            if (req.file) {
-                let ImageCFS = new ImageModel({
-                    user: req.user._id,
-                    data: req.file.buffer
-                });
-                await ImageCFS.save()
-                    .then(doc => {
-                        image.push(doc._id);
-                    })
-                    .catch(err => {
-                        console.error(err);
+            if (req.files) {
+                for(var i = 0; i< req.files.length; i++) {
+                    var fileImage = req.files[i];
+                    let ImageCFS = await new ImageModel({
+                        user: req.user._id,
+                        data: fileImage.buffer,
+                        mimetype: fileImage.mimetype
                     });
+                    await ImageCFS.save()
+                        .then(async doc => {
+                            await console.log(doc);
+                            await image.push(doc._id);
+                        })
+                        .catch(err => {
+                            console.error(err);
+                        });
+                }
+                req.files.forEach(async fileImage => {
+
+                });
             }
 
-            let PostCFS = new PostModel({
+            await console.log(image);
+
+            let PostCFS = await new PostModel({
                 user: req.user._id,
                 content: content,
                 image: image,
@@ -75,8 +85,6 @@ class PostController {
                 });
 
         }
-
-        console.log(message);
 
         res.render('member/post', {
             title: 'Đăng Bài Confession',
@@ -101,7 +109,7 @@ class PostController {
                 user: req.user
             }).skip((perPage * page) - perPage).limit(perPage)
             .exec(function(err, posts) {
-                PostModel.count().exec(function(err, count) {
+                PostModel.countDocuments().exec(function(err, count) {
                     if (err) return next(err);
                     res.render('member/posts', {
                         title: 'Danh Sách Đã Đăng Confession',

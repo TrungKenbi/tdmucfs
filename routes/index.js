@@ -9,7 +9,7 @@ const imageUpload = multer({
     storage: multer.memoryStorage(),
     limits: {
         fileSize: 5 * 1024 * 1024,  // 5 MB upload limit
-        files: 1                    // 1 file
+        files: 5                    // 5 file
     },
     fileFilter: (req, file, cb) => {
         // if the file extension is in our accepted list
@@ -32,7 +32,7 @@ router
     .post(
         '/post',
         isLoggedIn,
-        imageUpload.single('image'),
+        imageUpload.array('image'),
         PostCtrl.validate('postCFS'),
         PostCtrl.postCFS
     )
