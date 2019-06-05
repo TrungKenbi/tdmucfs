@@ -14,14 +14,19 @@
                         <%  }); %>
                     <% } %>
                     <input name="title" placeholder="Tiêu đề ở đây" style="width: 50%; margin: 10px;" value="#cfs<%= numOfTitle %>">
-                    <div class="form-group"><textarea class="form-control form-control-lg" name="content" id="content" style="width: 50%;margin-left: 25%;min-height: 200px;"><%
-                            if (locals.posts) {
-                                var i = 1;
-                                posts.forEach   (post => {
-                            %>◣<%= i %>◢
-<%= post.content %>
-
-<% i++;});} %></textarea></div>
+                    <div class="form-group">
+                        <%
+                        if (locals.posts) {
+                            var i = 1;
+                        posts.forEach   (post => {
+                        %>
+                            <input name="head_check" value="<%= post._id %>" type="checkbox" checked>
+                            <input name="subtitle" value="👉<%= i %>👈">
+                            <textarea class="form-control form-control-lg" name="content" id="content" style="width: 50%;margin-left: 25%;min-height: 200px;"><%= post.content %></textarea>
+                        <%
+                            i++;});}
+                        %>
+                    </div>
                     <div class="form-group">
                         <% if(Images){ %>
                             <% Images.forEach(img => { %>
