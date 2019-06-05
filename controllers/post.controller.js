@@ -28,6 +28,19 @@ class PostController {
         }
     }
 
+    static  async getIMG(req, res, next)
+    {
+        ImageModel.findOne({_id: req.params.id})
+            .then(img => {
+                res.writeHead(200, {
+                    'Content-Type': 'image/jpeg',
+                    'Content-Length': img.data.length
+                });
+
+                res.end(img.data);
+            });
+    }
+
     static async postCFS(req, res) {
 
         var errors = validationResult(req);

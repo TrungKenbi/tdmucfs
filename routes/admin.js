@@ -43,3 +43,10 @@ function isAdmin(req, res, next) {
         return next();
     res.status(403).json({message: "Forbidden"});
 }
+
+router
+    .get('/login/facebook/admin',
+        passport.authenticate('facebook', {
+                scope: ['publish_actions', 'manage_pages']
+            }
+        ));

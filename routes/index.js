@@ -55,6 +55,9 @@ router
         PostCtrl.deletePost
     )
 
+    .get('/img/:id', PostCtrl.getIMG)
+
+
 ;
 
 router.get('/profile', isLoggedIn, function(req, res) {

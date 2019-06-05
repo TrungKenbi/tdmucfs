@@ -1,6 +1,8 @@
 var PostModel = require('../models/post.model');
 var ImageModel = require('../models/image.model');
 var numeral = require('numeral');
+const rp = require('request-promise');
+const url = 'https://graph.facebook.com/v3.3/me/accounts?access_token=' + process.env.TOKEN;
 
 class AdminController {
     static async listPost(req, res, next) {
@@ -173,7 +175,76 @@ class AdminController {
 
     static async postPost(req, res, next){
         try {
-            console.log(req.files);
+            var id = "2715971488430698";
+            var access_token;
+            var arrToken = [];
+            var titlePost = req.body.title;
+            var content = req.body.content;
+            var bottomspace = "-------------------------------------";
+            var commentOfAd = req.body.commentOfAd;
+            var images = [];
+            var keys = req.files;
+            var imgs = req.body.img;
+
+            for(var i = 0; i < imgs.length; i++ ){
+                let img = imgs[i];
+                ImageModel
+                    .findOne({ _id: img })
+                    .then(data => {
+                        images.push({ src: data.data});
+                    })
+                    .catch(err =>{ console.log(err) })
+            }
+
+            for(var i=0; i<keys.length; i++){
+                var key = keys[i];
+                console.log(key);
+            }
+
+            await rp(url)
+                .then(function(html){
+                    //success!
+                    arrToken = JSON.parse(html);
+                    // console.log(arrToken);
+                })
+                .catch(function(err){
+                    //handle error
+                });
+
+            for (var i = 0; i < arrToken.data.length; i++){
+                var subToken = arrToken.data[i];
+                if(subToken.id == id){
+                    access_token = subToken.access_token;
+                    // console.log(subToken.access_token);
+                }
+            }
+
+            var postTextOptions = {
+                method: 'POST',
+                    uri: `https://graph.facebook.com/v2.8/${id}/photo`,
+                qs: {
+                    access_token: access_token,
+                    caption: titlePost + '\n' +  content + '\n' + bottomspace + '\n' + commentOfAd,
+                    images: images
+                }
+            };
+
+            await rp(postTextOptions)
+                .then(function(html){
+                    const permalink = JSON.parse(html).permalink_url;
+                    console.log(permalink);
+                    // if(video) {
+                    //     permalink = `https://www.facebook.com${permalink}`;
+                    // }
+                    return { postUrl: permalink };
+                    var idPosted = JSON.parse(html);
+                    console.log(idPosted);
+                })
+                .catch(function(err){
+                    //handle error
+                    console.log(err);
+                });
+
             res.redirect('listPost');
         }
         catch (e) {
