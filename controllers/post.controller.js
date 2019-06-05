@@ -28,7 +28,7 @@ class PostController {
         }
     }
 
-    static  async getIMG(req, res, next)
+    static async getIMG(req, res, next)
     {
         ImageModel.findOne({_id: req.params.id})
             .then(img => {
@@ -36,7 +36,6 @@ class PostController {
                     'Content-Type': 'image/jpeg',
                     'Content-Length': img.data.length
                 });
-
                 res.end(img.data);
             });
     }

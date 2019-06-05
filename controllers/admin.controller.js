@@ -186,15 +186,7 @@ class AdminController {
             var keys = req.files;
             var imgs = req.body.img;
 
-            for(var i = 0; i < imgs.length; i++ ){
-                let img = imgs[i];
-                ImageModel
-                    .findOne({ _id: img })
-                    .then(data => {
-                        images.push({ src: data.data});
-                    })
-                    .catch(err =>{ console.log(err) })
-            }
+            console.log(images);
 
             for(var i=0; i<keys.length; i++){
                 var key = keys[i];
@@ -219,24 +211,59 @@ class AdminController {
                 }
             }
 
+            for(var i = 0; i < imgs.length; i++ ){
+                let img = imgs[i];
+                await ImageModel
+                    .findOne({ _id: img })
+                    .then(async data => {
+                        let imgOption = {
+                            method: 'POST',
+                            uri: `https://graph.facebook.com/v3.3/${id}/photos`,
+                            qs: {
+                                access_token: access_token,
+                                caption: "Hình " + i,
+                                published: false,
+                                url: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png'
+                            }
+                        };
+                        await rp(imgOption)
+                            .then(function(html){
+                                // const permalink = JSON.parse(html).permalink_url;
+                                // console.log(permalink);
+                                // if(video) {
+                                //     permalink = `https://www.facebook.com${permalink}`;
+                                // }
+                                // return { postUrl: permalink };
+                                var idPosted = JSON.parse(html);
+                                // console.log(idPosted.id);
+                                images.push({ media_fbid : idPosted.id });
+                            })
+                            .catch(function(err){
+                                //handle error
+                                console.log(err);
+                            });
+                    })
+                    .catch(err =>{ console.log(err) })
+            }
+
             var postTextOptions = {
                 method: 'POST',
-                    uri: `https://graph.facebook.com/v2.8/${id}/photo`,
+                    uri: `https://graph.facebook.com/v3.3/${id}/feed`,
                 qs: {
                     access_token: access_token,
-                    caption: titlePost + '\n' +  content + '\n' + bottomspace + '\n' + commentOfAd,
-                    images: images
+                    message: titlePost + '\n' +  content + '\n' + bottomspace + '\n' + commentOfAd,
+                    attached_media: images
                 }
             };
 
             await rp(postTextOptions)
                 .then(function(html){
-                    const permalink = JSON.parse(html).permalink_url;
-                    console.log(permalink);
+                    // const permalink = JSON.parse(html).permalink_url;
+                    // console.log(permalink);
                     // if(video) {
                     //     permalink = `https://www.facebook.com${permalink}`;
                     // }
-                    return { postUrl: permalink };
+                    // return { postUrl: permalink };
                     var idPosted = JSON.parse(html);
                     console.log(idPosted);
                 })
