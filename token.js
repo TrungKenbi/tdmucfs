@@ -1,5 +1,5 @@
 var email = "0927000239";// điền nick anh vô, em ko nhìn đâu
-var password = "quynhtrang1";
+var password = "";
 
 var BASE_URL = "https://api.facebook.com/restserver.php";
 var API_SECRET = "62f8ce9f74b12f84c123cc23437a4a32";

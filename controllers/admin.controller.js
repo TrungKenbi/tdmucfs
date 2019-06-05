@@ -54,7 +54,7 @@ class AdminController {
             ];
 
             await PostModel
-                .findOne({ _id:req.query.key })
+                .findOne({ _id : req.query.key })
                 .then(async poster => {
                     var Images = [];
                     await ImageModel
@@ -65,6 +65,7 @@ class AdminController {
                         .catch(err => {
                             console.log(err);
                         })
+                    // console.log(poster);
                     res.render('admin/detail', {
                         title: "Hello",
                         user: req.user,
@@ -151,7 +152,7 @@ class AdminController {
                 Istatus=0;
             await PostModel
                 .updateOne({
-                        _id: req.query.key// chạy thử anh
+                        _id: req.query.key
                     },
                     {
                         note: messages,
@@ -171,7 +172,7 @@ class AdminController {
 
     static async postPost(req, res, next){
         try {
-            var id = "649079911793156";
+            var id = "2715971488430698";
             var access_token;
             var arrToken = [];
             var titlePost = req.body.title;
