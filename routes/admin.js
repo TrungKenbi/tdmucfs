@@ -21,7 +21,7 @@ const imageUpload = multer({
     }
 });
 
-var HomeCtrl = require('../controllers/home.controller');
+var ManageCtrl = require('../controllers/manage.controller');
 var AdminCtrl = require('../controllers/admin.controller');
 
 router
@@ -33,7 +33,13 @@ router
     .get('/detail', AdminCtrl.detailPost)
     .get('/posting', AdminCtrl.postingPost)
     .post('/sendmess', AdminCtrl.sendMess)
-    .post('/post', imageUpload.array('image'), AdminCtrl.postPost);
+    .post('/post', imageUpload.array('image'), AdminCtrl.postPost)
+
+    .get('/manageUser', ManageCtrl.index)
+    .get('/manageUser/:page', ManageCtrl.index)
+    .get('/manageUser/view/:id', ManageCtrl.viewProfile)
+    .post('/manageUser/update/:id', ManageCtrl.updateProfile)
+;
 
 module.exports = router;
 
