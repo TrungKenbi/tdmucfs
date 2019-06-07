@@ -172,7 +172,8 @@ class AdminController {
 
     static async postPost(req, res, next){
         try {
-            var id = "2715971488430698";
+            //var id = "2715971488430698"; // <- id page bán chè@@
+            var id = "649079911793156";
             var access_token;
             var arrToken = [];
             var titlePost = req.body.title;
@@ -229,8 +230,9 @@ class AdminController {
                                     access_token: access_token,
                                     caption: "Hình " + (i + 1),
                                     published: false,
-                                    url: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png'
-                                }
+                                    url: process.env.ImgURL+img
+                                    // url: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png'
+                                }// em pull ve chua, sao ki nhi ko thay, doi a chut
                             };
                             await rp(imgOption)
                                 .then(function (html) {
@@ -266,7 +268,8 @@ class AdminController {
                                 access_token: access_token,
                                 caption: "Hình " + (i + 1),
                                 published: false,
-                                url: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png'
+                                url: process.env.ImgURL+img
+                                // url: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png'
                                 // url: process.env.ImgURL + idImg
                             }
                         };
@@ -311,7 +314,8 @@ class AdminController {
                                 access_token: access_token,
                                 caption: "Hình of Admin",
                                 published: false,
-                                url: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png'
+                                url: process.env.ImgURL+doc._id
+                                // url: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png'
                                 // url: process.env.ImgURL + idImg
                             }
                         };

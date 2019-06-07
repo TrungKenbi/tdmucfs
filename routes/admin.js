@@ -28,18 +28,20 @@ router
     .get('/', isAdmin, function (req, res, next) {
         res.status(403).json({message: "hhi"});
     })
-    .get('/listPost', AdminCtrl.listPost)
-    .get('/listPost/:page', AdminCtrl.listPost)
-    .get('/detail', AdminCtrl.detailPost)
-    .get('/posting', AdminCtrl.postingPost)
-    .post('/sendmess', AdminCtrl.sendMess)
-    .post('/post', imageUpload.array('image'), AdminCtrl.postPost)
+    .get('/listPost', isAdmin, AdminCtrl.listPost)
+    .get('/listPost/:page', isAdmin, AdminCtrl.listPost)
+    .get('/detail', isAdmin, AdminCtrl.detailPost)
+    .get('/posting', isAdmin, AdminCtrl.postingPost)
+    .post('/sendmess', isAdmin, AdminCtrl.sendMess)
+    .post('/post', isAdmin, imageUpload.array('image'), AdminCtrl.postPost)
 
-    .get('/manageUser', ManageCtrl.index)
-    .get('/manageUser/:page', ManageCtrl.index)
-    .get('/manageUser/view/:id', ManageCtrl.viewProfile)
-    .post('/manageUser/update/:id', ManageCtrl.updateProfile)
+    .get('/manageUser', isAdmin, ManageCtrl.index)
+    .get('/manageUser/:page', isAdmin, ManageCtrl.index)
+    .get('/manageUser/view/:id', isAdmin, ManageCtrl.viewProfile)
+    .post('/manageUser/update/:id', isAdmin, ManageCtrl.updateProfile)
 ;
+
+// Co ve hoi chuoi nhi ?? xoq r a, ok, con c
 
 module.exports = router;
 
