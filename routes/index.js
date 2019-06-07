@@ -80,31 +80,31 @@ router.get('/logout', function (req, res) {
     res.redirect('/');
 });
 
-router.get('/fake', function(req, res, next) {
-    var faker = require('faker');
-    faker.locale = "vi";
-    var PostModel = require('../models/post.model');
-    for (var i = 0; i < 1000; i++) {
-        var post = new PostModel();
-
-        post.image = [];
-        post.user = '5ce41a111ddaef27d84a086a';
-        post.content = faker.lorem.text();
-        post.status = randomIntFromInterval(0, 2);
-        post.note = '';
-
-        console.log(post);
-        post.save(function(err) {
-            if (err) throw err
-        })
-    }
-    function randomIntFromInterval(min,max) // min and max included
-    {
-        return Math.floor(Math.random()*(max-min+1)+min);
-    }
-
-    res.redirect('/posts/1');
-});
+// router.get('/fake', function(req, res, next) {
+//     var faker = require('faker');
+//     faker.locale = "vi";
+//     var PostModel = require('../models/post.model');
+//     for (var i = 0; i < 1000; i++) {
+//         var post = new PostModel();
+//
+//         post.image = [];
+//         post.user = '5ce41a111ddaef27d84a086a';
+//         post.content = faker.lorem.text();
+//         post.status = randomIntFromInterval(0, 2);
+//         post.note = '';
+//
+//         console.log(post);
+//         post.save(function(err) {
+//             if (err) throw err
+//         })
+//     }
+//     function randomIntFromInterval(min,max) // min and max included
+//     {
+//         return Math.floor(Math.random()*(max-min+1)+min);
+//     }
+//
+//     res.redirect('/posts/1');
+// });
 
 module.exports = router;
 

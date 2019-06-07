@@ -171,6 +171,7 @@ class PostController {
             });
 
             PostCFS.content = content;
+            PostCFS.status = 0;
             if (image.length)
                 PostCFS.image = image;
 
