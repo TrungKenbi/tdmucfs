@@ -17,7 +17,7 @@ class PostController {
                     _id: ObjectID(edit)
                 });
             }
-
+            console.log(req.user);
             res.render('member/post', {
                 title: 'Đăng Bài Confession',
                 user : req.user,
@@ -95,6 +95,8 @@ class PostController {
                 .catch(err => {
                     console.error(err);
                 });
+
+
 
         }
 
