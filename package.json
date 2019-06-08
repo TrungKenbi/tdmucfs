@@ -30,6 +30,7 @@
     "path": "^0.12.7",
     "puppeteer": "^1.17.0",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4"
+    "request-promise": "^4.2.4",
+    "swagger-stats": "^0.95.7"
   }
 }
