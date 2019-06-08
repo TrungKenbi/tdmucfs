@@ -81,7 +81,11 @@
                             <li class="page-item"><a class="page-link" href="/posts/<%= pages %>">Trang Cuối</a></li>
                         <% } %>
                     </ul>
-                <% } %>
+                <% } else { %>
+                    <div class="alert alert-info text-center">
+                        Bạn chưa đăng bài nào cả, hãy thử đăng một bài đi nhé !
+                    </div>
+                <% }%>
 
 
             </div>
