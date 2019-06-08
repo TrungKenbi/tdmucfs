@@ -1,7 +1,9 @@
-<div class="container-contact100" style="font-family: 'Lobster', cursive;">
+<link rel="stylesheet" href="/assets/css/mainpost.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<div class="container-contact100" style="font-family: 'Quicksand', sans-serif;">
     <div class="wrap-contact100">
-        <form class="contact100-form validate-form" method="post" action="<%= locals.post ? '/editpost/' + post._id : '/post' %>" enctype="multipart/form-data">
-				<span class="contact100-form-title" style="font-family: 'Lobster', cursive;">
+        <form id="html5Form" class="contact100-form validate-form" method="post" action="<%= locals.post ? '/editpost/' + post._id : '/post' %>" enctype="multipart/form-data">
+				<span class="contact100-form-title" style="font-family: 'Quicksand', sans-serif;">
                     <%= locals.post ? 'Sửa Bài Đăng' : 'Đăng Bài' %>
 				</span>
             <% if (locals.message) { %>
