@@ -123,7 +123,9 @@ class PostController {
                 user: req.user
             }).skip((perPage * page) - perPage).limit(perPage)
             .exec(function(err, posts) {
-                PostModel.countDocuments().exec(function(err, count) {
+                PostModel.countDocuments({
+                    user: req.user
+                }).exec(function(err, count) {
                     if (err) return next(err);
                     res.render('member/posts', {
                         title: 'Danh Sách Đã Đăng Confession',
