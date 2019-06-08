@@ -3,7 +3,7 @@
     position:fixed;
     width:60px;
     height:60px;
-    bottom:90px;
+    bottom:70px;
     right:40px;
     background-color:#56c6c6;
     color:#FFF;
@@ -69,6 +69,10 @@ a#menu-share:active > i{
 @keyframes scale-in {
     from {transform: scale(0);opacity: 0;}
     to {transform: scale(1);opacity: 1;}
+}
+@keyframes scale-out{
+    from {transform: scale(1)}
+    to {transform: scale(0)}
 }
 
 @keyframes rotate-in {

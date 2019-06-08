@@ -8,7 +8,7 @@
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
 * {
-    margin: 0px;
+    
     padding: 0px;
     box-sizing: border-box;
 }
@@ -120,9 +120,8 @@ iframe {
 }
 
 table {
-    border-spacing: 1;
     border-collapse: collapse;
-    background: white;
+    background: rgba(255,255,255,0.8);
     border-radius: 10px;
     overflow: hidden;
     width: 100%;
@@ -171,50 +170,58 @@ tbody tr:nth-child(even) {
 }
 
 tbody tr {
-    font-size: 15px;
+    font-size: 17px;
     color: #808080;
     line-height: 1.2;
     font-weight: unset;
 }
 
 tbody tr:hover {
-    color: #555555;
+    color: black;
+    transition: ease-out 0.4s;
     background-color: #f5f5f5;
     cursor: pointer;
 }
 
 .column1 {
     width: 260px;
-    padding-left: 40px;
+    padding: 4px;
     text-align: center;
 }
 
 .column2 {
     width: 160px;
+    padding: 4px;
     text-align: center;
 }
 
 .column3 {
     width: 245px;
+    padding: 4px;
     text-align: center;
 }
 
 .column4 {
     width: 110px;
+    padding: 4px;
     text-align: center;
 }
 
 .column5 {
     width: 170px;
+    padding: 4px;
     text-align: center;
 }
 
 .column6 {
     width: 222px;
+    padding: 4px;
     text-align: center;
 }
 
-
+table{
+    font-family: 'Quicksand', sans-serif;
+}
 @media screen and (max-width: 992px) {
     table {
         display: block;
@@ -230,19 +237,19 @@ tbody tr:hover {
         padding: 37px 0;
     }
     table tbody tr td {
-        padding-left: 40% !important;
-        margin-bottom: 24px;
+        padding-left:  40% !important;
+        margin-bottom: 30px;
     }
     table tbody tr td:last-child {
         margin-bottom: 0;
     }
     table tbody tr td:before {
-        font-size: 14px;
-        color: #999999;
+        color: #050505;
         line-height: 1.2;
-        font-weight: unset;
+        font-weight: bold;
         position: absolute;
         width: 40%;
+        margin: 4px 0px;
         left: 30px;
         top: 0;
     }
@@ -263,6 +270,7 @@ tbody tr:hover {
     }
     table tbody tr td:nth-child(6):before {
         content: "Thao tác";
+        margin-top:9px;
     }
 
     .column1,
@@ -272,6 +280,8 @@ tbody tr:hover {
     .column5,
     .column6 {
         text-align: center;
+        width: 100%;
+        padding-bottom:3px;
     }
 
     .column4,
@@ -280,11 +290,12 @@ tbody tr:hover {
     .column1,
     .column2,
     .column3 {
-        width: 100%;
+        
+        text-align: center;
     }
 
     tbody tr {
-        font-size: 14px;
+        font-size: 15px;
     }
 }
 
