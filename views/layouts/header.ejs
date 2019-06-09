@@ -4,6 +4,13 @@
             <i class="fa fa-plus my-float"></i>
         </a>
         <ul id="menu-show" class="menu">
+            <% if (user.permission >= 3) { %>
+            <li>
+                <a href="/admin">
+                    <i class="fas fa-cogs my-float"></i>
+                </a>
+            </li>
+            <% } %>
             <li>
                 <a href="/post">
                     <i class="fas fa-edit my-float"></i>

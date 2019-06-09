@@ -25,9 +25,7 @@ var ManageCtrl = require('../controllers/manage.controller');
 var AdminCtrl = require('../controllers/admin.controller');
 
 router
-    .get('/', isAdmin, function (req, res, next) {
-        res.status(403).json({message: "hhi"});
-    })
+    .get('/', isAdmin, AdminCtrl.index)
     .get('/listPost', isAdmin, AdminCtrl.listPost)
     .get('/listPost/:page', isAdmin, AdminCtrl.listPost)
     .get('/detail', isAdmin, AdminCtrl.detailPost)

@@ -6,6 +6,14 @@ const rp = require('request-promise');
 const url = 'https://graph.facebook.com/v3.3/me/accounts?access_token=' + process.env.TOKEN;
 
 class AdminController {
+
+    static async index(req, res, next) {
+        res.render('admin/index', {
+            title: 'Quản Lý Hệ Thống Confession',
+            user: req.user
+        });
+    }
+
     static async listPost(req, res, next) {
         try {
             var perPage = 10;
