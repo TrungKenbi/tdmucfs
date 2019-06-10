@@ -1,6 +1,7 @@
 var PostModel = require('../models/post.model');
 var ImageModel = require('../models/image.model');
 var PostedModel = require('../models/posted.model');
+var UserModel = require('../models/user.model');
 var numeral = require('numeral');
 const rp = require('request-promise');
 const url = 'https://graph.facebook.com/v3.3/me/accounts?access_token=' + process.env.TOKEN;
@@ -206,6 +207,17 @@ class AdminController {
             var idImgs = [];
             var postkeys = req.body.head_check;
             var messagePost = "";
+            var signer = "";
+
+            UserModel
+                .findOne({ _id: locals.user._id })
+                .then(async data => {
+                    if(data.signer != undefined)
+                        signer = data.signer;
+                })
+                .catch(err => {
+                    console.log(err);
+                })
 
             messagePost += (titlePost + '\n');
             if(Array.isArray(postkeys)) {
@@ -217,6 +229,7 @@ class AdminController {
                 messagePost += (subTitle + '\n' + content + '\n' + bottomspace + '\n');
             }
             messagePost += (commentOfAd);
+            messagePost += '\n' + signer;
 
             await rp(url)
                 .then(function(html){
