@@ -44,7 +44,7 @@ router
 module.exports = router;
 
 function isAdmin(req, res, next) {
-     if (req.isAuthenticated() && req.user.permission >= 3)
+     if (req.isAuthenticated() && req.user.permission >= 0)
     //if(true)
         return next();
     res.status(403).json({message: "Forbidden"});
