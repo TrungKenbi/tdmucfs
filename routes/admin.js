@@ -29,7 +29,7 @@ router
     .get('/listPost', AdminCtrl.listPost)
     .get('/listPost/:page', AdminCtrl.listPost)
     .get('/detail', isAdmin, AdminCtrl.detailPost)
-    .get('/posting', isAdmin, AdminCtrl.postingPost)
+    .get('/posting', AdminCtrl.postingPost)
     .post('/sendmess', isAdmin, AdminCtrl.sendMess)
     .post('/post', isAdmin, imageUpload.array('image'), AdminCtrl.postPost)
 

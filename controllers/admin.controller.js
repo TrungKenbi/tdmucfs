@@ -100,6 +100,7 @@ class AdminController {
             var keys = req.query.check;
             var posts = [];
             var Images = [];
+            var indexImages = [];
 
             var tit;
             await PostedModel
@@ -115,7 +116,7 @@ class AdminController {
             var numOfTitle = numeral(tit).format('000000');
 
             await PostModel
-                .find({_id: keys })
+                .find({_id: keys, status: 0 })
                 .then(post => {
                     posts = post;
                 })
@@ -129,9 +130,13 @@ class AdminController {
                     .find({_id : post.image })
                     .then(Img =>{
                         if(Img.length > 0) {
+                            let t = [];
                             Img.forEach(img => {
+                                t.push(Images.length);
                                 Images.push(img);
                             });
+                            let key = post._id;
+                            indexImages[key] = t;
                             posts[i].content += " (Có hình 👇👇👇)";
                         }
                     })
@@ -140,10 +145,13 @@ class AdminController {
                     })
             }
 
+            console.log(indexImages);
+
             res.render('admin/posting', {
                 title: "Hello",
                 posts: posts,
                 Images: Images,
+                indexImages: indexImages,
                 numOfTitle: numOfTitle,
                 user: req.user
             })

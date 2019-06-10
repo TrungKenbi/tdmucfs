@@ -1,3 +1,17 @@
+<script>
+    function PostCheck() {
+        CheckOfpost = document.getElementById(arguments[0]).checked;
+        arr = document.getElementsByClassName('ImgOfPost');
+        for (var i = 1; i < arguments.length; i++) {
+            id = arguments[i];
+            arr[id].checked = CheckOfpost;
+        }
+        // arguments.forEach(index => {
+        //     console.log(index);
+        //     arr[index].checked = CheckOfpost;
+        // })
+    }
+</script>
 <div class="container">
     <div class="row">
         <div class="col">
@@ -13,15 +27,15 @@
                             </div>
                         <%  }); %>
                     <% } %>
-                    <input name="title" placeholder="Tiêu đề ở đây" style="width: 50%; margin: 10px;" value="#cfs<%= numOfTitle %>">
+                    <input name="title" class="form-control form-control-lg" placeholder="Tiêu đề ở đây" style="width: 50%; margin-left: 25%;" value="#cfs<%= numOfTitle %>">
                     <div class="form-group">
                         <%
                         if (locals.posts) {
                             var i = 1;
                         posts.forEach   (post => {
                         %>
-                            <input name="head_check" value="<%= post._id %>" type="checkbox" checked>
-                            <input name="subtitle" value="👉<%= i %>👈">
+                            <input name="head_check" class="form-control" value="<%= post._id %>" id="<%= post._id %>" type="checkbox" onclick="PostCheck('<%= post._id %>','<%= indexImages[post._id] %>')" checked>
+                            <input name="subtitle" class="form-control form-control-lg" value="👉<%= i %>👈" style="width: 50%;margin-left: 25%;">
                             <textarea class="form-control form-control-lg" name="content" id="content" style="width: 50%;margin-left: 25%;min-height: 200px;"><%= post.content %></textarea>
                         <%
                             i++;});}
@@ -30,7 +44,7 @@
                     <div class="form-group">
                         <% if(Images){ %>
                             <% Images.forEach(img => { %>
-                                <input name="img" value="<%= img._id %>" type="checkbox" checked>
+                                <input name="img" class="ImgOfPost form-control" value="<%= img._id %>" type="checkbox" checked>
                                 <img style="width: 20%" src="data:image/png;base64,<%= img.data.toString('base64') %>" />
                             <% }) %>
                         <% } %>
