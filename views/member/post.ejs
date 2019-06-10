@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 <link rel="stylesheet" href="/assets/css/mainpost.css">
 <link rel="stylesheet" href="/assets/css/style.css">
 <div class="container-contact100" style="font-family: 'Quicksand', sans-serif;">
     <div class="wrap-contact100">
         <form id="html5Form" class="contact100-form validate-form" method="post" action="<%= locals.post ? '/editpost/' + post._id : '/post' %>" enctype="multipart/form-data">
+=======
+<div class="container-contact100" style="font-family: 'Quicksand', sans-serif;">
+    <div class="wrap-contact100">
+        <form class="contact100-form validate-form" method="post" action="<%= locals.post ? '/editpost/' + post._id : '/post' %>" enctype="multipart/form-data">
+>>>>>>> ac2f48da88f3db44a2f507290db71c21e71a6b75
 				<span class="contact100-form-title" style="font-family: 'Quicksand', sans-serif;">
                     <%= locals.post ? 'Sửa Bài Đăng' : 'Đăng Bài' %>
 				</span>
@@ -15,12 +21,16 @@
             <% } %>
             <div class="wrap-input100 validate-input" data-validate = "Message is required">
                 <span class="label-input100" style="font-family: 'Quicksand', sans-serif;">Nội dung</span>
+<<<<<<< HEAD
                 <textarea style="font-family: 'Quicksand', sans-serif;" class="input100" name="content" placeholder="Nội dung ở đây..." required><% if (locals.post) { %><%= post.content %><% }%></textarea>
+=======
+                <textarea style="font-family: 'Quicksand', sans-serif;" class="input100" name="content" placeholder="Nội dung ở đây..."><% if (locals.post) { %><%= post.content %><% }%></textarea>
+>>>>>>> ac2f48da88f3db44a2f507290db71c21e71a6b75
                 <span class="focus-input100"></span>
             </div>
 
             <div class="custom-file mb-3">
-                <input type="file" accept="image/*" class="custom-file-input" id="customFile" name="image">
+                <input type="file" accept="image/*" class="custom-file-input" id="customFile" name="image" multiple>
                 <label class="custom-file-label" for="customFile">Chọn hình ảnh</label>
             </div>
 

@@ -84,7 +84,9 @@ body {
 hr {
     box-sizing: content-box;
     height: 0;
-    overflow: visible
+    overflow: visible;
+   
+    
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -8306,7 +8308,7 @@ a.text-dark:focus, a.text-dark:hover {
 }
 
 body {
-    font-family: Lato
+    font-family: 'Quicksand', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {

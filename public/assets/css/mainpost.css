@@ -1,17 +1,30 @@
 
 
+<<<<<<< HEAD
+=======
+
+
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+
+
+>>>>>>> ac2f48da88f3db44a2f507290db71c21e71a6b75
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
 
 * {
-    margin: 0px;
     padding: 0px;
     box-sizing: border-box;
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> ac2f48da88f3db44a2f507290db71c21e71a6b75
 /*---------------------------------------------*/
 a {
-    font-family: Poppins-Regular;
     font-size: 14px;
     line-height: 1.7;
     color: #666666;
@@ -30,6 +43,26 @@ a:hover {
     text-decoration: none;
 }
 
+<<<<<<< HEAD
+=======
+/*---------------------------------------------*/
+h1,h2,h3,h4,h5,h6 {
+    margin: 0px;
+    color:#fff;
+}
+
+p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #ffffff;
+    margin: 0px;
+}
+
+ul, li {
+    margin: 0px;
+    list-style-type: none;
+}
+>>>>>>> ac2f48da88f3db44a2f507290db71c21e71a6b75
 
 
 /*---------------------------------------------*/
@@ -133,7 +166,6 @@ iframe {
 
 .contact100-form-title {
     display: block;
-    font-family: Poppins-Bold;
     font-size: 39px;
     color: #333333;
     line-height: 1.2;
@@ -155,7 +187,6 @@ iframe {
 }
 
 .label-input100 {
-    font-family: Poppins-Regular;
     font-size: 13px;
     color: #666666;
     line-height: 1.5;
@@ -166,7 +197,6 @@ iframe {
     display: block;
     width: 100%;
     background: transparent;
-    font-family: Poppins-Medium;
     font-size: 18px;
     color: #333333;
     line-height: 1.2;
@@ -277,7 +307,6 @@ textarea.input100 {
     width: 100%;
     height: 50px;
 
-    font-family: Poppins-Medium;
     font-size: 16px;
     color: #fff;
     line-height: 1.2;
@@ -337,7 +366,6 @@ textarea.input100 {
     right: 2px;
     pointer-events: none;
 
-    font-family: Poppins-Regular;
     color: #c80000;
     font-size: 13px;
     line-height: 1.4;
@@ -354,7 +382,6 @@ textarea.input100 {
 
 .alert-validate::after {
     content: "\f06a";
-    font-family: FontAwesome;
     display: block;
     position: absolute;
     color: #c80000;
@@ -408,7 +435,6 @@ textarea.input100 {
 /*------------------------------------------------------------------
 [ in select ]*/
 .select2-container .select2-selection--single .select2-selection__rendered {
-    font-family: Poppins-Medium;
     font-size: 18px;
     color: #333333;
     line-height: 1.2;
@@ -496,7 +522,6 @@ textarea.input100 {
 }
 
 .select2-results__options {
-    font-family: Poppins-Regular;
     font-size: 15px;
     color: #333333;
     line-height: 1.2;
@@ -505,7 +530,6 @@ textarea.input100 {
 .select2-search--dropdown .select2-search__field {
     border: 1px solid #aaa;
     outline: none;
-    font-family: Poppins-Regular;
     font-size: 15px;
     color: #333333;
     line-height: 1.2;

@@ -1,19 +1,23 @@
+<<<<<<< HEAD
 <link rel="stylesheet" href="/assets/css/main.css">
 <div class="limiter" style="font-family: 'Lobster', cursive;">
+=======
+<div class="limiter">
+>>>>>>> ac2f48da88f3db44a2f507290db71c21e71a6b75
     <div class="container-table100">
         <div class="wrap-table100">
             <div class="table100">
-                <h1 style="text-align: center; font-size: 60px; font-family: 'Lobster', cursive;" >Bài đã đăng</h1>
+                <h1 style="text-align: center; font-size: 60px; padding-top: 50px" >Bài đã đăng</h1>
                 <br>
                 <table>
                     <thead>
                     <tr class="table100-head">
-                        <th class="column1" style="font-family: 'Lobster', cursive;">STT</th>
-                        <th class="column2" style="font-family: 'Lobster', cursive;">Nội dung</th>
-                        <th class="column3" style="font-family: 'Lobster', cursive;">Hình ảnh</th>
-                        <th class="column4" style="font-family: 'Lobster', cursive;">Trạng thái</th>
-                        <th class="column5" style="font-family: 'Lobster', cursive;">Ghi chú</th>
-                        <th class="column6" style="font-family: 'Lobster', cursive;">Thao tác</th>
+                        <th class=" column1" >STT</th>
+                        <th class=" column2" >Nội dung</th>
+                        <th class=" column3" >Hình ảnh</th>
+                        <th class=" column4" >Trạng thái</th>
+                        <th class=" column5" >Ghi chú</th>
+                        <th class=" column6" >Thao tác</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -55,8 +59,13 @@
                 </table>
 
                 <br/>
+<<<<<<< HEAD
                 <% if (locals.pages && pages > 0) { %>
                     <ul class="pagination" style="justify-content: center; ">
+=======
+                <% if (locals.pages && pages > 1) { %>
+                    <ul class="pagination" style="justify-content: center;">
+>>>>>>> ac2f48da88f3db44a2f507290db71c21e71a6b75
                         <% if (current == 1) { %>
                             <li class="page-item disabled" style=""><a class="page-link">Trang Đầu</a></li>
                         <% } else { %>
@@ -82,7 +91,15 @@
                             <li class="page-item"><a class="page-link" href="/posts/<%= pages %>">Trang Cuối</a></li>
                         <% } %>
                     </ul>
-                <% } %>
+                <% } else {
+                    if (posts.length == 0) { %>
+                    <div class="alert alert-info text-center">
+                        Bạn chưa đăng bài nào cả, hãy thử đăng một bài đi nhé !
+                    </div>
+                <%
+                    }
+                }
+                %>
 
 
             </div>

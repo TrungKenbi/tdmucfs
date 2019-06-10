@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var ImageModelSchema = new Schema({
     user: Schema.Types.ObjectId,
     data: Buffer,
+    mimetype: String,
     time: { type: Date, default: Date.now }
 });
 

@@ -8,7 +8,9 @@ var PostModelSchema = new Schema({
     image: [Schema.Types.ObjectId],
     time: { type: Date, default: Date.now },
     status: Number,
-    note: String
+    note: String,
+    user_upload: Schema.Types.ObjectId,
+    PostUrl: String
 });
 
 module.exports = mongoose.model('posts', PostModelSchema );
