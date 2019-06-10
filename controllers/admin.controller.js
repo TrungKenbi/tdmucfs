@@ -32,7 +32,7 @@ class AdminController {
             }
 
             await PostModel
-                .find({ status: f }).sort({_id: -1}).skip((perPage * page) - perPage).limit(perPage)
+                .find({ status: f }).sort({time: -1}).skip((perPage * page) - perPage).limit(perPage)
                 .exec(function (err, posts) {
                     console.log(f);
                     PostModel.countDocuments(
