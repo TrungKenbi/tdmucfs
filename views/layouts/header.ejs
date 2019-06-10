@@ -42,6 +42,9 @@
                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Xin chào, <b><%= user.name %></b></button>
                             <ul class="dropdown-menu ">
                                 <li>
+                                    <a href="/profileuser/<%= locals.user._id %>">Thông tin cá nhân</a>
+                                </li>
+                                <li>
                                     <a href="/logout">Đăng xuất!</a>
                                 </li>
                             </ul>

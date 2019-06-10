@@ -24,6 +24,7 @@ const imageUpload = multer({
 
 var HomeCtrl = require('../controllers/home.controller');
 var PostCtrl = require('../controllers/post.controller');
+var ManageCtrl = require('../controllers/manage.controller');
 
 /* GET home page. */
 router
@@ -59,6 +60,11 @@ router
         '/detail',
         isLoggedIn,
         PostCtrl.detailPost
+    )
+    .get(
+        '/profileuser/:id',
+        isLoggedIn,
+        ManageCtrl.viewProfileUser
     )
 
     .get('/img/:id', PostCtrl.getIMG)
