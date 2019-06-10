@@ -1,14 +1,8 @@
-<<<<<<< HEAD
 <link rel="stylesheet" href="/assets/css/mainpost.css">
 <link rel="stylesheet" href="/assets/css/style.css">
 <div class="container-contact100" style="font-family: 'Quicksand', sans-serif;">
     <div class="wrap-contact100">
         <form id="html5Form" class="contact100-form validate-form" method="post" action="<%= locals.post ? '/editpost/' + post._id : '/post' %>" enctype="multipart/form-data">
-=======
-<div class="container-contact100" style="font-family: 'Quicksand', sans-serif;">
-    <div class="wrap-contact100">
-        <form class="contact100-form validate-form" method="post" action="<%= locals.post ? '/editpost/' + post._id : '/post' %>" enctype="multipart/form-data">
->>>>>>> ea2602c423b3ccf38b7ddecf8b8bd058fea92929
 				<span class="contact100-form-title" style="font-family: 'Quicksand', sans-serif;">
                     <%= locals.post ? 'Sửa Bài Đăng' : 'Đăng Bài' %>
 				</span>
@@ -21,11 +15,7 @@
             <% } %>
             <div class="wrap-input100 validate-input" data-validate = "Message is required">
                 <span class="label-input100" style="font-family: 'Quicksand', sans-serif;">Nội dung</span>
-<<<<<<< HEAD
                 <textarea style="font-family: 'Lobster', cursive;" class="input100" name="content" placeholder="Nội dung ở đây..."><% if (locals.post) { %><%= post.content %><% }%></textarea>
-=======
-                <textarea style="font-family: 'Quicksand', sans-serif;" class="input100" name="content" placeholder="Nội dung ở đây..."><% if (locals.post) { %><%= post.content %><% }%></textarea>
->>>>>>> ea2602c423b3ccf38b7ddecf8b8bd058fea92929
                 <span class="focus-input100"></span>
             </div>
 
