@@ -436,7 +436,7 @@ class AdminController {
                     console.log(err);
                 });
 
-            res.redirect('listPost?key=0');
+            res.redirect('listPost?filter=0');
         }
         catch (e) {
             e.status(555).send("Fail Admin");
