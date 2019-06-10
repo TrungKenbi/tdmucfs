@@ -26,19 +26,16 @@ class AdminController {
                 '<span class="badge badge-danger">Từ chối</span>'
             ];
 
-            console.log(f);
-
-            if((parseInt(f) != 0 && parseInt(f) != 1 && parseInt(f) != 2)){
+            if((f !== 0 && f !== 1 && f !== 2)){
                 f = new Array(0,1,2) ;
             }
-
-            // console.log(f);
 
             await PostModel
                 .find({ status: f }).sort({_id: -1}).skip((perPage * page) - perPage).limit(perPage)
                 .exec(function (err, posts) {
+                    console.log(f);
                     PostModel.countDocuments(
-                        // {}, // filters
+                        { status: f }, // filters
                         // {}, // options
                         function (err, count) {
                             if (err) return next(err);
