@@ -23,19 +23,33 @@
                             <% }) %>
                         <% } %>
                     </div>
-                    <div class="form-group"><textarea class="form-control form-control-lg" placeholder="Admin note send user here!" name="messagesOfAdmin" style="width: 50%;margin-left: 25%;min-height: 100px; max-height: 500px;"><%= poster.note %></textarea></div>
+                    <div class="form-group"><textarea readonly="true" class="form-control form-control-lg" placeholder="Admin not yet comment" name="messagesOfAdmin" style="width: 50%;margin-left: 25%;min-height: 100px; max-height: 500px;"><%= poster.note %></textarea></div>
                     <%
                     if(poster.status == 1){
-                        %><div class="form-group"><a href="<%= poster.PostUrl %>" target="_blank">Liên kết đến bài viết</a></div>
+                    %><div class="form-group"><a href="<%= poster.PostUrl %>" target="_blank">Liên kết đến bài viết</a></div>
                     <% } else {
-                            %>
-                        <div class="form-group"><input type="checkbox" name="statusBox" <%= poster.status==2?"checked":0 %> >Từ chối bài đăng</div>
+                    %>
+                        <% if (poster.status == 0) { %>
+                            <a href="/deletepost/<%= poster._id %>">
+                                <button
+                                        onclick="return confirm('Bạn có muốn xóa bài đăng này chứ ?')"
+                                        class="btn-1 btn-1-danger">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </a>
+                        <% } else { %>
+                            <button
+                                    onclick="return confirm('Bạn không thể xóa bài đăng này được !')"
+                                    class="btn-1 btn-1-danger">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        <% } %>
                     <%
                     }
                     %>
                     <div class="form-group">
-                        <button class="btn btn-primary btn-lg" type="submit" style="width: 20%;">Send</button>
-                        <a href="/admin/listPost?filter=0" class="btn btn-dark btn-lg" style="width: 20%;">Cancel</a>
+                        <a href="/editpost/<%= poster._id %>" class="btn btn-primary btn-lg" style="width: 20%;">Chỉnh sửa</a>
+                        <a href="/posts" class="btn btn-dark btn-lg" style="width: 20%;">Trở về</a>
                     </div>
                 </form>
             </div>

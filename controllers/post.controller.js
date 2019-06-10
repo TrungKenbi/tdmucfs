@@ -139,6 +139,47 @@ class PostController {
             });
     }
 
+    static async detailPost(req, res, next){
+        try {
+            var message = [];
+            var status = [
+                '<span class="badge badge-info">Đang đợi duyệt</span>',
+                '<span class="badge badge-success">Đã duyệt</span>',
+                '<span class="badge badge-danger">Từ chối</span>'
+            ];
+
+            await PostModel
+                .findOne({ _id : req.query.key })
+                .then(async poster => {
+                    var Images = [];
+                    await ImageModel
+                        .find({_id : poster.image })
+                        .then(Img =>{
+                            Images = Img;
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
+                    // console.log(poster);
+                    res.render('member/detail', {
+                        title: "Chi tiết bài đăng",
+                        user: req.user,
+                        statusList: status,
+                        message: message,
+                        poster: poster,
+                        Images: Images
+                    })
+                })
+                .catch(err =>{
+                    console.log(err);
+                })
+
+        }
+        catch (e) {
+            res.status(555).send("Fail Admin");
+        }
+    }
+
     static async editPost(req, res, next)
     {
         var errors = validationResult(req);

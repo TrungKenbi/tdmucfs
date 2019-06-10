@@ -28,6 +28,7 @@
                             <td class="column4"><%- statusList[post.status] %></td>
                             <td class="column5">&emsp;<%= post.note %></td>
                             <td class="column6">
+                                <a href="/detail?key=<%= post._id %>">Chi tiết</a>
                                 <a href="/editpost/<%= post._id %>">
                                     <button class="btn-1 btn-1-warning"><i class="fa fa-edit"></i></button>
                                 </a>
@@ -47,7 +48,8 @@
                                     </button>
                                 <% } %>
                             </td>
-                        </tr>
+                            </tr>
+
                     <%   i++;});
                     } %>
                     </tbody>
