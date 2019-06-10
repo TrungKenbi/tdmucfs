@@ -6,6 +6,14 @@ const rp = require('request-promise');
 const url = 'https://graph.facebook.com/v3.3/me/accounts?access_token=' + process.env.TOKEN;
 
 class AdminController {
+
+    static async index(req, res, next) {
+        res.render('admin/index', {
+            title: 'Quản Lý Hệ Thống Confession',
+            user: req.user
+        });
+    }
+
     static async listPost(req, res, next) {
         try {
             var perPage = 10;
@@ -18,9 +26,14 @@ class AdminController {
                 '<span class="badge badge-danger">Từ chối</span>'
             ];
 
-            if(f != 0 && f != 1 && f!= 2){
+            console.log(f);
+
+            if((parseInt(f) != 0 && parseInt(f) != 1 && parseInt(f) != 2)){
                 f = new Array(0,1,2) ;
             }
+
+            // console.log(f);
+
             await PostModel
                 .find({ status: f }).sort({_id: -1}).skip((perPage * page) - perPage).limit(perPage)
                 .exec(function (err, posts) {
@@ -32,6 +45,7 @@ class AdminController {
                             res.render('admin/listPost', {
                                 title: 'Danh Sách Các Bài Đã Đăng Confession',
                                 user: req.user,
+                                filter: f,
                                 posts: posts,
                                 statusList: status,
                                 current: page,

@@ -17,7 +17,7 @@ class PostController {
                     _id: ObjectID(edit)
                 });
             }
-
+            console.log(req.user);
             res.render('member/post', {
                 title: 'Đăng Bài Confession',
                 user : req.user,
@@ -96,6 +96,8 @@ class PostController {
                     console.error(err);
                 });
 
+
+
         }
 
         res.render('member/post', {
@@ -121,7 +123,9 @@ class PostController {
                 user: req.user
             }).skip((perPage * page) - perPage).limit(perPage)
             .exec(function(err, posts) {
-                PostModel.countDocuments().exec(function(err, count) {
+                PostModel.countDocuments({
+                    user: req.user
+                }).exec(function(err, count) {
                     if (err) return next(err);
                     res.render('member/posts', {
                         title: 'Danh Sách Đã Đăng Confession',

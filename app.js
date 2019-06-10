@@ -21,6 +21,16 @@ var adminRouter = require('./routes/admin');
 
 var app = express();
 
+/* Swagger Stats */
+var swStats = require('swagger-stats');
+
+// Load your swagger specification
+//var apiSpec = require('swagger.json');
+
+// Enable swagger-stats middleware in express app, passing swagger specification as option
+app.use(swStats.getMiddleware({/*swaggerSpec:apiSpec*/}));
+/* Swagger Stats */
+
 app.use(session({
   secret: 'ChickenFlyStudio',
   resave: false,
