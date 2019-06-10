@@ -26,10 +26,10 @@ var AdminCtrl = require('../controllers/admin.controller');
 
 router
     .get('/', isAdmin, AdminCtrl.index)
-    .get('/listPost', AdminCtrl.listPost)
-    .get('/listPost/:page', AdminCtrl.listPost)
+    .get('/listPost', isAdmin, AdminCtrl.listPost)
+    .get('/listPost/:page', isAdmin, AdminCtrl.listPost)
     .get('/detail', isAdmin, AdminCtrl.detailPost)
-    .get('/posting', AdminCtrl.postingPost)
+    .get('/posting', isAdmin, AdminCtrl.postingPost)
     .post('/sendmess', isAdmin, AdminCtrl.sendMess)
     .post('/post', isAdmin, imageUpload.array('image'), AdminCtrl.postPost)
 

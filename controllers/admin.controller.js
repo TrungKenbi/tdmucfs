@@ -26,7 +26,7 @@ class AdminController {
                 '<span class="badge badge-danger">Từ chối</span>'
             ];
 
-            if((f !== 0 && f !== 1 && f !== 2)){
+            if((f != 0 && f != 1 && f != 2)){
                 f = new Array(0,1,2) ;
             }
 
