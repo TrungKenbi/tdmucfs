@@ -1,86 +1,170 @@
-
-.float{
-    position:fixed;
-    width:60px;
-    height:60px;
-    bottom:70px;
-    right:40px;
-    background-color:#56c6c6;
-    color:#FFF;
-    border-radius:50px;
-    text-align:center;
-    box-shadow: 2px 0px 3px #999;
-    z-index:1000;
+.float, .float::before {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 70px;
+    right: 40px;
+    background: #39C2C9;
+    background: linear-gradient(180deg, #39C2C9 0%, #3FC8C9 80%, #3FC8C9 100%);
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 0px 3px linear-gradient(180deg, #39C2C9 0%, #3FC8C9 80%, #3FC8C9 100%);
+    ;
+    z-index: 1000;
     animation: bot-to-top 2s ease-out;
 }
 
-ul.menu{
-    position:fixed;
-    right:40px;
-    padding-bottom:20px;
-    bottom:110px;
-    z-index:100;
-    color:white;
+.float::before {
+    -webkit-filter: blur(14px) brightness(0.9);
+    filter: blur(14px) brightness(0.9);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transition: all 0.3s ease-out;
 }
 
-.menu > li{
-    list-style:none;
-    margin-bottom:10px;
+ul.menu {
+    position: fixed;
+    right: 40px;
+    padding-bottom: 20px;
+    bottom: 110px;
+    z-index: 100;
+    color: white;
 }
 
-.menu > li a{
-    background-color:#56c6c6;
-    color:#FFF;
-    border-radius:50px;
-    text-align:center;
+.menu>li {
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+.menu>li a {
+    background-color: #56c6c6;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
     box-shadow: 2px 0px 3px #999;
-    width:60px;
-    height:60px;
-    display:block;
-}
-.menu:active{
-    visibility:visible!important;
-    opacity:1!important;
+    width: 60px;
+    height: 60px;
+    display: block;
 }
 
-
-.my-float{
-    font-size:24px;
-    margin-top:18px;
+.menu:active {
+    visibility: visible!important;
+    opacity: 1!important;
 }
 
-a#menu-share + ul.menu{
+.my-float {
+    font-size: 24px;
+    margin-top: 18px;
+}
+
+a#menu-share+ul.menu {
     visibility: hidden;
 }
 
-a#menu-share i{
+a#menu-share i {
     animation: rotate-in 0.5s;
 }
 
-a#menu-share:active > i{
+a#menu-share:active>i {
     animation: rotate-out 0.5s;
 }
 
 @keyframes bot-to-top {
-    0%   {bottom:-40px}
-    50%  {bottom:40px}
+    0% {
+        bottom: -40px
+    }
+    50% {
+        bottom: 40px
+    }
 }
 
 @keyframes scale-in {
-    from {transform: scale(0);opacity: 0;}
-    to {transform: scale(1);opacity: 1;}
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
-@keyframes scale-out{
-    from {transform: scale(1)}
-    to {transform: scale(0)}
+
+@keyframes scale-out {
+    from {
+        transform: scale(1)
+    }
+    to {
+        transform: scale(0)
+    }
 }
 
 @keyframes rotate-in {
-    from {transform: rotate(0deg);}
-    to {transform: rotate(360deg);}
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes rotate-out {
-    from {transform: rotate(360deg);}
-    to {transform: rotate(0deg);}
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+/*Button For Dang Bai*/
+
+.btnDangBai {
+    position: relative;
+    border-radius: 0.15em;
+    background: linear-gradient(45deg, #50C9C3, #96deda);
+    width: auto;
+    padding: 10px 20px;
+    border: none;
+    font-family: inherit;
+    text-transform: uppercase;
+    line-height: 24px;
+    letter-spacing: 2px;
+    border: 2px solid hsl(177°, 52%, 40%);
+    background: hsl(hue, saturation, lightness);
+    border-bottom: 4px solid rgba(0, 0, 0, 0.17);
+    box-shadow: 0px 3px 5px #595159;
+    transition: ease-in-out 0.1s;
+}
+
+.btnDangBai span {
+    color: #fff;
+    font-weight: 800;
+    display: inline-block;
+    z-index: 2;
+    will-change: transform, filter;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.btn-Gradient:hover {
+    background: linear-gradient(25deg, #f2709c, #d16a4b 90%);
+}
+
+.btn-Gradient:active {
+    background: linear-gradient(-25deg, #FC3D7C 0%, #F76A34 80%, #F76A34 100%);
+    transform: translateY(3px);
+}
+
+.btn-Gradient:active {
+    box-shadow: inset 0px -0.6em 0 -0.40em rgba(0, 0, 0, 0.17);
+    box-shadow: 2px 2px 2px #777;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.17);
+}
+
+@media all and (max-width:30em) {
+    .btnDangBai {
+        display: block;
+        margin: 0.4em auto;
+    }
 }

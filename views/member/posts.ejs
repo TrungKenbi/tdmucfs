@@ -29,7 +29,7 @@
                             <td class="column5">&emsp;<%= post.note %></td>
                             <td class="column6">
                                 <a href="/detail?key=<%= post._id %>">Chi tiết</a>
-                                <a href="/editpost/<%= post._id %>">
+                                <a href="/editpost/<%= post._id %>" title="Chỉnh sửa bài viết">
                                     <button class="btn-1 btn-1-warning"><i class="fa fa-edit"></i></button>
                                 </a>
                                 <% if (post.status == 0) { %>
@@ -43,7 +43,7 @@
                                 <% } else { %>
                                     <button
                                         onclick="return confirm('Bạn không thể xóa bài đăng này được !')"
-                                        class="btn-1 btn-1-danger">
+                                        class="btn-1 btn-1-danger" title="Xóa">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 <% } %>
