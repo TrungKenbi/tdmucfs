@@ -121,7 +121,7 @@ class PostController {
         await PostModel
             .find({
                 user: req.user
-            }).sort({ id: -1 }).skip((perPage * page) - perPage).limit(perPage)
+            }).sort({ _id: -1 }).skip((perPage * page) - perPage).limit(perPage)
             .exec(function(err, posts) {
                 PostModel.countDocuments({
                     user: req.user
