@@ -55,6 +55,12 @@ router
         PostCtrl.deletePost
     )
 
+    .get(
+        '/detail',
+        isLoggedIn,
+        PostCtrl.detailPost
+    )
+
     .get('/img/:id', PostCtrl.getIMG)
 
 

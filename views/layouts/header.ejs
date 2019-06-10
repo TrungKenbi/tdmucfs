@@ -4,6 +4,13 @@
             <i class="fa fa-plus my-float"></i>
         </a>
         <ul id="menu-show" class="menu">
+            <% if (user.permission >= 3) { %>
+            <li>
+                <a href="/admin">
+                    <i class="fas fa-cogs my-float"></i>
+                </a>
+            </li>
+            <% } %>
             <li>
                 <a href="/post">
                     <i class="fas fa-edit my-float"></i>
@@ -32,7 +39,7 @@
                 <span class="navbar-text actions">
                 <% if (locals.user) { %>
                         <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"">Xin chào, <b><%= user.name %></b></button>
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Xin chào, <b><%= user.name %></b></button>
                             <ul class="dropdown-menu ">
                                 <li>
                                     <a href="/logout">Đăng xuất!</a>
@@ -44,5 +51,6 @@
                     <a class="btn btn-light action-button" role="button" href="/auth/facebook" style="width: 106px;font-size: 16px;">Đăng Nhập</a>
                 <% } %>
                 </span>
+            </div>
         </div>
-    </nav>
+</nav>

@@ -6,6 +6,14 @@ const rp = require('request-promise');
 const url = 'https://graph.facebook.com/v3.3/me/accounts?access_token=' + process.env.TOKEN;
 
 class AdminController {
+
+    static async index(req, res, next) {
+        res.render('admin/index', {
+            title: 'Quản Lý Hệ Thống Confession',
+            user: req.user
+        });
+    }
+
     static async listPost(req, res, next) {
         try {
             var perPage = 10;
@@ -18,20 +26,23 @@ class AdminController {
                 '<span class="badge badge-danger">Từ chối</span>'
             ];
 
-            if(f != 0 && f != 1 && f!= 2){
+            if((f != 0 && f != 1 && f != 2)){
                 f = new Array(0,1,2) ;
             }
+
             await PostModel
                 .find({ status: f }).sort({_id: -1}).skip((perPage * page) - perPage).limit(perPage)
                 .exec(function (err, posts) {
+                    console.log(f);
                     PostModel.countDocuments(
-                        // {}, // filters
+                        { status: f }, // filters
                         // {}, // options
                         function (err, count) {
                             if (err) return next(err);
                             res.render('admin/listPost', {
                                 title: 'Danh Sách Các Bài Đã Đăng Confession',
                                 user: req.user,
+                                filter: f,
                                 posts: posts,
                                 statusList: status,
                                 current: page,
@@ -89,6 +100,7 @@ class AdminController {
             var keys = req.query.check;
             var posts = [];
             var Images = [];
+            var indexImages = [];
 
             var tit;
             await PostedModel
@@ -104,7 +116,7 @@ class AdminController {
             var numOfTitle = numeral(tit).format('000000');
 
             await PostModel
-                .find({_id: keys })
+                .find({_id: keys, status: 0 })
                 .then(post => {
                     posts = post;
                 })
@@ -118,9 +130,13 @@ class AdminController {
                     .find({_id : post.image })
                     .then(Img =>{
                         if(Img.length > 0) {
+                            let t = [];
                             Img.forEach(img => {
+                                t.push(Images.length);
                                 Images.push(img);
                             });
+                            let key = post._id;
+                            indexImages[key] = t;
                             posts[i].content += " (Có hình 👇👇👇)";
                         }
                     })
@@ -129,10 +145,13 @@ class AdminController {
                     })
             }
 
+            console.log(indexImages);
+
             res.render('admin/posting', {
                 title: "Hello",
                 posts: posts,
                 Images: Images,
+                indexImages: indexImages,
                 numOfTitle: numOfTitle,
                 user: req.user
             })
@@ -163,7 +182,7 @@ class AdminController {
                 .catch(err => {
                     console.log(err);
                 })
-            res.redirect('listPost');
+            res.redirect('listPost?filter=0');
         }
         catch (e) {
             res.status(555).send("Fail Admin");
@@ -417,7 +436,7 @@ class AdminController {
                     console.log(err);
                 });
 
-            res.redirect('listPost?key=0');
+            res.redirect('listPost?filter=0');
         }
         catch (e) {
             e.status(555).send("Fail Admin");
