@@ -57,6 +57,7 @@ router
 
     .get(
         '/detail',
+        isLoggedIn,
         PostCtrl.detailPost
     )
 
