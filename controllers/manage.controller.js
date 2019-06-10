@@ -51,6 +51,24 @@ class ManageController {
         });
     }
 
+    static async viewProfileUser(req, res, next)
+    {
+        var permisions = [
+            'Thành viên',
+            'Biên Tập Viên',
+            'Tổng Biên Tập Viên',
+            'Giám Đốc Điều Hành'
+        ];
+        var profileID = req.params.id;
+        var userView = await UserModel.findOne({ _id: profileID });
+        res.render('member/profile', {
+            title: 'Thông Tin Thành Viên',
+            user: req.user,
+            permisions: permisions,
+            userView: userView
+        });
+    }
+
     static async updateProfile(req, res)
     {
         await UserModel.updateOne({ _id: ObjectID(req.params.id) }, { permission: req.body.permision })

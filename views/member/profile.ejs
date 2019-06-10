@@ -1,6 +1,72 @@
-<div class="container" style="padding-top: 70px;">
+<div class="container">
     <div class="row">
-        <p>Đây là giao diện khi đăng nhập thành công</p>
+        <div class="col">
+            <div class="shadow-lg d-block shadow text-center"
+                 style="width: 100%;min-height: 630px;margin-top: 119px;background-color: rgba(255,255,255,0.79);">
+                <h1>Thông Tin Tài Khoản</h1>
+                <table class="table table-striped">
+                    <tr>
+                        <th scope="row">Tên tài khoản:</th>
+                        <th><%= userView.name %></th>
+                    </tr>
+                    <tr>
+                        <th scope="row">Bài viết:</th>
+                        <td><b class="text-danger"><%= userView.countPost %></b></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Điểm Cống Hiến:</th>
+                        <td><b class="text-success"><%= userView.point %></b></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Chức vụ:</th>
+                        <td>
+                            <label id="permision" name="permision"><%= permisions[userView.permission] %></label>
+                        </td>
+                    </tr>
+                    <%
+                    if(userView.permission != 0){
+                    %>
+                        <tr>
+                            <th scope="row">Chữ ký</th>
+                            <td>
+                                <textarea class="form-control form-control-lg" id="signer" name="signer"
+                                          style="width: 50%;min-height: 100px;"><%= userView.signer %></textarea>
+                                <button class="btn btn-primary btn-lg" onclick="signChange('<%= userView._id %>')" style="width: 10%;">OK</button>
+                                <span id="loading" style="display: none">
+                                <img src="/assets/img/loading.svg" width="30px">
+                                </span>
+                                    <span id="success" style="display: none">
+                                    <img src="/assets/img/tick.png" width="30px">
+                                </span>
+                            </td>
+                        </tr>
+                    <%
+                    }
+                    %>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
-// Thử coi, để anh, lại thử
+<script type="text/javascript">
+    function signChange(value) {
+        $('#loading').show();
+        $('#success').hide();
+        $.ajax({
+            url: "/admin/manageUser/update/<%= userView._id %>",
+            type: "POST",
+            dataType: "text",
+            data: {
+                signer: $('#signer').val()
+            },
+            success: function (result) {
+                //$('#result').html(result);
+                setTimeout(function () {
+                    $('#loading').hide();
+                    $('#success').show();
+                }, 1000);
+            }
+        });
+    }
+</script>
