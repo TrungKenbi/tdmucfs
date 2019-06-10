@@ -16,6 +16,15 @@
 }
 
 .float::before {
+    content: '';
+    display: inline-block;
+    height: 40px;
+    position: absolute;
+    bottom: -1px;
+    left: 0px;
+    right: 0px;
+    z-index: -1;
+    border-radius: 2em;
     -webkit-filter: blur(14px) brightness(0.9);
     filter: blur(14px) brightness(0.9);
     -webkit-transform-style: preserve-3d;
