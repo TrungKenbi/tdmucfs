@@ -48,7 +48,7 @@
         $('#loading').show();
         $('#success').hide();
         $.ajax({
-            url : "/admin/manageUser/update/<%= userView._id %>",
+            url : "/admin/manageUser/update/<%= userView._id %>?key=0",
             type : "POST",
             dataType:"text",
             data : {

@@ -54,14 +54,14 @@
         $('#loading').show();
         $('#success').hide();
         $.ajax({
-            url: "/admin/manageUser/update/<%= userView._id %>",
+            url: "/admin/manageUser/update/<%= userView._id %>?key=1",
             type: "POST",
             dataType: "text",
             data: {
                 signer: $('#signer').val()
             },
             success: function (result) {
-                //$('#result').html(result);
+                $('#result').html(result);
                 setTimeout(function () {
                     $('#loading').hide();
                     $('#success').show();

@@ -71,14 +71,24 @@ class ManageController {
 
     static async updateProfile(req, res)
     {
-        await UserModel.updateOne({ _id: ObjectID(req.params.id) }, { permission: req.body.permision })
-            .then(doc => {
-                //console.log(doc);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-
+        var key = req.query.key;
+        if(key == 0 ) {
+            await UserModel.updateOne({_id: ObjectID(req.params.id)}, {permission: req.body.permision})
+                .then(doc => {
+                    //console.log(doc);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        } else if (key == 1) {
+            await UserModel.updateOne({_id: ObjectID(req.params.id)}, {signer: req.body.signer})
+                .then(doc => {
+                    //console.log(doc);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
         res.status(200).send("OK");
     }
 }
