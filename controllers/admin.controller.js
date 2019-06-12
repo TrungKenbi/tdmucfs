@@ -343,7 +343,7 @@ class AdminController {
                         let idImg = doc._id;
                         let imgOption = {
                             method: 'POST',
-                            uri: `https://graph.facebook.com/v3.3/${id}/photos`,
+                            uri: `https://graph.facebook.com/3.3/${id}/photos`,
                             qs: {
                                 access_token: access_token,
                                 caption: "Hình of Admin",
