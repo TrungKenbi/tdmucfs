@@ -2,6 +2,7 @@ var PostModel = require('../models/post.model');
 var ImageModel = require('../models/image.model');
 var PostedModel = require('../models/posted.model');
 var UserModel = require('../models/user.model');
+var decode = require('unescape');
 var numeral = require('numeral');
 const rp = require('request-promise');
 const url = 'https://graph.facebook.com/v3.3/me/accounts?access_token=' + process.env.TOKEN;
@@ -376,12 +377,13 @@ class AdminController {
                     });
             }
 
+            messagePost = decode(messagePost,'all');
             var postTextOptions = {
                 method: 'POST',
                     uri: `https://graph.facebook.com/v3.3/${id}/feed`,
                 qs: {
                     access_token: access_token,
-                    message: decode(messagePost),
+                    message: messagePost,
                     attached_media: images
                 }
             };
