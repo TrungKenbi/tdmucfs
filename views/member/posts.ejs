@@ -26,7 +26,7 @@
                             <td class="column2"><%= post.content.length > 20 ? post.content.substring(0, 20) + '...' : post.content %></td>
                             <td class="column3"><%= post.image.length %></td>
                             <td class="column4"><%- statusList[post.status] %></td>
-                            <td class="column5">&emsp;<%= post.note %></td>
+                            <td class="column5">&emsp;<%= post.note.length > 10 ? post.note.substring(0, 10) + '...' : post.note %></td>
                             <td class="column6">
                                 <a href="/detail?key=<%= post._id %>">Chi tiết</a>
                                 <a href="/editpost/<%= post._id %>" title="Chỉnh sửa bài viết">

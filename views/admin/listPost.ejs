@@ -15,11 +15,12 @@
     <div class="container-table100">
         <div class="wrap-table100">
             <div class="table100">
+                <form action="/admin/posting" method="get">
                 <div>
                     <h1 style="text-align: center; font-size: 60px; padding-top: 50px">Bài đăng</h1>
                 </div>
                 <div style="margin:8px 0 15px 0; text-align:center; height: 50px;">
-                    <button class=" btnDangBai btn-Gradient " type="button"><span>Đăng Bài</span></button>
+                    <button class=" btnDangBai btn-Gradient " type="submit"><span>Đăng Bài</span></button>
                 </div>
                 <table>
                     <thead>
@@ -36,7 +37,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <form action="/admin/posting" method="get">
                         <%
                         if (locals.posts) {
                             var i = (current == 1) ? 1 : (current - 1) * 10 + 1;
@@ -51,7 +51,7 @@
                                 <td class="column2"><%= post.content.length > 20 ? post.content.substring(0, 20) + '...' : post.content %></td>
                                 <td class="column3"><%= post.image.length %></td>
                                 <td class="column4"><%- statusList[post.status] %></td>
-                                <td class="column5">&emsp;<%= post.note %></td>
+                                <td class="column5">&emsp;<%= post.note.length > 10 ? post.note.substring(0, 10) + '...' : post.note %></td>
                                 <td class="column6">
                                     <a href="/admin/detail?key=<%= post._id %>">
                                         <button class="btn-1 btn-1-warning"><i class="fa fa-edit"></i></button>
@@ -75,7 +75,6 @@
                             </tr>
                         <% i++;});
                         } %>
-                    </form>
                     </tbody>
                 </table>
 
@@ -110,7 +109,7 @@
                         <% } %>
                     </ul>
                 <% } %>
-
+                </form>
             </div>
         </div>
     </div>
