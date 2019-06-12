@@ -1,5 +1,6 @@
 var PostModel = require('../models/post.model');
 var ImageModel = require('../models/image.model');
+var UserModel = require('../models/user.model');
 const {ObjectID} = require("mongodb");
 
 const { body, validationResult } = require('express-validator/check');
@@ -85,12 +86,28 @@ class PostController {
             });
 
             await PostCFS.save()
-                .then(doc => {
+                .then(async doc => {
                     var success = {
                         'type': 'success',
                         'msg': 'Đăng bài thành công, vui lòng đợi admin duyệt bài để được đưa lên fanpage nhé !'
                     };
                     message.push(success);
+                    await PostModel
+                        .countDocuments({user:req.user._id})
+                        .then(count => {
+                            console.log(count);
+                            UserModel
+                                .updateOne({_id:req.user._id},{ countPost:count, point: count })
+                                .then(data => {
+                                    // console.log(data);
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                })
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
                 })
                 .catch(err => {
                     console.error(err);

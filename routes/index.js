@@ -67,6 +67,11 @@ router
         ManageCtrl.viewProfileUser
     )
 
+    .get(
+        '/update',
+        ManageCtrl.update
+    )
+
     .get('/img/:id', PostCtrl.getIMG)
 
 

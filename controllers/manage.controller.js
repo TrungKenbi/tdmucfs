@@ -1,4 +1,5 @@
 var UserModel = require('../models/user.model');
+var PostModel = require('../models/post.model');
 const {ObjectID} = require("mongodb");
 
 class ManageController {
@@ -53,20 +54,26 @@ class ManageController {
 
     static async viewProfileUser(req, res, next)
     {
-        var permisions = [
-            'Thành viên',
-            'Biên Tập Viên',
-            'Tổng Biên Tập Viên',
-            'Giám Đốc Điều Hành'
-        ];
-        var profileID = req.params.id;
-        var userView = await UserModel.findOne({ _id: profileID });
-        res.render('member/profile', {
-            title: 'Thông Tin Thành Viên',
-            user: req.user,
-            permisions: permisions,
-            userView: userView
-        });
+        try {
+            var permisions = [
+                'Thành viên',
+                'Biên Tập Viên',
+                'Tổng Biên Tập Viên',
+                'Giám Đốc Điều Hành'
+            ];
+            var profileID = req.params.id;
+            var userView = await UserModel.findOne({ _id: profileID });
+            res.render('member/profile', {
+                title: 'Thông Tin Thành Viên',
+                user: req.user,
+                permisions: permisions,
+                userView: userView
+            });
+        }
+        catch (e) {
+            res.status(200).send('Error Manager!');
+        }
+
     }
 
     static async updateProfile(req, res)
@@ -90,6 +97,43 @@ class ManageController {
                 });
         }
         res.status(200).send("OK");
+    }
+
+    static async update(req, res, next){
+        try {
+            await UserModel
+                .find()
+                .then(async data => {
+                    let users = data;
+                    for (var i = 0; i < users.length; i++){
+                        var user = users[i];
+                        await PostModel
+                            .countDocuments({user:user._id})
+                            .then(count => {
+                                console.log(count);
+                                UserModel
+                                    .updateOne({_id:user._id},{ countPost:count, point: count })
+                                    .then(data => {
+                                        // console.log(data);
+                                    })
+                                    .catch(err => {
+                                        console.log(err);
+                                    })
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            })
+                    }
+                })
+                .catch(err =>{
+                    console.log(err)
+                })
+
+            res.redirect('/');
+        }
+        catch (e) {
+            res.status(201).send('Fail Update');
+        }
     }
 }
 module.exports = ManageController;
