@@ -16,7 +16,7 @@
         <div class="wrap-table100">
             <div class="table100">
                 <div>
-                    <h1 style="text-align: center; font-size: 60px; padding-top: 50px" >Bài đăng</h1>
+                    <h1 style="text-align: center; font-size: 60px; padding-top: 50px">Bài đăng</h1>
                 </div>
                 <div style="margin:8px 0 15px 0; text-align:center; height: 50px;">
                     <button class=" btnDangBai btn-Gradient " type="button"><span>Đăng Bài</span></button>
@@ -24,53 +24,58 @@
                 <table>
                     <thead>
                     <tr class="table100-head">
-                        <th class="column1" >
-                            <input onclick="handle()" type="checkbox" id="checkall" style="margin-left:auto; margin-right:auto;">
+                        <th class="column1">
+                            <input onclick="handle()" type="checkbox" id="checkall"
+                                   style="margin-left:auto; margin-right:auto;">
                         </th>
-                        <th class=" column2" >Nội dung</th>
-                        <th class=" column3" >Hình ảnh</th>
-                        <th class=" column4" >Trạng thái</th>
-                        <th class=" column5" >Ghi chú</th>
-                        <th class=" column6" >Thao tác</th>
+                        <th class=" column2">Nội dung</th>
+                        <th class=" column3">Hình ảnh</th>
+                        <th class=" column4">Trạng thái</th>
+                        <th class=" column5">Ghi chú</th>
+                        <th class=" column6">Thao tác</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <%
+                    <form action="/admin/posting" method="get">
+                        <%
                         if (locals.posts) {
                             var i = (current == 1) ? 1 : (current - 1) * 10 + 1;
-                            posts.forEach(post => {
-                    %>
-                        <tr>
-                            <td class="column1">
-                                <input type="checkbox" class="PostSelected" style="margin-left:auto; margin-right:auto;" name="check" value="<%= post._id %>">
-                            </td>
-                            <td class="column2"><%= post.content.length > 20 ? post.content.substring(0, 20) + '...' : post.content %></td>
-                            <td class="column3"><%= post.image.length %></td>
-                            <td class="column4"><%- statusList[post.status] %></td>
-                            <td class="column5">&emsp;<%= post.note %></td>
-                            <td class="column6">
-                                <a href="/admin/detail?key=<%= post._id %>">
-                                    <button class="btn-1 btn-1-warning"><i class="fa fa-edit"></i></button>
-                                </a>
-                                <% if (post.status == 0) { %>
-                                <a href="/deletepost/<%= post._id %>">
-                                    <button
-                                        onclick="return confirm('Bạn có muốn xóa bài đăng này chứ ?')"
-                                        class="btn-1 btn-1-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </a>
-                                <% } else { %>
-                                    <button
-                                        onclick="return confirm('Bạn không thể xóa bài đăng này được !')"
-                                        class="btn-1 btn-1-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                <% } %>
-                            </td>
-                        </tr>
-                    <%   i++;});
-                    } %>
+                        posts.forEach(post => {
+                        %>
+                            <tr>
+                                <td class="column1">
+                                    <input type="checkbox" class="PostSelected"
+                                           style="margin-left:auto; margin-right:auto;" name="check"
+                                           value="<%= post._id %>">
+                                </td>
+                                <td class="column2"><%= post.content.length > 20 ? post.content.substring(0, 20) + '...' : post.content %></td>
+                                <td class="column3"><%= post.image.length %></td>
+                                <td class="column4"><%- statusList[post.status] %></td>
+                                <td class="column5">&emsp;<%= post.note %></td>
+                                <td class="column6">
+                                    <a href="/admin/detail?key=<%= post._id %>">
+                                        <button class="btn-1 btn-1-warning"><i class="fa fa-edit"></i></button>
+                                    </a>
+                                    <% if (post.status == 0) { %>
+                                        <a href="/deletepost/<%= post._id %>">
+                                            <button
+                                                    onclick="return confirm('Bạn có muốn xóa bài đăng này chứ ?')"
+                                                    class="btn-1 btn-1-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </a>
+                                    <% } else { %>
+                                        <button
+                                                onclick="return confirm('Bạn không thể xóa bài đăng này được !')"
+                                                class="btn-1 btn-1-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        <% i++;});
+                        } %>
+                    </form>
                     </tbody>
                 </table>
 
@@ -106,16 +111,11 @@
                     </ul>
                 <% } %>
 
-
             </div>
         </div>
     </div>
 </div>
 <!-- ------------------- -->
-
-
-
-
 
 
 <!--
@@ -142,10 +142,10 @@
                     <form action="/admin/posting" method="get">
                         <tbody>
                         <%
-                        if (locals.posts.length > 0) {
-                            var i = (current == 1) ? 1 : (current - 1) * 10 + 1;
-                            posts.forEach(post => {
-                        %>
+if (locals.posts.length > 0) {
+    var i = (current == 1) ? 1 : (current - 1) * 10 + 1;
+posts.forEach(post => {
+%>
                             <tr>
                                 <td scope="col"><input type="checkbox" class="PostSelected" name="check"
                                                        value="<%= post._id %>"></td>
@@ -161,15 +161,15 @@
                                 </td>
                             </tr>
                         <% i++;});
-                        } else { %>
+} else { %>
                             <tr>
                                 <td>
                                     <p>Danh sách trống</p>
                                 </td>
                             </tr>
                         <%
-                            }
-                        %>
+}
+%>
                         </tbody>
                         <button class="btn btn-primary btn-lg" type="submit" style="width: 20%;">Đăng bài</button>
                         <div class="dropdown">
