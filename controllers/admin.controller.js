@@ -381,7 +381,7 @@ class AdminController {
                     uri: `https://graph.facebook.com/v3.3/${id}/feed`,
                 qs: {
                     access_token: access_token,
-                    message: messagePost,
+                    message: decode(messagePost),
                     attached_media: images
                 }
             };
