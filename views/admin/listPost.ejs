@@ -53,23 +53,20 @@
                                 <td class="column4"><%- statusList[post.status] %></td>
                                 <td class="column5">&emsp;<%= post.note.length > 10 ? post.note.substring(0, 10) + '...' : post.note %></td>
                                 <td class="column6">
-                                    <a href="/admin/detail?key=<%= post._id %>">
-                                        <button class="btn-1 btn-1-warning"><i class="fa fa-edit"></i></button>
+                                    <a href="/admin/detail?key=<%= post._id %>" class="btn-1 btn-1-warning">
+                                        <i class="fa fa-edit"></i>
                                     </a>
                                     <% if (post.status == 0) { %>
-                                        <a href="/deletepost/<%= post._id %>">
-                                            <button
-                                                    onclick="return confirm('Bạn có muốn xóa bài đăng này chứ ?')"
-                                                    class="btn-1 btn-1-danger">
+                                        <a href="/deletepost/<%= post._id %>" onclick="return confirm('Bạn có muốn xóa bài đăng này chứ ?')"
+                                           class="btn-1 btn-1-danger">
                                                 <i class="fa fa-trash"></i>
-                                            </button>
                                         </a>
                                     <% } else { %>
-                                        <button
+                                        <a type="button"
                                                 onclick="return confirm('Bạn không thể xóa bài đăng này được !')"
                                                 class="btn-1 btn-1-danger">
                                             <i class="fa fa-trash"></i>
-                                        </button>
+                                        </a>
                                     <% } %>
                                 </td>
                             </tr>

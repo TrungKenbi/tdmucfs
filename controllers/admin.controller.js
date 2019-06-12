@@ -146,7 +146,7 @@ class AdminController {
                     })
             }
 
-            console.log(indexImages);
+            // console.log(indexImages);
 
             res.render('admin/posting', {
                 title: "Hello",
@@ -192,7 +192,7 @@ class AdminController {
 
     static async postPost(req, res, next){
         try {
-            //var id = "2715971488430698"; // <- id page bán chè@@
+            // var id = "2715971488430698"; // <- id page bán chè@@
             var id = "649079911793156";
             var access_token;
             var arrToken = [];
@@ -209,8 +209,8 @@ class AdminController {
             var messagePost = "";
             var signer = "";
 
-            UserModel
-                .findOne({ _id: locals.user._id })
+            await UserModel
+                .findOne({ _id: req.user._id })
                 .then(async data => {
                     if(data.signer != undefined)
                         signer = data.signer;
@@ -229,7 +229,7 @@ class AdminController {
                 messagePost += (subTitle + '\n' + content + '\n' + bottomspace + '\n');
             }
             messagePost += (commentOfAd);
-            messagePost += '\n' + signer;
+            messagePost += ('\n' + signer);
 
             await rp(url)
                 .then(function(html){
@@ -262,7 +262,7 @@ class AdminController {
                                     access_token: access_token,
                                     caption: "Hình " + (i + 1),
                                     published: false,
-                                    url: process.env.ImgURL+img
+                                    url: process.env.ImgURL + img
                                     // url: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png'
                                 }// em pull ve chua, sao ki nhi ko thay, doi a chut
                             };
@@ -290,9 +290,11 @@ class AdminController {
                 }
             }else if(imgs != undefined){
                 let img = imgs;
+                var i = 0;
                 await ImageModel
                     .findOne({_id: img})
                     .then(async data => {
+                        // console.log(data);
                         let imgOption = {
                             method: 'POST',
                             uri: `https://graph.facebook.com/v3.3/${id}/photos`,
@@ -300,7 +302,7 @@ class AdminController {
                                 access_token: access_token,
                                 caption: "Hình " + (i + 1),
                                 published: false,
-                                url: process.env.ImgURL+img
+                                url: process.env.ImgURL + img
                                 // url: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png'
                                 // url: process.env.ImgURL + idImg
                             }
