@@ -142,6 +142,7 @@ hr.star-light-1:after {
 }
 
 .footer {
+    height: auto;
     padding-top: 5rem;
     padding-bottom: 5rem;
     background-color: #1a252f;
