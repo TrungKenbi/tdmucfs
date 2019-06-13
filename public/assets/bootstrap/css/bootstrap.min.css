@@ -8646,7 +8646,7 @@ form .row:first-child .floating-label-form-group {
 }
 
 a {
-    color: #18bc9c
+    color: #18bc9c;
 }
 
 a:active, a:focus, a:hover {

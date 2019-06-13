@@ -1,0 +1,16 @@
+.cloud-animation{
+    background-image:url('../img/cloud.png') ;
+    z-index:1;
+    background-size: cover;
+    height: 30em;
+    width:100%;
+    position: absolute;
+    top:0px;
+    opacity:0.6;
+    animation:cloudLoop 80s linear infinite;
+    -webkit-animation: cloudLoop 80s linear infinite;
+}
+@keyframes cloudLoop{
+    0%{background-position: 0px}
+    100%{background-position: 2313px}
+}

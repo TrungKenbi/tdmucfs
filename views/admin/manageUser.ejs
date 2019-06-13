@@ -1,16 +1,16 @@
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="shadow-lg d-block shadow text-center"
-                 style="width: 100%;min-height: 630px;margin-top: 119px;background-color: rgba(255,255,255,0.79);">
-                <h1>Quản Lý Thành Viên</h1>
-                <table class="table">
-                    <thead class="thead-light">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Tên người dùng</th>
-                        <th scope="col">Số bài đăng</th>
-                        <th scope="col">Số điểm</th>
+<div class="container-table100 backgroundManage">
+    <div class="cloud-animation"></div>
+    <div class="wrap-table100" style="z-index:2">
+        <div class="table100">
+            <!--<div class="cloud-animation w-100" style="border:1px solid red; height:100px;background-image:url('assets/img/cloud.png')"></div>-->
+            <h1 class='text-center mt-5 mb-4' style="font-size:60px;">Quản Lý Thành Viên</h1>
+                <table>
+                    <thead>
+                    <tr class="table100-head">
+                        <th scope="col" class='column2'>#</th>
+                        <th scope="col" class='column1'>Tên người dùng</th>
+                        <th scope="col" class='column3'>Số bài đăng</th>
+                        <th scope="col" class='column4'>Số điểm</th>
 <!--                        <th scope="col">Thao tác</th>-->
                     </tr>
                     </thead>
@@ -20,12 +20,12 @@
                         users.forEach(userr => {
                     %>
                         <tr>
-                            <td scope="col"><%= i %></td>
-                            <td scope="col">
+                            <td scope="col"class='column2'><%= i %></td>
+                            <td scope="col" class='column1'>
                                 <a href="/admin/manageUser/view/<%= userr._id %>"><%= userr.name %></a>
                             </td>
-                            <td scope="col"><%= userr.countPost %></td>
-                            <td scope="col"><%= userr.point %></td>
+                            <td scope="col" class='column3'><%= userr.countPost %></td>
+                            <td scope="col" class='column4'><%= userr.point %></td>
 <!--                            <td scope="col">-->
 <!--                                <a href="/admin/manageUser/edit/<%= userr._id %>"-->
 <!--                                   title="Sửa thông tin">-->
@@ -41,7 +41,7 @@
                     <% i++ }) %>
                     </tbody>
                 </table>
-
+                <br>    
                 <% if (locals.pages && pages > 2) { %>
                     <ul class="pagination" style="justify-content: center;">
                         <% if (current == 1) { %>
@@ -71,8 +71,7 @@
                                     Cuối</a></li>
                         <% } %>
                     </ul>
-                <% } %>
-            </div>
+                <%}%>
         </div>
     </div>
 </div>
