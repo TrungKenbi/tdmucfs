@@ -4,8 +4,11 @@ var PostedModel = require('../models/posted.model');
 var UserModel = require('../models/user.model');
 var decode = require('unescape');
 var numeral = require('numeral');
+
 const rp = require('request-promise');
 const url = 'https://graph.facebook.com/v3.3/me/accounts?access_token=' + process.env.TOKEN;
+const Entities = require('html-entities').AllHtmlEntities;
+const entities = new Entities();
 
 class AdminController {
 
@@ -377,7 +380,7 @@ class AdminController {
                     });
             }
 
-            messagePost = decode(messagePost,'all');
+            messagePost = entities.decode(messagePost);
             var postTextOptions = {
                 method: 'POST',
                     uri: `https://graph.facebook.com/v3.3/${id}/feed`,
