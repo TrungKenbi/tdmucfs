@@ -28,6 +28,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script src="/assets/js/animationButtonMenu.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  $(document).ready(() => {
+    var socket = io();
+    $('form').submit(function(e){
+      e.preventDefault(); // Chặn tải lại trang
+      socket.emit('search user', $('#username').val()); // Gửi dữ liệu về server
+      socket.on('search user result', function(msg){
+        $('#messages').empty();
+        $('#messages').append($('<li class="alert alert-info">').text(msg));
+      });
+      return false;
+    });
+  });
+</script>
 </body>
 
 </html>

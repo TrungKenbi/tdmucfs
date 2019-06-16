@@ -1,8 +1,27 @@
 <div class="container">
+    <div class="row justify-content-center" style="padding-top: 80px;">
+        <div class="col-12 col-md-10 col-lg-8">
+            <form class="card card-sm">
+                <div class="card-body row no-gutters align-items-center">
+                    <div class="col-auto">
+                        <i class="fas fa-search h4 text-body"></i>
+                    </div>
+                    <div class="col">
+                        <input class="form-control form-control-lg form-control-borderless" id="username" type="search" placeholder="Tìm kiếm người dùng">
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-lg btn-success" type="submit">Tìm kiếm</button>
+                    </div>
+                </div>
+            </form>
+            <ul id="messages">
+            </ul>
+        </div>
+    </div>
     <div class="row">
         <div class="col">
             <div class="shadow-lg d-block shadow text-center"
-                 style="width: 100%;min-height: 630px;margin-top: 119px;background-color: rgba(255,255,255,0.79);">
+                 style="width: 100%;min-height: 630px;margin-top: 20px;background-color: rgba(255,255,255,0.79);">
                 <h1>Quản Lý Thành Viên</h1>
                 <table class="table">
                     <thead class="thead-light">
@@ -11,7 +30,6 @@
                         <th scope="col">Tên người dùng</th>
                         <th scope="col">Số bài đăng</th>
                         <th scope="col">Số điểm</th>
-<!--                        <th scope="col">Thao tác</th>-->
                     </tr>
                     </thead>
                     <tbody>
@@ -26,17 +44,6 @@
                             </td>
                             <td scope="col"><%= userr.countPost %></td>
                             <td scope="col"><%= userr.point %></td>
-<!--                            <td scope="col">-->
-<!--                                <a href="/admin/manageUser/edit/<%= userr._id %>"-->
-<!--                                   title="Sửa thông tin">-->
-<!--                                    <button class="btn btn-warning"><i class="fa fa-edit"></i></button>-->
-<!--                                </a>-->
-<!--&lt;!&ndash;                                <a href="/admin/manageUser/ban/<%= userr._id %>"&ndash;&gt;-->
-<!--&lt;!&ndash;                                   onclick="return confirm('Bạn có cấm người dùng này không ?')"&ndash;&gt;-->
-<!--&lt;!&ndash;                                    title="Cấm người dùng">&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <button class="btn btn-danger"><i class="fa fa-ban"></i></button>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </a>&ndash;&gt;-->
-<!--                            </td>-->
                         </tr>
                     <% i++ }) %>
                     </tbody>
