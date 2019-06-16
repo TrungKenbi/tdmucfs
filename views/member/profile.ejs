@@ -11,7 +11,7 @@
                     </tr>
                     <tr>
                         <th scope="row">Bài viết:</th>
-                        <td><b class="text-danger"><%= userView.countPost %></b></td>
+                        <td><b class="text-danger"><%= userView.countPost == 0 ? 'Bạn chưa đăng bài viết ' : userView.countPost %></b></td>
                     </tr>
 
                     <tr>
@@ -24,26 +24,30 @@
                             <label id="permision" name="permision"><%= permisions[userView.permission] %></label>
                         </td>
                     </tr>
-                    <%
-                    if(userView.permission != 0){
-                    %>
-                        <tr>
-                            <th scope="row">Chữ ký</th>
-                            <td>
-                                <textarea class="form-control form-control-lg" id="signer" name="signer"
-                                          style="width: 50%;min-height: 100px;"><%= userView.signer %></textarea>
-                                <button class="btn btn-primary btn-lg" onclick="signChange('<%= userView._id %>')" style="width: 10%;">OK</button>
-                                <span id="loading" style="display: none">
-                                <img src="/assets/img/loading.svg" width="30px">
-                                </span>
-                                    <span id="success" style="display: none">
-                                    <img src="/assets/img/tick.png" width="30px">
-                                </span>
-                            </td>
-                        </tr>
-                    <%
-                    }
-                    %>
+                    <% if (userView.permission != 0) { %>
+                    <tr>
+                        <th scope="row">Chữ ký</th>
+                        <td>
+                            <input type="text"
+                                   class="form-group form-control-lg"
+                                   id="signer" name="signer"
+                                   value="<%= userView.signer %>"
+                                   placeholder="Chữ ký">
+                        </td>
+                    </tr>
+                    <% } %>
+                    <tr>
+                        <th></th>
+                        <td>
+                            <button class="btn btn-primary btn-lg" onclick="signChange('<%= userView._id %>')">Cập Nhật</button>
+                            <span id="loading" style="display: none">
+                                &nbsp<img src="/assets/img/loading.svg" width="30px">
+                            </span>
+                            <span id="success" style="display: none">
+                                &nbsp<img src="/assets/img/tick.png" width="30px">
+                            </span>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>
