@@ -1,58 +1,77 @@
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="shadow-lg d-block shadow text-center" style="width: 100%;min-height: 630px;margin-top: 119px;background-color: rgba(255,255,255,0.79);">
-                <form style="padding-top: 70px;" method="post" action="sendmess?key=<%= poster._id %>">
-                    <div class="form-group">
-                        <h1 class="text-center" style="color: rgb(1,1,1);font-weight: bold;">Chi tiết bài đăng</h1>
-                        <p><%- statusList[poster.status] %></p>
-                        <input name="statusPost" type="hidden" value="<%= poster.status %>">
-                    </div>
-                    <% if (locals.message) { %>
-                        <% message.forEach(mess => { %>
-                            <div class="alert alert-info">
-                                <%= mess.msg %>
-                            </div>
-                        <%  }); %>
-                    <% } %>
-                    <div class="form-group"><textarea readonly="true" class="form-control form-control-lg" name="content" id="content" style="width: 50%;margin-left: 25%;min-height: 200px;"><%= poster.content %></textarea></div>
-                    <div class="form-group">
-                        <% if(Images){ %>
-                            <% Images.forEach(img => { %>
-                                <img style="width: 20%" src="data:image/png;base64,<%= img.data.toString('base64') %>" />
-                            <% }) %>
+<div class="container-table100 detail">
+            <div class="shadow-lg mb-4 border shadow text-center" style="width: 90ch;min-height: 630px;margin-top: 119px;background-color: rgba(255,255,255,0.9); border-radius:20px; border:none">
+                    <form style="padding-top: 70px;" method="post" action="sendmess?key=<%= poster._id %>">
+                        <div class="form-group">
+                            <h1 class="text-center" style="color: rgb(1,1,1);font-weight: bold; text-transform: capitalize">Chi tiết bài đăng</h1>
+                            <p><span style="color:black; font-weight:bold">Trạng Thái: </span> <%- statusList[poster.status] %></p>
+                            <input name="statusPost" type="hidden" value="<%= poster.status %>">
+                        </div>
+                        <% if (locals.message) { %>
+                            <% message.forEach(mess => { %>
+                                <div class="alert alert-info">
+                                    <%= mess.msg %>
+                                </div>
+                            <%  }); %>
                         <% } %>
-                    </div>
-                    <div class="form-group"><textarea readonly="true" class="form-control form-control-lg" placeholder="Admin not yet comment" name="messagesOfAdmin" style="width: 50%;margin-left: 25%;min-height: 100px; max-height: 500px;"><%= poster.note %></textarea></div>
-                    <%
-                    if(poster.status == 1){
-                    %><div class="form-group"><a href="<%= poster.PostUrl %>" target="_blank">Liên kết đến bài viết</a></div>
-                    <% } else {
-                    %>
-                        <% if (poster.status == 0) { %>
-                            <a href="/deletepost/<%= poster._id %>">
-                                <button
-                                        onclick="return confirm('Bạn có muốn xóa bài đăng này chứ ?')"
+                        <div class="form-group"><textarea readonly="true" class="form-control form-control-lg" name="content" id="content" style="width: 50%;margin-left: 25%;min-height: 200px; resize:none; overflow:auto"><%= poster.content %></textarea></div>
+                        <div class="form-group">
+                            <% if(Images){ %>
+                                <% Images.forEach(img => { %>
+                                    <img style="width: 20%" src="data:image/png;base64,<%= img.data.toString('base64') %>" />
+                                <% }) %>
+                            <% } %>
+                        </div>
+                        <div class="form-group"><textarea disabled='true' class="form-control form-control-lg" placeholder="Admin not yet comment" name="messagesOfAdmin" style="width: 50%;margin-left: 25%;min-height: 100px; max-height: 500px; resize:none; overflow:auto"><%= poster.note %></textarea></div>
+                        <%
+                        if(poster.status == 1){
+                        %><div class="form-group"><a href="<%= poster.PostUrl %>" target="_blank">Liên kết đến bài viết</a></div>
+                        <% } else {
+                        %>
+                            <% if (poster.status == 0) { %>
+                                <a href="/deletepost/<%= poster._id %>">
+                                    <button
+                                            onclick="return confirm('Bạn có muốn xóa bài đăng này chứ ?')"
+                                            class="btn-1 btn-1-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </a>
+                            <% } else { %>
+                                <div class="form-group">
+                                    <button
+                                        onclick="return confirm('Bạn không thể xóa bài đăng này được !')"
                                         class="btn-1 btn-1-danger">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </a>
-                        <% } else { %>
-                            <button
-                                    onclick="return confirm('Bạn không thể xóa bài đăng này được !')"
-                                    class="btn-1 btn-1-danger">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        <% } %>
-                    <%
-                    }
-                    %>
-                    <div class="form-group">
-                        <a href="/editpost/<%= poster._id %>" class="btn btn-primary btn-lg" style="width: 20%;">Chỉnh sửa</a>
-                        <a href="/posts" class="btn btn-dark btn-lg" style="width: 20%;">Trở về</a>
-                    </div>
-                </form>
+                                        <i class="fa fa-trash"></i>
+                                        <span>Xóa bài đăng</span>
+                                    </button>
+                                </div>
+                            <% } %>
+                        <%
+                        }
+                        %>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6 mb-3">
+                                    <div class="row">
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-6">
+                                            <a href="/editpost/<%= poster._id %>" class="btn btn-primary btn-lg w-75">
+                                                <span>Chỉnh sửa</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6 mb-3">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a href="/posts" class="btn btn-dark btn-lg w-75">
+                                                <span>Hủy bỏ</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                
             </div>
-        </div>
-    </div>
 </div>
