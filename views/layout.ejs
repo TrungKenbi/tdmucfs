@@ -34,7 +34,7 @@
 <script>
   $(document).ready(() => {
     var socket = io();
-    $('form').submit(function(e){
+    $('#form_search').submit(function(e){
       e.preventDefault(); // Chặn tải lại trang
       socket.emit('search user', $('#username').val()); // Gửi dữ liệu về server
       socket.on('search user result', function(msg){
