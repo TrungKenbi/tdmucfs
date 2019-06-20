@@ -47,7 +47,7 @@ ul, li {
 
 /* ------------------------------------ */
 input {
-    display: block;
+    display: inline;
     outline: none;
     border: none !important;
 }

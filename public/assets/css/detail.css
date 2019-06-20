@@ -1,8 +1,68 @@
-.detail{
-    background: #000000; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #000000, #434343); /* Chrome 10-25, Safari 5.1-6 */
+.detail {
+    background: #000000;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #000000, #434343);
+    /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #000000, #434343);
 }
-.detail-forAdmin{
-    backgou
+
+/*
+    ---Detail in admin----
+*/
+
+input[type="checkbox"].check-custom {
+    display: none;
+    overflow: hidden;
+    transition: 0.5s ease;
+}
+
+input[type='checkbox'].check-custom.toggle-switch~.check-toggle {
+    width: 2rem;
+    height: 1rem;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    
+}
+
+input[type='checkbox'].check-custom.toggle-switch~.check-toggle::before, input[type='checkbox'].check-custom.toggle-switch~.check-toggle::after {
+    content: '';
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+input[type='checkbox'].check-custom.toggle-switch~.check-toggle::before {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+    background: #626262;
+}
+
+input[type='checkbox'].check-custom.toggle-switch~.check-toggle::after {
+    width: 0.75rem;
+    height: 0.75rem;
+    margin: 0.125rem;
+    border-radius: 50%;
+    background: #ffffff;
+}
+
+input[type='checkbox'].check-custom.toggle-switch:hover~.check-toggle::before {
+    background: #c4c4c4;
+}
+
+input[type='checkbox'].check-custom.toggle-switch:focus:checked~.check-toggle::before {
+    box-shadow: 0 0 0 2px rgba(97, 191, 158, 0.5);
+}
+
+input[type='checkbox'].check-custom.toggle-switch:checked~.check-toggle::before {
+    background: linear-gradient(45deg,#3494E6,#EC6EAD);
+}
+
+input[type='checkbox'].check-custom.toggle-switch:checked~.check-toggle::after {
+    left: auto;
+    right: 0;
+}
+@media screen and (min-width:320px){
+    
 }
