@@ -1,11 +1,14 @@
 // expose our config directly to our application using module.exports
+
+var URL_SERVER = process.env.URL_SERVER != null ? process.env.URL_SERVER : 'https://tdmucfs.herokuapp.com';
+
 module.exports = {
 
     'facebookAuth' : process.env.APP_ENV == 'production' ?
     {
         'clientID'      : '1287536914734391',
         'clientSecret'  : '44b88811d922ceb13f464d36d9a3bb94',
-        'callbackURL'   : 'https://tdmucfs.herokuapp.com/auth/facebook/callback',
+        'callbackURL'   : URL_SERVER + '/auth/facebook/callback',
         'profileFields' : ['id', 'name']
     } : {
         'clientID'      : '371818743678815',
