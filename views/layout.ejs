@@ -1,50 +1,90 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title><%= locals.title ? title : 'TDMU Confession' %></title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link href="https://fonts.googleapis.com/css?family=Nova+Square&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Lemonada|Pattaya|Lobster|Quicksand"
+    />
+    <link rel="stylesheet" href="/assets/css/styles.min.css" />
+    <link rel="stylesheet" href="/assets/css/buttonMenu.css" />
+    <link rel="stylesheet" href="/assets/css/Animation.css" />
+    <link rel="stylesheet" href="/assets/css/mainpost.css" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/detail.css" />
+    <link rel="shortcut icon" href="/assets/img/favicon.png" />
+  </head>
+  <body id="page-top">
+    <% include layouts/header%> <%- body %> <% include layouts/footer%>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title><%= locals.title ? title : 'TDMU Confession' %></title>
-  <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lemonada|Pattaya|Lobster|Quicksand">
-  <link rel="stylesheet" href="/assets/css/styles.min.css">
-  <link rel="stylesheet" href="/assets/css/buttonMenu.css">
-  <link rel="stylesheet" href="/assets/css/Animation.css">
-  <link rel="stylesheet" href="/assets/css/mainpost.css">
-  <link rel="stylesheet" href="/assets/css/main.css">
-  <link rel="stylesheet" href="/assets/css/detail.css">
-  <link rel="shortcut icon" href="/assets/img/favicon.png">
-  
-</head>
-<body id="page-top">
-<% include layouts/header%>
-<%- body %>
-<% include layouts/footer%>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<script src="/assets/js/animationButtonMenu.js"></script>
-<script src="/socket.io/socket.io.js"></script>
-<script>
-  $(document).ready(() => {
-    var socket = io();
-    $('#form_search').submit(function(e){
-      e.preventDefault(); // Chặn tải lại trang
-      socket.emit('search user', $('#username').val()); // Gửi dữ liệu về server
-      socket.on('search user result', function(msg){
-        $('#messages').empty();
-        $('#messages').append($('<li class="alert alert-info">').text(msg));
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="/assets/js/animationButtonMenu.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      $(document).ready(() => {
+        var socket = io();
+        $('#form_search').submit(function(e){
+          e.preventDefault(); // Chặn tải lại trang
+          socket.emit('search user', $('#username').val()); // Gửi dữ liệu về server
+          socket.on('search user result', function(msg){
+            $('#messages').empty();
+            $('#messages').append($('<li class="alert alert-info">').text(msg));
+              socket.on('search data', function(data){
+                $('#person').empty();
+                $('#phantrang').empty();
+                var length=data.length;
+                if (length != 0 ) {
+                  $('#listUser').show();
+                  for(var i=1;i<=length;i++){
+                    
+                    $('#person').append($('<tr>\
+                    <td scope="col"class=\'column2\'>'+i+'</td>\
+                    <td scope="col" class=\'column1\'>\
+                        <a href="/admin/manageUser/view/'+data[i-1]._id+'">' + data[i-1].name + '</a>\
+                    </td>\
+                    <td scope="col" class="column3">'+data[i-1].countPost+'</td>\
+                    <td scope="col" class="column4">'+data[i-1].point+'</td>\
+                    </tr>'));
+                  }
+                } else {
+                  $('#listUser').hide();
+                  $('#messages').empty();
+                  $('#messages').append($('<li class="alert alert-warning">').text('Không tìm thấy người dùng này !'));
+                }
+                
+            });
+          });
+          return false;
+        });
       });
-      return false;
-    });
-  });
-</script>
-</body>
-
+    </script>
+  </body>
 </html>

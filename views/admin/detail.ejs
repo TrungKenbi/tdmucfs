@@ -5,6 +5,7 @@
                         <h1 class="text-center" style="color: rgb(1,1,1);font-weight: bold;">Chi tiết bài đăng</h1>
                         <p><span style="color:black; font-weight:bold">Trạng Thái: </span> <%- statusList[poster.status] %></p>
                         <input name="statusPost" type="hidden" value="<%= poster.status %>">
+                        <input name="content" type="hidden" value="<%= poster.content %>">
                     </div>
                     <% if (locals.message) { %>
                         <% message.forEach(mess => { %>
@@ -13,13 +14,30 @@
                             </div>
                         <%  }); %>
                     <% } %>
-                    <div class="form-group"><textarea readonly="true" class="form-control form-control-lg" name="content" id="content" style="width: 50%;margin-left: 25%;min-height: 200px;"><%= poster.content %></textarea></div>
-                    <div class="form-group">
-                        <% if(Images){ %>
-                            <% Images.forEach(img => { %>
-                                <img style="width: 20%" src="data:image/png;base64,<%= img.data.toString('base64') %>" />
-                            <% }) %>
-                        <% } %>
+                    <div class="container">
+                        <div class="row">
+                            <div class="form-group col-sm-12 col-md-6 bordercustom">
+                                <blockquote class=" form-control text-left form-control-lg border-0"   >
+                                        <%= poster.content %>
+                                        <br>
+                                        <span>-----------</span>
+                                <blockquote>
+                            </div>
+                            
+                            <div class="form-group col-md-6 text-center col-sm-12 blockPicture">
+                                <% if(Images.length>0){ %>
+                                    <figure class="picture">
+                                    <% Images.forEach(img => { %>
+                                        <img src="data:image/png;base64,<%= img.data.toString('base64') %>" />
+                                    <% }) %>
+                                    </figure>
+                                <% } else{ %>
+                                    <div class="noPicture ">
+                                        <p></p>
+                                    </div>
+                                <% } %>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group"><textarea class="form-control form-control-lg" placeholder="Admin note send user here!" name="messagesOfAdmin" style="width: 50%;margin-left: 25%;min-height: 100px; max-height: 500px;"><%= poster.note %></textarea></div>
                     <%

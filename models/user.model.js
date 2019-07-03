@@ -1,5 +1,5 @@
 //Require Mongoose
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
 
 var UserModelSchema = new Schema({
