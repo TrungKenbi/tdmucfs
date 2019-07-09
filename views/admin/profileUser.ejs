@@ -1,47 +1,150 @@
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="shadow-lg d-block shadow text-center"
-                 style="width: 100%;min-height: 630px;margin-top: 119px;background-color: rgba(255,255,255,0.79);">
-                <h1>Thông Tin Thành Viên</h1>
-                <table class="table table-striped">
-                    <tr>
-                        <th scope="row">ID:</th>
-                        <th><span class="c-font-uppercase"><%= userView._id %></span></th>
-                    </tr>
-                    <tr>
-                        <th scope="row">Tên tài khoản:</th>
-                        <th><%= userView.name %></th>
-                    </tr>
-                    <tr>
-                        <th scope="row">Bài viết:</th>
-                        <td><b class="text-danger"><%= userView.countPost %></b></td>
-                    </tr>
+<link href="/assets/css/profile.css" rel="stylesheet">
+<div style="padding-top: 50px">
 
-                    <tr>
-                        <th scope="row">Điểm Cống Hiến:</th>
-                        <td><b class="text-success"><%= userView.point %></b></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Chức vụ:</th>
-                        <td>
-                            <select id="permision" name="permision" onChange="statusChange(this.value)">
-                                <% for(var i = 0; i < permisions.length; i++) { %>
-                                <option value="<%= i %>"<%= (i == userView.permission) ? ' selected' : '' %>><%= permisions[i] %></option>
-                                <% } %>
-                            </select>
-                            <span id="loading" style="display: none">
-                                <img src="/assets/img/loading.svg" width="30px">
-                            </span>
-                            <span id="success" style="display: none">
-                                <img src="/assets/img/tick.png" width="30px">
-                            </span>
-                        </td>
-                    </tr>
-                </table>
+</div>
+<div class="container emp-profile">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="https://graph.facebook.com/v3.3/<%= userView.facebook.id %>/picture?type=large" alt=""/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        <%= userView.name %>
+                    </h5>
+                    <h6>
+                        <%= permisions[userView.permission] %>
+                    </h6>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                               aria-controls="home" aria-selected="true">Thông Tin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                               aria-controls="profile" aria-selected="false">Bài Viết</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Chỉnh sửa"/>
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>User ID</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p><%= userView._id %></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Tên tài khoản</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p><%= userView.name %></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Bài viết:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>0</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Điểm Cống Hiến</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>0</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Chức vụ</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select id="permision" name="permision" onChange="statusChange(this.value)">
+                                    <% for(var i = 0; i < permisions.length; i++) { %>
+                                        <option value="<%= i %>"<%= (i == userView.permission) ? ' selected' : '' %>><%= permisions[i] %></option>
+                                    <% } %>
+                                </select>
+                                <span id="loading" style="display: none">
+                                    <img src="/assets/img/loading.svg" width="30px">
+                                </span>
+                                <span id="success" style="display: none">
+                                    <img src="/assets/img/tick.png" width="30px">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Experience</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Expert</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Hourly Rate</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>10$/hr</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Total Projects</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>230</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>English Level</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Expert</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Availability</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>6 months</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Your Bio</label><br/>
+                                <p>Your detail description</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 <script type="text/javascript">
     function statusChange(value) {

@@ -1,0 +1,179 @@
+.detail {
+    background: #000000;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #000000, #434343);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #000000, #434343);
+}
+
+/*
+    ---Detail in admin----
+*/
+
+input[type="checkbox"].check-custom {
+    display: none;
+    overflow: hidden;
+    transition: 0.5s ease;
+}
+
+input[type='checkbox'].check-custom.toggle-switch~.check-toggle {
+    width: 2rem;
+    height: 1rem;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+input[type='checkbox'].check-custom.toggle-switch~.check-toggle::before, input[type='checkbox'].check-custom.toggle-switch~.check-toggle::after {
+    content: '';
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+input[type='checkbox'].check-custom.toggle-switch~.check-toggle::before {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+    background: #626262;
+}
+
+input[type='checkbox'].check-custom.toggle-switch~.check-toggle::after {
+    width: 0.75rem;
+    height: 0.75rem;
+    margin: 0.125rem;
+    border-radius: 50%;
+    background: #ffffff;
+}
+
+input[type='checkbox'].check-custom.toggle-switch:hover~.check-toggle::before {
+    background: #c4c4c4;
+}
+
+input[type='checkbox'].check-custom.toggle-switch:focus:checked~.check-toggle::before {
+    box-shadow: 0 0 0 2px rgba(97, 191, 158, 0.5);
+}
+
+input[type='checkbox'].check-custom.toggle-switch:checked~.check-toggle::before {
+    background: linear-gradient(45deg, #3494E6, #EC6EAD);
+}
+
+input[type='checkbox'].check-custom.toggle-switch:checked~.check-toggle::after {
+    left: auto;
+    right: 0;
+}
+/*
+    --For Place have picture--
+*/
+.bordercustom {
+    border-left: 15px double #525252;
+    background: #fff;
+    border-radius: 0px 20px 20px 0;
+    box-shadow: 0 2px 6px 0 rgba(32, 33, 36, 0.28);
+    padding: 10px;
+    width: 100%;
+}
+
+.bordercustom>blockquote {
+    letter-spacing: 1px;
+    font-size: 17px;
+    height: 300px;
+    overflow: auto;
+    margin: 0;
+}
+/* Custom scrollbar*/
+blockquote::-webkit-scrollbar {
+    width: 10px;
+    background-color: #F5F5F5;
+}
+
+blockquote::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+blockquote::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background: #93b5b3;
+}
+/*For Picture*/
+.blockPicture{
+    height:300px;
+    padding:10px;
+}
+.blockPicture .picture{
+    width:100%;
+    height:100%;
+    border:5px solid black;
+    padding:0;
+    background:rgba(187,187,187);
+}
+.blockPicture .picture>img{
+    width:100%;
+    height:100%;
+    transition: ease all 0.4s;
+}
+.blockPicture .picture > img:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+/*
+*/
+/*
+    If don't have picture
+*/
+.blockPicture .noPicture{
+    height:100%;
+    background:#52437b;
+    border-radius: 20px;
+    border:15px solid #010059;
+}
+.blockPicture .noPicture > p{
+    position: relative;
+    top:90px;
+    font-size:30px;
+    text-transform: capitalize;
+    font-family: 'Nova Square', cursive;
+    letter-spacing: 2px;
+}
+.blockPicture .noPicture > p::before { 
+    content: "No picture for this post";
+    border-bottom:2px solid #fcf594;
+}
+
+/*Reponsive for picture*/
+@media screen and (min-width:320px) {
+    .bordercustom {
+        border: none;
+        background: transparent;
+        border-radius: 20px;
+    }
+    .bordercustom>blockquote {
+        border-radius: 20px;
+        overflow: auto;
+        height: auto;
+    }
+    .blockPicture{
+
+    }
+}
+
+@media screen and (min-width:1024px) {
+    .bordercustom {
+        border-left: 15px double #525252;
+        background: #fff;
+        border-radius: 0px 20px 20px 0;
+        box-shadow: 1px 2px 6px 0 rgba(32, 33, 36, 0.28);
+        padding: 10px;
+        width: 100%;
+        height:300px;
+    }
+    .bordercustom>blockquote {
+        letter-spacing: 1px;
+        font-size: 17px;
+        height: 260px;
+        overflow: auto;
+        margin: 0;
+    }
+}

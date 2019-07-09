@@ -1,6 +1,8 @@
-<div class="container">
-    <div class="row justify-content-center" style="padding-top: 80px;">
-        <div class="col-12 col-md-10 col-lg-8">
+<div class="container-table100 backgroundManage">
+    <div class="cloud-animation"></div>
+    <div class="wrap-table100" style="z-index:2">
+        <div class="table100">
+            <h1 class='text-center mt-5 mb-4' style="font-size:60px;">Quản Lý Thành Viên</h1>
             <form class="card card-sm" id="form_search">
                 <div class="card-body row no-gutters align-items-center">
                     <div class="col-auto">
@@ -16,41 +18,35 @@
             </form>
             <ul id="messages">
             </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="shadow-lg d-block shadow text-center"
-                 style="width: 100%;min-height: 630px;margin-top: 20px;background-color: rgba(255,255,255,0.79);">
-                <h1>Quản Lý Thành Viên</h1>
-                <table class="table">
-                    <thead class="thead-light">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Tên người dùng</th>
-                        <th scope="col">Số bài đăng</th>
-                        <th scope="col">Số điểm</th>
+            <br>
+                <table id="listUser">
+                    <thead>
+                    <tr class="table100-head">
+                        <th scope="col" class='column2'>#</th>
+                        <th scope="col" class='column1'>Tên người dùng</th>
+                        <th scope="col" class='column3'>Số bài đăng</th>
+                        <th scope="col" class='column4'>Số điểm</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="person">
                     <%
                         var i = (current == 1) ? 1 : (current - 1) * 10 + 1;
                         users.forEach(userr => {
                     %>
                         <tr>
-                            <td scope="col"><%= i %></td>
-                            <td scope="col">
+                            <td scope="col"class='column2'><%= i %></td>
+                            <td scope="col" class='column1'>
                                 <a href="/admin/manageUser/view/<%= userr._id %>"><%= userr.name %></a>
                             </td>
-                            <td scope="col"><%= userr.countPost %></td>
-                            <td scope="col"><%= userr.point %></td>
+                            <td scope="col" class="column3"><%= userr.countPost %></td>
+                            <td scope="col" class="column4"><%= userr.point %></td>
                         </tr>
                     <% i++ }) %>
                     </tbody>
                 </table>
-
+                <br>    
                 <% if (locals.pages && pages > 2) { %>
-                    <ul class="pagination" style="justify-content: center;">
+                    <ul class="pagination" id="phantrang" style="justify-content: center;">
                         <% if (current == 1) { %>
                             <li class="page-item disabled"><a class="page-link">Trang Đầu</a></li>
                         <% } else { %>
@@ -78,8 +74,7 @@
                                     Cuối</a></li>
                         <% } %>
                     </ul>
-                <% } %>
-            </div>
+                <%}%>
         </div>
     </div>
 </div>

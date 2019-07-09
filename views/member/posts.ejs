@@ -28,7 +28,9 @@
                             <td class="column4"><%- statusList[post.status] %></td>
                             <td class="column5">&emsp;<%= post.note.length > 10 ? post.note.substring(0, 10) + '...' : post.note %></td>
                             <td class="column6">
-                                <a href="/detail?key=<%= post._id %>">Chi tiết</a>
+                                <a href="/detail?key=<%= post._id %>" title="Chi tiết bài đăng">
+                                    <button class="btn-1 btn-1-success"><i class="fas fa-info-circle"></i></button>
+                                </a>
                                 <a href="/editpost/<%= post._id %>" title="Chỉnh sửa bài viết">
                                     <button class="btn-1 btn-1-warning"><i class="fa fa-edit"></i></button>
                                 </a>

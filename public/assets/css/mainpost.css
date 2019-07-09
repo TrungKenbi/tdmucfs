@@ -126,7 +126,7 @@ iframe {
 
 .container-contact100 {
     width: 100%;
-    height: 130vh;
+    height: 110vh;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -137,18 +137,18 @@ iframe {
     align-items: center;
     padding: 15px;
     background: #a64bf4;
-    background: -webkit-linear-gradient(45deg, #73a4db, #4454dd);
-    background: -o-linear-gradient(45deg, #73a4db, #4454dd);
+    background: -webkit-linear-gradient(180deg,#00c6ff, #0072ff);
+    background: -o-linear-gradient(45deg,#00c6ff, #0072ff);
     background: -moz-linear-gradient(45deg, #73a4db, #4454dd);
-    background: linear-gradient(45deg, #73a4db, #4454dd);
+    background: linear-gradient(180deg,#00c6ff, #0072ff);
 
 }
 
 .wrap-contact100 {
     border: none;
     width: 600px;
-    position: relative;
-    top:30px;
+    position: absolute;
+    top:140px;
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
