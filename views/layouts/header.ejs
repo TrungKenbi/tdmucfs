@@ -5,11 +5,11 @@
         </a>
         <ul id="menu-show" class="menu">
             <% if (user.permission >= 3) { %>
-            <li>
-                <a href="/admin">
-                    <i class="fas fa-cogs my-float"></i>
-                </a>
-            </li>
+                <li>
+                    <a href="/admin">
+                        <i class="fas fa-cogs my-float"></i>
+                    </a>
+                </li>
             <% } %>
             <li>
                 <a href="/post">
@@ -26,34 +26,38 @@
     <!--End-->
 <% } %>
 
-<nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="height: 70px;background-color: rgb(39,52,55);padding: 0 1.5rem;">
-        <div class="container"><a class="navbar-brand" href="/" style="width: 146px;height: inherit;"><img src="/assets/img/logo.png" style="width: 100%;"></a>
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1">
-                <span class="sr-only" >Toggle navigation</span>
-                <span class="text-white" style="width: 106%">
-                    <img src="/assets/img/menu.png" alt="nope">
-                </span>
-            </button>
-            <div class="collapse navbar-collapse dropdown text-right" id="navcol-1" style="font-family:inherit  ">
-                <ul class="nav navbar-nav mr-auto"></ul>
-                <span class="navbar-text actions">
+<nav class="navbar navbar-light navbar-expand-md navigation-clean-button"
+     style="height: 70px;background-color: rgb(39,52,55);padding: 0 1.5rem;">
+    <div class="container">
+        <a class="navbar-brand" href="/" style="width: 146px;height: inherit;">
+            <img src="/assets/img/logo.png" style="width: 100%;">
+        </a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="text-white" style="width: 106%">
+                <img src="/assets/img/menu.png" alt="nope">
+            </span>
+        </button>
+        <div class="collapse navbar-collapse dropdown text-right" id="navcol-1" style="font-family:inherit  ">
+            <ul class="nav navbar-nav mr-auto"></ul>
+            <span class="navbar-text actions">
                 <% if (locals.user) { %>
-                        <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Xin chào, <b><%= user.name %></b></button>
-                            <ul class="dropdown-menu ">
-                                <li>
-                                    <a href="/profileuser/<%= locals.user._id %>">Thông tin cá nhân</a>
-                                </li>
-                                <li>
-                                    <a href="/logout">Đăng xuất!</a>
-                                </li>
-                            </ul>
-                        </div>
-
-            <% } else { %>
-                    <a class="btn btn-light action-button" role="button" href="/auth/facebook" style="width: 106px;font-size: 16px;">Đăng Nhập</a>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Xin chào, <b><%= user.name %></b></button>
+                        <ul class="dropdown-menu ">
+                            <li>
+                                <a href="/profileuser/<%= locals.user._id %>">Thông tin cá nhân</a>
+                            </li>
+                            <li>
+                                <a href="/logout">Đăng xuất!</a>
+                            </li>
+                        </ul>
+                    </div>
+                <% } else { %>
+                    <a class="btn btn-light action-button" role="button" href="/auth/facebook"
+                       style="width: 106px;font-size: 16px;">Đăng Nhập</a>
                 <% } %>
-                </span>
-            </div>
+            </span>
         </div>
+    </div>
 </nav>
