@@ -17,12 +17,26 @@
             <div class="table100">
                 <form action="/admin/posting" method="get">
                 <div>
-                    <h1 style="text-align: center; font-size: 60px; padding-top: 50px">Bài đăng</h1>
+                    <h1 style="text-align: center; font-size: 60px; padding-top: 50px">Danh Sách Bài Đăng</h1>
                 </div>
-                <div style="margin:8px 0 15px 0; text-align:center; height: 50px;">
-                    <button class=" btnDangBai btn-Gradient " type="submit"><span>Đăng Bài</span></button>
+                <div class="row" style="margin:8px 0 15px 0; text-align:center; height: 50px;">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-offset-4 col-md-4">
+                        <button class=" btnDangBai btn-Gradient " type="submit"><span>Đăng Bài</span></button>
+                    </div>
+                    <div class="col-md-2">
+                        <select
+                            class="form-control"
+                            onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
+                        >
+                            <option disabled>Bộ Lọc Bài Viết</option>
+                            <option value="?filter=0"<%=(filter == 0 ? 'selected' :'')%>>Đang Đợi Duyệt</option>
+                            <option value="?filter=1" <%=(filter == 1 ? 'selected' :'')%>>Đã Duyệt</option>
+                            <option value="?filter=2"<%=(filter == 2 ? 'selected' :'')%>>Từ Chối</option>
+                        </select>
+                    </div>
                 </div>
-                <table>
+                <table >
                     <thead>
                     <tr class="table100-head">
                         <th class="column1">
