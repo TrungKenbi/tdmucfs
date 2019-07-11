@@ -44,10 +44,12 @@
                                    style="margin-left:auto; margin-right:auto;">
                         </th>
                         <th class=" column2">Nội dung</th>
+                        <th class=" column7">Người đăng</th>
                         <th class=" column3">Hình ảnh</th>
                         <th class=" column4">Trạng thái</th>
                         <th class=" column5">Ghi chú</th>
                         <th class=" column6">Thao tác</th>
+                        <th class=" column8">Thời gian</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -62,11 +64,16 @@
                                            style="margin-left:auto; margin-right:auto;" name="check"
                                            value="<%= post._id %>">
                                 </td>
-                                <td class="column2"><%- post.content.length > 20 ? post.content.substring(0, 20) + '...' : post.content %></td>
+                                <td class="column2">
+                                    <a href="/admin/detail?key=<%= post._id %>" title="<%- post.content %>">
+                                        <%- post.content.length > 20 ? post.content.substring(0, 50) + '...' : post.content %>
+                                    </a>
+                                </td>
+                                <td class="column7"><a href="/admin/manageUser/view/<%= post.user %>"><%= post.user %></a> </td>
                                 <td class="column3"><%- post.image.length == 0 ? 'Không có' : 'Có <span style="color: red; font-weight: bold;">' + post.image.length + '</span> ảnh' %></td>
                                 <td class="column4"><%- statusList[post.status] %></td>
                                 <td class="column5">&emsp;<%= post.note.length > 10 ? post.note.substring(0, 10) + '...' : post.note %></td>
-                                <td class="column6">
+                                <td class="column2">
                                     <a href="/admin/detail?key=<%= post._id %>" class="btn-1 btn-1-warning">
                                         <i class="fa fa-edit"></i>
                                     </a>
@@ -83,6 +90,7 @@
                                         </a>
                                     <% } %>
                                 </td>
+                                <td class="column2">5 phút trước</td>
                             </tr>
                         <% i++;});
                         } %>

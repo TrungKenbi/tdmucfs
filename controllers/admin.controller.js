@@ -4,6 +4,7 @@ var PostedModel = require('../models/posted.model');
 var UserModel = require('../models/user.model');
 var decode = require('unescape');
 var numeral = require('numeral');
+const {ObjectId} = require("mongodb");
 
 const rp = require('request-promise');
 const url = 'https://graph.facebook.com/v3.3/me/accounts?access_token=' + process.env.TOKEN;
@@ -38,7 +39,6 @@ class AdminController {
             await PostModel
                 .find({ status: f }).sort({time: -1}).skip((perPage * page) - perPage).limit(perPage)
                 .exec(function (err, posts) {
-                    console.log(f);
                     PostModel.countDocuments(
                         { status: f }, // filters
                         // {}, // options
@@ -57,7 +57,7 @@ class AdminController {
                 });
         }
         catch (e) {
-            res.status(555).send("Fail Admin");
+            res.status(500).send("Có lỗi, vui lòng liên hệ ChickenFlyStudio !!! [ListPostError]");
         }
     }
 
@@ -75,13 +75,12 @@ class AdminController {
                     var Images = [];
                     await ImageModel
                         .find({_id : poster.image })
-                        .then(Img =>{
+                        .then(Img => {
                             Images = Img;
                         })
                         .catch(err => {
                             console.log(err);
-                        })
-                    // console.log(poster);
+                        });
                     res.render('admin/detail', {
                         title: "Hello",
                         user: req.user,
