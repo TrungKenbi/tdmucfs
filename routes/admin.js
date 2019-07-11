@@ -45,9 +45,8 @@ router
 module.exports = router;
 
 function isAdmin(req, res, next) {
-    //if (req.isAuthenticated() && req.user.permission >= 3)
+    if (process.env.APP_ENV != 'production' || (req.isAuthenticated() && req.user.permission >= 3))
         return next();
-    //res.status(403).json({message: "Forbidden"});
     res.redirect('/');
 }
 
