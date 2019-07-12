@@ -42,7 +42,7 @@ class AdminController {
                     PostModel.countDocuments(
                         { status: f }, // filters
                         // {}, // options
-                        function (err, count) {
+                        async function (err, count) {
                             if (err) return next(err);
                             var user_Post = [];
                             for(var i = 0; i < posts.length; i++){
