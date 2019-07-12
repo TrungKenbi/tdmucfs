@@ -70,7 +70,7 @@
                                         <%- post.content.length > 20 ? post.content.substring(0, 50) + '...' : post.content %>
                                     </a>
                                 </td>
-                                <td class="column3"><a href="/admin/manageUser/view/<%= user_Post[k++].name %>"><%= post.user %></a> </td>
+                                <td class="column3"><a href="/admin/manageUser/view/<%= post.user %>"><%= user_Post[k++].name %></a> </td>
                                 <td class="column4"><%- post.image.length == 0 ? 'Không có' : 'Có <span style="color: red; font-weight: bold;">' + post.image.length + '</span> ảnh' %></td>
                                 <td class="column5"><%- statusList[post.status] %></td>
                                 <td class="column6">&emsp;<%= post.note.length > 10 ? post.note.substring(0, 10) + '...' : post.note %></td>
