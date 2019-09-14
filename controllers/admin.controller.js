@@ -42,19 +42,8 @@ class AdminController {
                     PostModel.countDocuments(
                         { status: f }, // filters
                         // {}, // options
-                        async function (err, count) {
+                        function (err, count) {
                             if (err) return next(err);
-                            var user_Post = [];
-                            for(var i = 0; i < posts.length; i++){
-                                await UserModel
-                                    .findOne({ _id: posts[i].user })
-                                    .then(async data => {
-                                        user_Post.push(data);
-                                    })
-                                    .catch(err => {
-                                        console.log(err);
-                                    })
-                            }
                             res.render('admin/listPost', {
                                 title: 'Danh Sách Các Bài Đã Đăng Confession',
                                 user: req.user,
@@ -62,8 +51,7 @@ class AdminController {
                                 posts: posts,
                                 statusList: status,
                                 current: page,
-                                pages: Math.ceil(count / perPage),
-                                user_Post: user_Post
+                                pages: Math.ceil(count / perPage)
                             });
                         })
                 });
@@ -246,24 +234,23 @@ class AdminController {
             messagePost += (commentOfAd);
             messagePost += ('\n' + signer);
 
-            // await rp(url)
-            //     .then(function(html){
-            //         //success!
-            //         arrToken = JSON.parse(html);
-            //         // console.log(arrToken);
-            //     })
-            //     .catch(function(err){
-            //         //handle error
-            //     });
+            await rp(url)
+                .then(function(html){
+                    //success!
+                    arrToken = JSON.parse(html);
+                    // console.log(arrToken);
+                })
+                .catch(function(err){
+                    //handle error
+                });
 
-            // for (var i = 0; i < arrToken.data.length; i++){
-            //     var subToken = arrToken.data[i];
-            //     if(subToken.id == id){
-            //         access_token = subToken.access_token;
-            //     }
-            // }
-
-            access_token = process.env.TOKEN;
+            for (var i = 0; i < arrToken.data.length; i++){
+                var subToken = arrToken.data[i];
+                if(subToken.id == id){
+                    access_token = subToken.access_token;
+                    // console.log(subToken.access_token);
+                }
+            }
 
             if(Array.isArray(imgs)) {
                 for (var i = 0; i < imgs.length; i++) {
