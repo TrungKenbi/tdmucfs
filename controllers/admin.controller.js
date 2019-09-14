@@ -42,8 +42,19 @@ class AdminController {
                     PostModel.countDocuments(
                         { status: f }, // filters
                         // {}, // options
-                        function (err, count) {
+                        async function (err, count) {
                             if (err) return next(err);
+                            var user_Post = [];
+                            for(var i = 0; i < posts.length; i++){
+                                await UserModel
+                                    .findOne({ _id: posts[i].user })
+                                    .then(async data => {
+                                        user_Post.push(data);
+                                    })
+                                    .catch(err => {
+                                        console.log(err);
+                                    })
+                            }
                             res.render('admin/listPost', {
                                 title: 'Danh Sách Các Bài Đã Đăng Confession',
                                 user: req.user,
@@ -51,7 +62,8 @@ class AdminController {
                                 posts: posts,
                                 statusList: status,
                                 current: page,
-                                pages: Math.ceil(count / perPage)
+                                pages: Math.ceil(count / perPage),
+                                user_Post: user_Post
                             });
                         })
                 });
