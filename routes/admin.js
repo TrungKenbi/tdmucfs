@@ -38,6 +38,8 @@ router
     .get('/manageUser/view/:id', isAdmin, ManageCtrl.viewProfile)
     .post('/manageUser/update/:id', isAdmin, ManageCtrl.updateProfile)
 
+    .get('/settings', isAdmin, AdminCtrl.settings)
+
 ;
 
 // Co ve hoi chuoi nhi ?? xoq r a, ok, con c

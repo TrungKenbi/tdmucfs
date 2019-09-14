@@ -174,7 +174,8 @@ class AdminController {
             else if(Istatus == 2)
                 Istatus=0;
             await PostModel
-                .updateOne({
+                .updateOne(
+                    {
                         _id: req.query.key
                     },
                     {
@@ -185,7 +186,7 @@ class AdminController {
                 })
                 .catch(err => {
                     console.log(err);
-                })
+                });
             res.redirect('listPost?filter=0');
         }
         catch (e) {
@@ -195,7 +196,6 @@ class AdminController {
 
     static async postPost(req, res, next){
         try {
-            // var id = "2715971488430698"; // <- id page bán chè@@
             var id = "649079911793156";
             var access_token;
             var arrToken = [];
@@ -220,7 +220,7 @@ class AdminController {
                 })
                 .catch(err => {
                     console.log(err);
-                })
+                });
 
             messagePost += (titlePost + '\n');
             if(Array.isArray(postkeys)) {
@@ -234,23 +234,24 @@ class AdminController {
             messagePost += (commentOfAd);
             messagePost += ('\n' + signer);
 
-            await rp(url)
-                .then(function(html){
-                    //success!
-                    arrToken = JSON.parse(html);
-                    // console.log(arrToken);
-                })
-                .catch(function(err){
-                    //handle error
-                });
+            // await rp(url)
+            //     .then(function(html){
+            //         //success!
+            //         arrToken = JSON.parse(html);
+            //         // console.log(arrToken);
+            //     })
+            //     .catch(function(err){
+            //         //handle error
+            //     });
 
-            for (var i = 0; i < arrToken.data.length; i++){
-                var subToken = arrToken.data[i];
-                if(subToken.id == id){
-                    access_token = subToken.access_token;
-                    // console.log(subToken.access_token);
-                }
-            }
+            // for (var i = 0; i < arrToken.data.length; i++){
+            //     var subToken = arrToken.data[i];
+            //     if(subToken.id == id){
+            //         access_token = subToken.access_token;
+            //     }
+            // }
+
+            access_token = process.env.TOKEN;
 
             if(Array.isArray(imgs)) {
                 for (var i = 0; i < imgs.length; i++) {
@@ -266,19 +267,11 @@ class AdminController {
                                     caption: "Hình " + (i + 1),
                                     published: false,
                                     url: process.env.ImgURL + img
-                                    // url: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png'
-                                }// em pull ve chua, sao ki nhi ko thay, doi a chut
+                                }
                             };
                             await rp(imgOption)
                                 .then(function (html) {
-                                    // const permalink = JSON.parse(html).permalink_url;
-                                    // console.log(permalink);
-                                    // if(video) {
-                                    //     permalink = `https://www.facebook.com${permalink}`;
-                                    // }
-                                    // return { postUrl: permalink };
                                     var idPosted = JSON.parse(html);
-                                    // console.log(idPosted.id);
                                     images.push({media_fbid: idPosted.id});
                                     idImgs.push(img);
                                 })
@@ -297,7 +290,6 @@ class AdminController {
                 await ImageModel
                     .findOne({_id: img})
                     .then(async data => {
-                        // console.log(data);
                         let imgOption = {
                             method: 'POST',
                             uri: `https://graph.facebook.com/v3.3/${id}/photos`,
@@ -306,20 +298,11 @@ class AdminController {
                                 caption: "Hình " + (i + 1),
                                 published: false,
                                 url: process.env.ImgURL + img
-                                // url: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png'
-                                // url: process.env.ImgURL + idImg
                             }
                         };
                         await rp(imgOption)
                             .then(function (html) {
-                                // const permalink = JSON.parse(html).permalink_url;
-                                // console.log(permalink);
-                                // if(video) {
-                                //     permalink = `https://www.facebook.com${permalink}`;
-                                // }
-                                // return { postUrl: permalink };
                                 var idPosted = JSON.parse(html);
-                                // console.log(idPosted.id);
                                 images.push({media_fbid: idPosted.id});
                             })
                             .catch(function (err) {
@@ -341,8 +324,6 @@ class AdminController {
                 });
                 await ImageCFS.save()
                     .then(async doc => {
-                        // console.log(doc);
-                        // images.push({ media_fbid : doc._id });
                         let idImg = doc._id;
                         let imgOption = {
                             method: 'POST',
@@ -352,20 +333,11 @@ class AdminController {
                                 caption: "Hình of Admin",
                                 published: false,
                                 url: process.env.ImgURL+doc._id
-                                // url: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png'
-                                // url: process.env.ImgURL + idImg
                             }
                         };
                         await rp(imgOption)
                             .then(function (html) {
-                                // const permalink = JSON.parse(html).permalink_url;
-                                // console.log(permalink);
-                                // if(video) {
-                                //     permalink = `https://www.facebook.com${permalink}`;
-                                // }
-                                // return { postUrl: permalink };
                                 var idPosted = JSON.parse(html);
-                                // console.log(idPosted.id);
                                 images.push({media_fbid: idPosted.id});
                                 idImgs.push(doc._id);
                             })
@@ -394,9 +366,6 @@ class AdminController {
                 .then(async function(html){
                     const permalink = await 'https://www.facebook.com/' + JSON.parse(html).id;
                     console.log(permalink);
-                    // if(video) {
-                    //     permalink = `https://www.facebook.com${permalink}`;
-                    // }
                     let PostedCFS = await new PostedModel({
                         user: req.user._id,
                         title: titlePost,
@@ -412,7 +381,9 @@ class AdminController {
                                     let idPost = postkeys[i];
                                     await PostModel
                                         .updateOne(
-                                            {_id: idPost},
+                                            {
+                                                _id: idPost
+                                            },
                                             {
                                                 status: 1,
                                                 user_upload: req.user._id,
@@ -460,6 +431,14 @@ class AdminController {
         catch (e) {
             e.status(555).send("Fail Admin");
         }
+    }
+
+    static async settings(req, res, next)
+    {
+        res.render('admin/settings', {
+            title: "Thiết Lập Hệ Thống",
+            user: req.user
+        })
     }
 }
 module.exports = AdminController;
